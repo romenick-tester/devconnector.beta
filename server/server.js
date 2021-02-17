@@ -7,10 +7,9 @@ const app = express();
 connectDB();
 dotenv.config();
 
-app.use(express.json());
+app.use(express.json({ extended: false }));
 
-app.get("/", (req,res) => res.send("API ready!"));
-
+app.get("/", (req,res) => res.send("root route"));
 app.use("/api/users", usersRoute);
 app.use("/api/profile", profileRoute);
 app.use("/api/auth", authRoute);

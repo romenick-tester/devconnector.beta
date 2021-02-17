@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { profileApi } = require("../../controllers");
+const {
+    profileAPI } = require("../../controllers/profileControllers");
 
 //route:        GET api/profile
 //desc:         test route
 //access:       public  
-router.get("/", profileApi);
+router.get("/", profileAPI);
 
 module.exports = router;

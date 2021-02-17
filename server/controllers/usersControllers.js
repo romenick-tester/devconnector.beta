@@ -1,5 +1,6 @@
-const usersAPI = (req,res) => {
-    res.send("users route")
+const registerUser = (req,res) => {
+    console.log(req.body);
+    res.send("users route");
 }
 
-module.exports = usersAPI;
+module.exports = { registerUser };

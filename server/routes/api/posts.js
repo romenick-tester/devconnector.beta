@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { postsApi } = require("../../controllers");
+const {
+    postsAPI } = require("../../controllers/postsControllers");
 
 //route:        GET api/posts
 //desc:         test route
 //access:       public  
-router.get("/", postsApi);
+router.get("/", postsAPI);
 
 module.exports = router;
