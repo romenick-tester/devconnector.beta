@@ -1,4 +1,5 @@
 const { validationResult } = require("express-validator");
+const normalize = require("normalize-url");
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
@@ -18,11 +19,11 @@ const registerUser = async(req,res) => {
             return res.status(400).json({ errors: [ { msg: "User already exist!" } ] });
         }
 
-        const avatar = gravatar.url(email, {
+        const avatar = normalize(gravatar.url(email, {
             s: "200",
             r: "pg",
             d: "mm"
-        })
+        }), { forceHttps: true });
 
         user = new User({
             name,
