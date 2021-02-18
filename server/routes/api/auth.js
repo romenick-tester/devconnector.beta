@@ -1,11 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const { loginUser } = require("../../controllers/authControllers");
+const { userDetails, loginUser } = require("../../controllers/authControllers");
+const { loginValidations } = require("../../utils/validationChecks");
 const { auth } = require("../../middlewares");
 
-//route:        GET api/auth
-//desc:         test route
+//route:        POST api/auth
+//desc:         login user
 //access:       public  
-router.get("/", auth, loginUser);
+router.post("/", loginValidations, loginUser);
+
+//route:        GET api/auth/me
+//desc:         get user details
+//access:       private  
+router.get("/me", auth, userDetails);
 
 module.exports = router;
