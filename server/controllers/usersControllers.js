@@ -2,7 +2,11 @@ const { validationResult } = require("express-validator");
 const normalize = require("normalize-url");
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
+const dotenv = require("dotenv");
+const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+
+dotenv.config();
 
 const registerUser = async(req,res) => {
     const errors = validationResult(req);
@@ -38,8 +42,20 @@ const registerUser = async(req,res) => {
     
         await user.save();
     
-        // return jsonwebtoken
-        res.send("user registered!");
+        const payload = {
+            user: {
+                id: user.id
+            }
+        }
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 });
+
+        if(!token) {
+            return res.status(400).json({ errors: [ { msg: "400: Bad request" } ] })
+        }
+
+        res.json({token});
+
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Server Error");
