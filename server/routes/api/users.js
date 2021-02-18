@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {
-    registerUser 
-} = require("../../controllers/usersControllers");
+const { registerUser } = require("../../controllers/usersControllers");
 const { registerValidation } = require("../../utils/validationChecks");
 
 //route:        POST api/users
