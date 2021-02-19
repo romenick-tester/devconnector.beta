@@ -1,11 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const {
-    profileAPI } = require("../../controllers/profileControllers");
+const { getUserProfile, createUserProfile } = require("../../controllers/profileControllers");
+const { auth } = require("../../middlewares");
 
-//route:        GET api/profile
-//desc:         test route
-//access:       public  
-router.get("/", profileAPI);
+//route:        POST api/profile
+//desc:         create user profile
+//access:       private  
+router.get("/me", auth, createUserProfile);
+
+//route:        GET api/profile/me
+//desc:         get current user profile
+//access:       private  
+router.get("/me", auth, getUserProfile);
 
 module.exports = router;
