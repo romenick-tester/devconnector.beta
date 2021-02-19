@@ -74,4 +74,40 @@ const getUserProfile = async(req,res) => {
     }
 }
 
-module.exports = { getUserProfile, createUserProfile };
+//route:        GET api/profile
+//desc:         get all users profile
+//access:       public  
+const getAllProfiles = async(req,res) => {
+    try {
+        const profiles = await Profile.find().populate("users", ["name", "avatar"]);
+        
+        if(!profiles) {
+            return res.status(404).json({ errors: [{ msg: "No profiles found!" }] })
+        }
+    
+        res.json(profiles);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("server error");
+    }
+}
+
+//route:        GET api/profile/:id
+//desc:         get current user profile
+//access:       private  
+const getUserProfileByID = async(req,res) => {
+    try {
+        const profile = await Profile.findById(req.params.id);
+    
+        if(!profile) {
+            return res.status(404).json({ errors: [{ msg: "No profile found!" }] })
+        }
+        
+        res.json(profile);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("server error");
+    }
+}
+
+module.exports = { getUserProfile, createUserProfile, getAllProfiles, getUserProfileByID };
