@@ -1,6 +1,6 @@
-const usersRoute = require("./users");
-const profileRoute = require("./profile");
-const authRoute = require("./auth");
-const postsRoute = require("./posts");
+const usersRoutes = require("./usersRoutes");
+const profileRoutes = require("./profileRoutes");
+const authRoutes = require("./authRoutes");
+const postsRoutes = require("./postsRoutes");
 
-module.exports = { usersRoute, profileRoute, authRoute, postsRoute };
+module.exports = { usersRoutes, profileRoutes, authRoutes, postsRoutes };

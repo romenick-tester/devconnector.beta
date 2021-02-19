@@ -40,21 +40,21 @@ const ProfileSchema = new Schema({
                 required: true
             },
             location: {
-            type: String
+                type: String
             },
             from: {
-              type: Date,
-              required: true
+                type: Date,
+                required: true
             },
             to: {
-              type: Date
+                type: Date
             },
             current: {
-              type: Boolean,
-              default: false
+                type: Boolean,
+                default: false
             },
             description: {
-              type: String
+                type: String
             }
         }
     ],

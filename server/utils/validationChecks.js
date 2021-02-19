@@ -11,4 +11,9 @@ const loginValidations = [
     check("password", "Password is required.").not().isEmpty()
 ]
 
-module.exports = { registerValidations, loginValidations };
+const profileValidations = [
+    check("status", "Status is required.").not().isEmpty(),
+    check("skills", "Skills is required.").not().isEmpty()
+]
+
+module.exports = { registerValidations, loginValidations, profileValidations };
