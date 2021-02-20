@@ -47,7 +47,7 @@ const createUserProfile = async(req,res) => {
             { user: req.user.id },
             { $set: profileFields },
             { new: true, upsert: true, setDefaultsOnInsert: true }
-        );
+        ).populate("user", ["name", "avatar"]);
 
         return res.json(profile);
     } catch (err) {
