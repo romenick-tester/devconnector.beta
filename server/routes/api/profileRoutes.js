@@ -4,9 +4,9 @@ const {
     getUserProfile, 
     createUserProfile,
     getAllProfiles,
-    getUserProfileByID } = require("../../controllers/profileControllers");
-const { profileValidations } = require("../../utils/validationChecks");
-const { auth } = require("../../middlewares");
+    getUserProfileByID } = require("../../controllers");
+const { profileValidations } = require("../../settings");
+const { auth } = require("../../settings");
 
 
 router.route("/")

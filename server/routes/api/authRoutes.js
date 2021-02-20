@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { userDetails, loginUser } = require("../../controllers/authControllers");
-const { loginValidations } = require("../../utils/validationChecks");
-const { auth } = require("../../middlewares");
+const { userDetails, loginUser } = require("../../controllers");
+const { loginValidations } = require("../../settings");
+const { auth } = require("../../settings");
 
 //route:        POST api/auth
 //desc:         login user

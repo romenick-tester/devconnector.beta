@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 const express = require("express");
-const connectDB = require("./utils/db");
-const { usersRoutes, profileRoutes, authRoutes, postsRoutes } = require("./routes/api");
+const { connectDB } = require("./settings");
+const { usersRoutes, profileRoutes, authRoutes, postsRoutes } = require("./routes");
 
 const app = express();
 connectDB();

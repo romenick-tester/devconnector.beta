@@ -4,7 +4,7 @@ const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const { User } = require("../settings");
 
 dotenv.config();
 
