@@ -5,19 +5,23 @@ const {
     createUserProfile,
     getAllProfiles,
     getUserProfileByID,
-    deleteUserProfile } = require("../../controllers");
-const { profileValidations } = require("../../settings");
+    deleteUserProfile, 
+    addProfileExperience } = require("../../controllers");
+const { profileValidations, experienceValidations } = require("../../settings");
 const { auth } = require("../../settings");
 
 router.route("/")
-    .get(getAllProfiles)
-    .post([auth, profileValidations], createUserProfile)
-    .delete(auth, deleteUserProfile);
+.get(getAllProfiles)
+.post([auth, profileValidations], createUserProfile)
+.delete(auth, deleteUserProfile);
 
 router.route("/user/:id")
-    .get(getUserProfileByID);
+.get(getUserProfileByID);
 
 router.route("/me")
-    .get(auth, getUserProfile);
+.get(auth, getUserProfile);
+
+router.route("/experience")
+.put([auth, experienceValidations], addProfileExperience);
     
 module.exports = router;

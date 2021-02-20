@@ -2,6 +2,50 @@ const { validationResult } = require("express-validator");
 const normalize = require("normalize-url");
 const { User, Profile } = require("../settings");
 
+//route:        PUT api/profile/experience
+//desc:         add or update user profile experience
+//access:       private 
+const addProfileExperience = async(req,res) => {
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const {
+        title,
+        company,
+        location,
+        from,
+        to,
+        current,
+        description
+    } = req.body;
+
+    const newExp = {
+        title,
+        company,
+        location,
+        from,
+        to,
+        current,
+        description
+    }
+
+    try {
+        const profile = await Profile.findOne({user: req.user.id});
+
+        profile.experience.unshift(newExp);
+
+        await profile.save();
+
+        res.json(profile);
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).send('Server Error');
+    }
+}
+
 //route:        POST api/profile
 //desc:         create or update user profile
 //access:       private 
@@ -135,4 +179,10 @@ const deleteUserProfile = async(req,res) => {
     }
 }
 
-module.exports = { getUserProfile, createUserProfile, getAllProfiles, getUserProfileByID, deleteUserProfile };
+module.exports = {
+    getUserProfile, 
+    createUserProfile, 
+    getAllProfiles, 
+    getUserProfileByID, 
+    deleteUserProfile, 
+    addProfileExperience };
