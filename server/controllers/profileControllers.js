@@ -113,4 +113,26 @@ const getUserProfileByID = async(req,res) => {
     }
 }
 
-module.exports = { getUserProfile, createUserProfile, getAllProfiles, getUserProfileByID };
+//route:        GET api/profile
+//desc:         delete user profile
+//access:       private  
+const deleteUserProfile = async(req,res) => {
+    try {
+        //remove users posts
+
+        //remove profile
+        await Profile.findOneAndRemove({user: req.user.id});
+        //remove user
+        await User.findOneAndRemove({_id: req.user.id});
+
+        res.json({ msg: "user deleted!" })
+    } catch (error) {
+        console.error(error.message);
+        if(error.kind === "ObjectId") {
+            return res.status(400).json({ errors: [{ msg: "No profile found!" }] });
+        }
+        res.status(500).send("server error");
+    }
+}
+
+module.exports = { getUserProfile, createUserProfile, getAllProfiles, getUserProfileByID, deleteUserProfile };

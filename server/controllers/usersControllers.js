@@ -8,6 +8,9 @@ const { User } = require("../settings");
 
 dotenv.config();
 
+//route:        POST api/users
+//desc:         register user
+//access:       public  
 const registerUser = async(req,res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
@@ -62,4 +65,18 @@ const registerUser = async(req,res) => {
     }
 }
 
-module.exports = { registerUser };
+const getAllUsers = async(req, res) => {
+    try {
+        const users = await User.find().select(["email", "-_id"]);
+        
+        if(!users) {
+            return res.status(400).json({ errors: [{ msg: "No users found!" }] });
+        }
+    
+        res.json(users)
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+module.exports = { registerUser, getAllUsers };
