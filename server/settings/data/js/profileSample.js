@@ -21,7 +21,7 @@
     education: [
         {
             school: "*",
-            degree: "*",
+            level: "*",
             fieldofstudy: "*",
             from: "*",
             to: "",

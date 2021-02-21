@@ -22,4 +22,16 @@ const experienceValidations = [
     check("from", "From date is required.").not().isEmpty(),
 ]
 
-module.exports = { registerValidations, loginValidations, profileValidations, experienceValidations };
+const educationValidations = [
+    check("school", "School is required.").not().isEmpty(),
+    check("level", "Level is required.").not().isEmpty(),
+    check("fieldofstudy", "Field-of-study is required.").not().isEmpty(),
+    check("from", "From date is required.").not().isEmpty(),
+]
+
+module.exports = {
+    registerValidations, 
+    loginValidations, 
+    profileValidations, 
+    experienceValidations, 
+    educationValidations };

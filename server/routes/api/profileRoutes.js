@@ -7,8 +7,10 @@ const {
     getUserProfileByID,
     deleteUserProfile, 
     addProfileExperience, 
-    deleteProfileExperience } = require("../../controllers");
-const { profileValidations, experienceValidations } = require("../../settings");
+    deleteProfileExperience, 
+    addProfileEducation, 
+    deleteProfileEducation } = require("../../controllers");
+const { profileValidations, experienceValidations, educationValidations } = require("../../settings");
 const { auth } = require("../../settings");
 
 router.route("/")
@@ -26,5 +28,10 @@ router.route("/experience")
     .put([auth, experienceValidations], addProfileExperience);
 
 router.delete("/experience/:exp_id", auth, deleteProfileExperience)    
+
+router.route("/education")
+    .put([auth, educationValidations], addProfileEducation);
+
+router.delete("/education/:edu_id", auth, deleteProfileEducation);    
 
 module.exports = router;

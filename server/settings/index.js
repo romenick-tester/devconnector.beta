@@ -1,6 +1,12 @@
 const { User, Profile } = require("./models");
 const { auth } = require("./middlewares");
-const { connectDB, loginValidations, registerValidations, profileValidations, experienceValidations } = require("./utils");
+const {
+    connectDB, 
+    loginValidations, 
+    registerValidations, 
+    profileValidations, 
+    experienceValidations, 
+    educationValidations } = require("./utils");
 
 module.exports = {
     User, Profile, 
@@ -8,4 +14,5 @@ module.exports = {
     loginValidations, 
     registerValidations, 
     profileValidations, 
-    experienceValidations };
+    experienceValidations, 
+    educationValidations };

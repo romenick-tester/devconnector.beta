@@ -3,11 +3,13 @@ const {
     loginValidations, 
     registerValidations, 
     profileValidations, 
-    experienceValidations } = require("./validationChecks");
+    experienceValidations, 
+    educationValidations } = require("./validationChecks");
 
 module.exports = {
     connectDB,
     loginValidations, 
     registerValidations, 
     profileValidations, 
-    experienceValidations };
+    experienceValidations, 
+    educationValidations };
