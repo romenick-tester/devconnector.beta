@@ -6,12 +6,14 @@ const {
     createUserProfile, 
     getUserProfileByID, 
     deleteUserProfile, 
-    addProfileExperience } = require("./profileControllers");
+    addProfileExperience, 
+    deleteProfileExperience } = require("./profileControllers");
 const { registerUser, getAllUsers } = require("./usersControllers");
 
 module.exports = {
     loginUser, userDetails,
     postsAPI,
-    getAllProfiles, getUserProfile, getUserProfileByID, createUserProfile, deleteUserProfile, addProfileExperience,
+    getAllProfiles, getUserProfile, getUserProfileByID, createUserProfile, 
+    deleteUserProfile, addProfileExperience, deleteProfileExperience,
     registerUser, getAllUsers,
 };

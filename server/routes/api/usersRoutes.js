@@ -5,7 +5,7 @@ const { registerValidations } = require("../../settings");
 const { auth } = require("../../settings");
 
 router.route("/")
-.get(auth, getAllUsers)
-.post(registerValidations, registerUser);
+    .get(auth, getAllUsers)
+    .post(registerValidations, registerUser);
 
 module.exports = router;

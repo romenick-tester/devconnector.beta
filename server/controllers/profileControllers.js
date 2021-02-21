@@ -46,6 +46,25 @@ const addProfileExperience = async(req,res) => {
     }
 }
 
+//route:        DELETE api/profile/experience
+//desc:         delete user profile experience
+//access:       private 
+const deleteProfileExperience = async(req,res) => {
+    try {
+        const profile = await Profile.findOne({ user: req.user.id });
+        const removeIndex = profile.experience.map((exp) => exp.id).indexOf(req.params.exp_id);
+
+        profile.experience.splice(removeIndex, 1);
+
+        await profile.save();
+
+        res.json(profile);
+    } catch (err) {
+      console.error(err.message);
+      return res.status(500).send('Server Error');
+    }
+}
+
 //route:        POST api/profile
 //desc:         create or update user profile
 //access:       private 
@@ -141,7 +160,7 @@ const getAllProfiles = async(req,res) => {
 //access:       private  
 const getUserProfileByID = async(req,res) => {
     try {
-        const profile = await Profile.findOne({user: req.params.id}).populate("user", ["name", "avatar"]);
+        const profile = await Profile.findOne({user: req.params.user_id}).populate("user", ["name", "avatar"]);
     
         if(!profile) {
             return res.status(400).json({ errors: [{ msg: "No profile found!" }] });
@@ -185,4 +204,5 @@ module.exports = {
     getAllProfiles, 
     getUserProfileByID, 
     deleteUserProfile, 
-    addProfileExperience };
+    addProfileExperience, 
+    deleteProfileExperience };

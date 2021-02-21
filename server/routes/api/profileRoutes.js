@@ -6,22 +6,25 @@ const {
     getAllProfiles,
     getUserProfileByID,
     deleteUserProfile, 
-    addProfileExperience } = require("../../controllers");
+    addProfileExperience, 
+    deleteProfileExperience } = require("../../controllers");
 const { profileValidations, experienceValidations } = require("../../settings");
 const { auth } = require("../../settings");
 
 router.route("/")
-.get(getAllProfiles)
-.post([auth, profileValidations], createUserProfile)
-.delete(auth, deleteUserProfile);
+    .get(getAllProfiles)
+    .post([auth, profileValidations], createUserProfile)
+    .delete(auth, deleteUserProfile);
 
-router.route("/user/:id")
-.get(getUserProfileByID);
+router.route("/user/:user_id")
+    .get(getUserProfileByID);
 
 router.route("/me")
-.get(auth, getUserProfile);
+    .get(auth, getUserProfile);
 
 router.route("/experience")
-.put([auth, experienceValidations], addProfileExperience);
-    
+    .put([auth, experienceValidations], addProfileExperience);
+
+router.delete("/experience/:exp_id", auth, deleteProfileExperience)    
+
 module.exports = router;
