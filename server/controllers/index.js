@@ -9,7 +9,8 @@ const {
     addProfileExperience, 
     deleteProfileExperience, 
     deleteProfileEducation, 
-    addProfileEducation } = require("./profileControllers");
+    addProfileEducation, 
+    getGithubRepo } = require("./profileControllers");
 const { registerUser, getAllUsers } = require("./usersControllers");
 
 module.exports = {
@@ -17,6 +18,6 @@ module.exports = {
     postsAPI,
     getAllProfiles, getUserProfile, getUserProfileByID, createUserProfile, 
     deleteUserProfile, addProfileExperience, deleteProfileExperience,
-    addProfileEducation, deleteProfileEducation,
+    addProfileEducation, deleteProfileEducation, getGithubRepo,
     registerUser, getAllUsers,
 };

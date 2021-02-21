@@ -9,7 +9,8 @@ const {
     addProfileExperience, 
     deleteProfileExperience, 
     addProfileEducation, 
-    deleteProfileEducation } = require("../../controllers");
+    deleteProfileEducation, 
+    getGithubRepo } = require("../../controllers");
 const { profileValidations, experienceValidations, educationValidations } = require("../../settings");
 const { auth } = require("../../settings");
 
@@ -32,6 +33,8 @@ router.delete("/experience/:exp_id", auth, deleteProfileExperience)
 router.route("/education")
     .put([auth, educationValidations], addProfileEducation);
 
-router.delete("/education/:edu_id", auth, deleteProfileEducation);    
+router.delete("/education/:edu_id", auth, deleteProfileEducation);
+
+router.get("/github/:username", getGithubRepo);    
 
 module.exports = router;

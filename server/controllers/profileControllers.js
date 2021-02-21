@@ -1,6 +1,10 @@
 const { validationResult } = require("express-validator");
+const axios = require("axios");
 const normalize = require("normalize-url");
+const dotenv = require("dotenv");
 const { User, Profile } = require("../settings");
+
+dotenv.config();
 
 //route:        PUT api/profile/experience
 //desc:         add or update user profile experience
@@ -261,6 +265,29 @@ const deleteUserProfile = async(req,res) => {
     }
 }
 
+//route:        GET api/profile/github/:username
+//desc:         get user repos from github
+//access:       public  
+const getGithubRepo = async(req,res) => {
+    const mainUrl = "https://api.github.com/users/";
+
+    try {
+        const uri = encodeURI(`${mainUrl}${req.params.username}/repos?per_page=5&sort=created:asc`);
+            
+        const headers = {
+            "user-agent": "node.js",
+            Authorization: `token ${process.env.GITHUB_ACCESS_TOKEN}`
+        };
+          
+        const gitHubResponse = await axios.get(uri, { headers });
+
+        return res.json(gitHubResponse.data);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("server error");
+    }
+}
+
 module.exports = {
     getUserProfile, 
     createUserProfile, 
@@ -270,4 +297,5 @@ module.exports = {
     addProfileExperience, 
     deleteProfileExperience, 
     addProfileEducation, 
-    deleteProfileEducation };
+    deleteProfileEducation, 
+    getGithubRepo };
