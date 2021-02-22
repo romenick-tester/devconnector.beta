@@ -191,7 +191,7 @@ const createUserProfile = async(req,res) => {
 //access:       private  
 const getUserProfile = async(req,res) => {
     try {
-        const profile = await Profile.findOne({ user: req.user.id }).populate("user", ["name", "avatar"]);
+        const profile = await Profile.findOne({ user: req.user.id }).populate("User", ["name", "avatar"]);
 
         if(!profile) {
             return res.status(400).json({ errors: [{ msg: "There is no profile for this user." }] });
@@ -209,7 +209,7 @@ const getUserProfile = async(req,res) => {
 //access:       public  
 const getAllProfiles = async(req,res) => {
     try {
-        const profiles = await Profile.find().populate("user", ["name", "avatar"]);
+        const profiles = await Profile.find().populate("User", ["name", "avatar"]);
         
         if(!profiles) {
             return res.status(404).json({ errors: [{ msg: "No profiles found!" }] })
@@ -227,7 +227,7 @@ const getAllProfiles = async(req,res) => {
 //access:       private  
 const getUserProfileByID = async(req,res) => {
     try {
-        const profile = await Profile.findOne({user: req.params.user_id}).populate("user", ["name", "avatar"]);
+        const profile = await Profile.findOne({user: req.params.user_id}).populate("User", ["name", "avatar"]);
     
         if(!profile) {
             return res.status(400).json({ errors: [{ msg: "No profile found!" }] });
