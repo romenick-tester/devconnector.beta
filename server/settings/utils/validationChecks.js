@@ -29,9 +29,14 @@ const educationValidations = [
     check("from", "From date is required.").not().isEmpty(),
 ]
 
+const postValidations = [
+    check("text", "Text is required.").not().isEmpty(),
+]
+
 module.exports = {
     registerValidations, 
     loginValidations, 
     profileValidations, 
     experienceValidations, 
-    educationValidations };
+    educationValidations, 
+    postValidations };

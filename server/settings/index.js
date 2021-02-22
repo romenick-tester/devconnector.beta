@@ -1,4 +1,4 @@
-const { User, Profile } = require("./models");
+const { User, Profile, Post } = require("./models");
 const { auth } = require("./middlewares");
 const {
     connectDB, 
@@ -6,13 +6,15 @@ const {
     registerValidations, 
     profileValidations, 
     experienceValidations, 
-    educationValidations } = require("./utils");
+    educationValidations, 
+    postValidations } = require("./utils");
 
 module.exports = {
-    User, Profile, 
+    User, Profile, Post, 
     auth, connectDB, 
     loginValidations, 
     registerValidations, 
     profileValidations, 
     experienceValidations, 
-    educationValidations };
+    educationValidations, 
+    postValidations };

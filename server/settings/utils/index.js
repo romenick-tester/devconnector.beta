@@ -4,7 +4,8 @@ const {
     registerValidations, 
     profileValidations, 
     experienceValidations, 
-    educationValidations } = require("./validationChecks");
+    educationValidations, 
+    postValidations } = require("./validationChecks");
 
 module.exports = {
     connectDB,
@@ -12,4 +13,5 @@ module.exports = {
     registerValidations, 
     profileValidations, 
     experienceValidations, 
-    educationValidations };
+    educationValidations, 
+    postValidations };
