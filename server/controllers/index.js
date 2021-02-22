@@ -1,5 +1,5 @@
 const { loginUser, userDetails } = require("./authControllers");
-const { createPost } = require("./postsControllers");
+const { createPost, getAllPosts, getSinglePost, deletePost } = require("./postsControllers");
 const {
     getUserProfile, 
     getAllProfiles, 
@@ -15,7 +15,7 @@ const { registerUser, getAllUsers } = require("./usersControllers");
 
 module.exports = {
     loginUser, userDetails,
-    createPost,
+    createPost, getAllPosts, getSinglePost, deletePost,
     getAllProfiles, getUserProfile, getUserProfileByID, createUserProfile, 
     deleteUserProfile, addProfileExperience, deleteProfileExperience,
     addProfileEducation, deleteProfileEducation, getGithubRepo,
