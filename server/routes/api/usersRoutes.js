@@ -4,7 +4,8 @@ const { registerUser, getAllUsers } = require("../../controllers");
 const { registerValidations } = require("../../settings");
 const { auth } = require("../../settings");
 
-router.route("/")
+router
+    .route("/")
     .get(auth, getAllUsers)
     .post(registerValidations, registerUser);
 

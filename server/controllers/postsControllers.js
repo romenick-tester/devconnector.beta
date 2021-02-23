@@ -23,6 +23,7 @@ const createPost = async(req,res) => {
 
         const post = await newPost.save();
 
+        console.log("new post created!");
         res.status(201).json(post);
     } catch (error) {
         console.error(error.message);
@@ -110,6 +111,7 @@ const likePost = async(req,res) => {
         
         await post.save();
 
+        console.log("comment liked!");
         res.json(post.likes);
     } catch (error) {
         console.error(error.message);
@@ -136,6 +138,7 @@ const unlikePost = async(req,res) => {
         
         await post.save();
 
+        console.log("post unliked!");
         res.json(post.likes);
     } catch (error) {
         console.error(error.message);
@@ -186,7 +189,45 @@ const createPostComment = async(req,res) => {
 
         await post.save();
 
+        console.log("comment added!");
         res.status(201).json(post.comments);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("server error");
+    }
+};
+
+//route:        DEL /api/posts/comment/:id
+//desc:         delete post comment
+//access:       private
+const deletePostComment = async(req,res) => {
+    try {
+        const post = await Post.findById(req.params.post_id);
+        
+        const comment = post.comments
+            .find((comment) => comment.id === req.params.comment_id);
+
+        if(!post) {
+            return res.status(404).json({ msg: "Post not found!" });
+        } else if(!comment) {
+            return res.status(404).json({ msg: "Comment not found!" });
+        }
+        
+        //toString() because comment.user is a type of object
+        if(comment.user.toString() !== req.user.id) {
+            return res.status(401).json({ msg: "User not authorised to delete this comment" });
+        }
+
+        const removeIndex = post.comments
+            .map((comment) => comment.user.toString())
+            .indexOf(req.user.id);
+
+        post.comments.splice(removeIndex, 1);
+        
+        await post.save();
+
+        console.log("comment deleted!");
+        res.json(post.comments);
     } catch (error) {
         console.error(error.message);
         res.status(500).send("server error");
@@ -195,5 +236,5 @@ const createPostComment = async(req,res) => {
 
 module.exports = {
     createPost, getAllPosts, getSinglePost, deletePost, 
-    likePost, unlikePost, editPost, createPostComment 
+    likePost, unlikePost, editPost, createPostComment, deletePostComment, 
 };

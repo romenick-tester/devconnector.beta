@@ -14,27 +14,35 @@ const {
 const { profileValidations, experienceValidations, educationValidations } = require("../../settings");
 const { auth } = require("../../settings");
 
-router.route("/")
+router
+    .route("/")
     .get(getAllProfiles)
     .post([auth, profileValidations], createUserProfile)
     .delete(auth, deleteUserProfile);
 
-router.route("/user/:user_id")
+router
+    .route("/user/:user_id")
     .get(getUserProfileByID);
 
-router.route("/me")
+router
+    .route("/me")
     .get(auth, getUserProfile);
 
-router.route("/experience")
+router
+    .route("/experience")
     .put([auth, experienceValidations], addProfileExperience);
 
-router.delete("/experience/:exp_id", auth, deleteProfileExperience)    
+router
+    .delete("/experience/:exp_id", auth, deleteProfileExperience)    
 
-router.route("/education")
+router
+    .route("/education")
     .put([auth, educationValidations], addProfileEducation);
 
-router.delete("/education/:edu_id", auth, deleteProfileEducation);
+router
+    .delete("/education/:edu_id", auth, deleteProfileEducation);
 
-router.get("/github/:username", getGithubRepo);    
+router
+    .get("/github/:username", getGithubRepo);    
 
 module.exports = router;

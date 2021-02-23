@@ -3,7 +3,8 @@ const router = express.Router();
 const { auth, postValidations, commentValidations } = require("../../settings");
 const {
     createPost, getAllPosts, getSinglePost, 
-    deletePost, likePost, unlikePost, editPost, createPostComment } = require("../../controllers");
+    deletePost, likePost, unlikePost, editPost, 
+    createPostComment, deletePostComment } = require("../../controllers");
 
 router
     .route("/")
@@ -25,5 +26,8 @@ router
 router
     .route("/comment/:id")
     .post([auth, commentValidations], createPostComment);
+
+router
+    .delete("/comment/:post_id/:comment_id", auth, deletePostComment);
 
 module.exports = router;
