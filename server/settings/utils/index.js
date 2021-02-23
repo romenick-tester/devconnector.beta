@@ -5,7 +5,8 @@ const {
     profileValidations, 
     experienceValidations, 
     educationValidations, 
-    postValidations } = require("./validationChecks");
+    postValidations, 
+    commentValidations } = require("./validationChecks");
 
 module.exports = {
     connectDB,
@@ -14,4 +15,5 @@ module.exports = {
     profileValidations, 
     experienceValidations, 
     educationValidations, 
-    postValidations };
+    postValidations, 
+    commentValidations };

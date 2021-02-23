@@ -7,7 +7,8 @@ const {
     profileValidations, 
     experienceValidations, 
     educationValidations, 
-    postValidations } = require("./utils");
+    postValidations, 
+    commentValidations } = require("./utils");
 
 module.exports = {
     User, Profile, Post, 
@@ -17,4 +18,5 @@ module.exports = {
     profileValidations, 
     experienceValidations, 
     educationValidations, 
-    postValidations };
+    postValidations, 
+    commentValidations };

@@ -113,6 +113,7 @@ const likePost = async(req,res) => {
         res.json(post.likes);
     } catch (error) {
         console.error(error.message);
+        res.status(500).json({ msg: "Error server" });
     }
 };
 
@@ -138,7 +139,61 @@ const unlikePost = async(req,res) => {
         res.json(post.likes);
     } catch (error) {
         console.error(error.message);
+        res.status(500).json({ msg: "Error server" });
     }
 };
 
-module.exports = { createPost, getAllPosts, getSinglePost, deletePost, likePost, unlikePost };
+//route:        PUT /api/posts/update/:id
+//desc:         edit a post
+//access:       private
+const editPost = async(req,res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+
+        if(post.comments > 0) {
+            return res.status(400).json({ msg: "People already commented, cannot edit this post now." })
+        }
+
+        res.json(post.likes);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ msg: "Server error" })
+    }
+};
+
+//route:        POST /api/posts/comment/:id
+//desc:         create post comment
+//access:       private
+const createPostComment = async(req,res) => {
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+        const user = await User.findById(req.user.id).select("-password");
+        const post = await Post.findById(req.params.id);
+        
+        const newComment = {
+            user: req.user.id,
+            name: user.name,
+            email: user.email,
+            text: req.body.text,
+        }
+
+        post.comments.unshift(newComment);
+
+        await post.save();
+
+        res.status(201).json(post.comments);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("server error");
+    }
+};
+
+module.exports = {
+    createPost, getAllPosts, getSinglePost, deletePost, 
+    likePost, unlikePost, editPost, createPostComment 
+};
