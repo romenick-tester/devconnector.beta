@@ -35,7 +35,7 @@ const createPost = async(req,res) => {
 //access:       private
 const getAllPosts = async(req,res) => {
     try {
-        const posts = await Post.find({}).sort({ date: -1 });
+        const posts = await Post.find({}).sort({ date: -1 }).limit(5);
 
         res.json(posts);
     } catch (error) {
@@ -98,12 +98,12 @@ const deletePost = async(req,res) => {
 //access:       private
 const likePost = async(req,res) => {
     try {
-        const post = await Post.findById(req.params.post_id);
+        const post = await Post.findById(req.params.id);
 
         const likes = post.likes.filter((like) => like.user.toString() === req.user.id);
 
         if(likes.length > 0) {
-            return res.status(400).json({ msg: "This user already liked this post." })
+            return res.status(400).json({ msg: "You already liked this post." })
         }
 
         post.likes.unshift({ user: req.user.id });
@@ -116,4 +116,29 @@ const likePost = async(req,res) => {
     }
 };
 
-module.exports = { createPost, getAllPosts, getSinglePost, deletePost, likePost };
+//route:        PUT /api/posts/unlike/:id
+//desc:         unlike a post
+//access:       private
+const unlikePost = async(req,res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+
+        const likes = post.likes.filter((like) => like.user.toString() === req.user.id);
+
+        if(likes.length === 0) {
+            return res.status(400).json({ msg: "You have not liked this post yet to unlike." })
+        }
+
+        const removeIndex = post.likes.map((like) => like.user.toString()).indexOf(req.user.id);
+
+        post.likes.splice(removeIndex, 1);
+        
+        await post.save();
+
+        res.json(post.likes);
+    } catch (error) {
+        console.error(error.message);
+    }
+};
+
+module.exports = { createPost, getAllPosts, getSinglePost, deletePost, likePost, unlikePost };

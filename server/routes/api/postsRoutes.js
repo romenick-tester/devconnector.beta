@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { auth, postValidations } = require("../../settings");
-const { createPost, getAllPosts, getSinglePost, deletePost, likePost } = require("../../controllers");
+const { createPost, getAllPosts, getSinglePost, deletePost, likePost, unlikePost } = require("../../controllers");
 
 router.route("/")
     .get( auth, getAllPosts )
@@ -9,7 +9,10 @@ router.route("/")
 
 router.route("/:post_id")
     .get(auth, getSinglePost)
-    .put(auth, likePost)
     .delete(auth, deletePost);
+
+router.put("/like/:id", auth, likePost);
+
+router.put("/unlike/:id", auth, unlikePost);
 
 module.exports = router;
