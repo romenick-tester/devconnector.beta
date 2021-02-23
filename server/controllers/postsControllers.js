@@ -93,4 +93,27 @@ const deletePost = async(req,res) => {
     }
 };
 
-module.exports = { createPost, getAllPosts, getSinglePost, deletePost };
+//route:        PUT /api/posts/like/:id
+//desc:         like a post
+//access:       private
+const likePost = async(req,res) => {
+    try {
+        const post = await Post.findById(req.params.post_id);
+
+        const likes = post.likes.filter((like) => like.user.toString() === req.user.id);
+
+        if(likes.length > 0) {
+            return res.status(400).json({ msg: "This user already liked this post." })
+        }
+
+        post.likes.unshift({ user: req.user.id });
+        
+        await post.save();
+
+        res.json(post.likes);
+    } catch (error) {
+        console.error(error.message);
+    }
+};
+
+module.exports = { createPost, getAllPosts, getSinglePost, deletePost, likePost };
