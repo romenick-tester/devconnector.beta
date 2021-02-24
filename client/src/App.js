@@ -1,10 +1,16 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { LandingDisplay, } from "./displays"
+import { Navbar, } from "./components"
 
 function App() {
     return (
-        <div>
-            <h1>hello</h1>
-        </div>
+        <Router>
+            <Navbar/>
+            <Switch>
+                <Route path="/" exact component={LandingDisplay}/>
+            </Switch>
+        </Router>
     )
 }
 
