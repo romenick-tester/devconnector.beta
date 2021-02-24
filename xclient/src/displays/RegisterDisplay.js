@@ -17,11 +17,11 @@ function RegisterDisplay() {
 
     function submitHandler(e) {
         e.preventDefault();
+
         if(password !== password2) {
             console.log("password does not match!");
             return;
         }
-        console.log(formData);
     }
 
     return (
