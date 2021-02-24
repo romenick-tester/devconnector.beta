@@ -1,4 +1,5 @@
 import { AppProvider, useGlobalContext } from "./agents/useGlobalContext";
-import useSend from "./agents/useSend";
+export { AppProvider, useGlobalContext };
 
-export { AppProvider, useGlobalContext, useSend };
+import { store } from "./redux";
+export { store };
