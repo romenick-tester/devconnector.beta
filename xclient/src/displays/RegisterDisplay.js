@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setAlert, registerUser, logout } from "../manager";
+import { setAlert } from "../manager";
 
 function RegisterDisplay({ history }) {
     const [formData, setFormData] = useState({
