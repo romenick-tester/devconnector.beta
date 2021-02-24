@@ -4,7 +4,7 @@ import thunk from "redux-thunk";
 import { alertReducers } from "./reducers/alertReducers";
 
 const reducers = combineReducers({
-    alert:          alertReducers
+    alerts:          alertReducers
 });
 
 const initialState = {};

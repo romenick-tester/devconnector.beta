@@ -8,8 +8,7 @@ const alertReducers = (state = [], action) => {
             return [...state, payload];
 
         case ALERT_REMOVE:
-            const id = payload;
-            return [...state].filter((item) => item.id !== id);
+            return state.filter((item) => item.id !== payload);
 
         default: 
             return state;
