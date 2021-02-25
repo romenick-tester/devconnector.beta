@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import sendForm from "../manager/agents/useSend";
+import { loginUser } from "../manager";
 
 function LoginDisplay() {
-    const [loginData, setLoginData] = useState(null);
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -11,22 +11,15 @@ function LoginDisplay() {
 
     const { email, password } = formData;
 
+    const dispatch = useDispatch();
+
     function changeHandler(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
     const submitHandler = async(e) => {
         e.preventDefault();
-
-        const endpoint = "/api/auth";
-
-        const data = await sendForm(endpoint, { email, password });
-
-        setLoginData(data);
-    }
-
-    if(loginData){
-        console.log(loginData);
+        dispatch(loginUser(formData))
     }
 
     return (

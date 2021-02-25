@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setAlert } from "../manager";
+import { setAlert, registerUser } from "../manager";
 
 function RegisterDisplay() {
     const [formData, setFormData] = useState({
@@ -26,21 +26,23 @@ function RegisterDisplay() {
             dispatch(setAlert("danger", "Password does not match!"))
             return;
         }
+
+        dispatch(registerUser(name, email, password));
+        dispatch(setAlert("success", "Successfully registered!"))
     }
 
     return (
         <>
             <h1 className="large text-primary">Sign Up</h1>
             <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
-            <form className="form" onSubmit={submitHandler}>
+            <form className="form" onSubmit={(e) => submitHandler(e)}>
                 <div className="form-group">
                     <input 
                         type="text" 
                         placeholder="Name" 
                         name="name"
                         value={name}
-                        onChange={(e) => changeHandler(e)} 
-                        required />
+                        onChange={(e) => changeHandler(e)} />
                 </div>
                 <div className="form-group">
                     <input 
@@ -58,7 +60,6 @@ function RegisterDisplay() {
                         type="password"
                         placeholder="Password"
                         name="password"
-                        minLength="6"
                         value={password}
                         onChange={(e) => changeHandler(e)} />
                 </div>
@@ -67,7 +68,6 @@ function RegisterDisplay() {
                     type="password"
                     placeholder="Confirm Password"
                     name="password2"
-                    minLength="6"
                     value={password2}
                     onChange={(e) => changeHandler(e)} />
                 </div>

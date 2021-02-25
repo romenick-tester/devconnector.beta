@@ -1,3 +1,4 @@
 import { setAlert } from "./alertActions";
+import { loginUser, registerUser } from "./authActions";
 
-export { setAlert };
+export { setAlert, registerUser, loginUser };
