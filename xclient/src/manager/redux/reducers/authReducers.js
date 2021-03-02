@@ -15,9 +15,9 @@ import {
 const tokenFromStorage = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
 
 const auth_initial_state = {
-    auth_loading: true,
+    auth_loading: false,
     auth_error: false,
-    isAuthenticated: tokenFromStorage ? true : null,
+    isAuthenticated: tokenFromStorage ? true : false,
     token: tokenFromStorage,
 }
 

@@ -10,20 +10,18 @@ import {
     DashboardDisplay,
     PrivateRoute,
 } from "./displays"
-import { loadUser, logout, getUserProfile } from "./manager";
+import { loadUser, getUserProfile } from "./manager";
 
 function App() {
     const dispatch = useDispatch();
-    const { token } = useSelector(state => state.auth);
+    const { auth_loading, isAuthenticated, token } = useSelector(state => state.auth);
 
     useEffect(() => {
-        if (token) {
+        if (!auth_loading && isAuthenticated && token) {
             dispatch(loadUser());
             dispatch(getUserProfile());
-        } else {
-            dispatch(logout());
-        }
-    }, [token, dispatch])
+        } 
+    }, [auth_loading, isAuthenticated, token, dispatch])
 
     return (
         <Router>

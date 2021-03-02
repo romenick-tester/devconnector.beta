@@ -26,17 +26,17 @@ function ProfileEducation() {
     }
 
     return (
-        <table class="table" style={{ minWidth: "700px" }}>
+        <table className="table" style={{ minWidth: "700px" }}>
             <thead>
                 <tr>
                     <td colSpan={4}>
-                        <h2 class="my-2">Education</h2>
+                        <h2>Education</h2>
                     </td>
                 </tr>
                 <tr>
                     <th>School</th>
-                    <th class="hide-sm">Level</th>
-                    <th class="hide-sm">Years</th>
+                    <th className="hide-sm">Level</th>
+                    <th className="hide-sm">Years</th>
                     <th />
                 </tr>
             </thead>
@@ -46,15 +46,15 @@ function ProfileEducation() {
                 })}
                 <tr>
                     <td>Westminster College</td>
-                    <td class="hide-sm">
+                    <td className="hide-sm">
                         <small>BTEC</small><br />
                         Product Engineer
                     </td>
-                    <td class="hide-sm">
+                    <td className="hide-sm">
                         2008 - 2018
                     </td>
                     <td>
-                        <button class="btn btn-danger" >
+                        <button className="btn btn-danger" >
                             Delete
                         </button>
                     </td>

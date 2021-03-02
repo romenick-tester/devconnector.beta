@@ -26,15 +26,17 @@ function ProfileExperience() {
     }
 
     return (
-        <table class="table" style={{ minWidth: "700px" }}>
+        <table className="table" style={{ minWidth: "700px" }}>
             <thead>
                 <tr>
-                    <h2 class="my-2">Experience</h2>
+                    <td colSpan={4}>
+                        <h2 className="my-2">Experience</h2>
+                    </td>
                 </tr>
                 <tr>
                     <th>Company</th>
-                    <th class="hide-sm">Title</th>
-                    <th class="hide-sm">Years</th>
+                    <th className="hide-sm">Title</th>
+                    <th className="hide-sm">Years</th>
                     <th></th>
                 </tr>
             </thead>
@@ -44,12 +46,12 @@ function ProfileExperience() {
                 })}
                 <tr>
                     <td>Traversy Media</td>
-                    <td class="hide-sm">Instructor & Developer</td>
-                    <td class="hide-sm">
+                    <td className="hide-sm">Instructor & Developer</td>
+                    <td className="hide-sm">
                         02-03-2015 - Now
                     </td>
                     <td>
-                        <button class="btn btn-danger">
+                        <button className="btn btn-danger">
                             Delete
                         </button>
                     </td>
