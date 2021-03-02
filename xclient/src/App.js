@@ -8,6 +8,7 @@ import {
     RegisterDisplay,
     LoginDisplay,
     DashboardDisplay,
+    PrivateRoute,
 } from "./displays"
 import { loadUser, logout, getUserProfile } from "./manager";
 
@@ -31,7 +32,7 @@ function App() {
             <Main className="container">
                 <Alert />
                 <Switch>
-                    <Route path="/dashboard" component={DashboardDisplay} />
+                    <PrivateRoute path="/dashboard" component={DashboardDisplay} />
                     <Route path="/register" component={RegisterDisplay}/>
                     <Route path="/login" component={LoginDisplay} />
                 </Switch>
