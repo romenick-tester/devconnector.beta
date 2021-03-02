@@ -1,4 +1,4 @@
 import { setAlert } from "./alertActions";
-import { loginUser, registerUser, loadUser } from "./authActions";
+import { loginUser, registerUser, loadUser, logout } from "./authActions";
 
-export { setAlert, registerUser, loginUser, loadUser };
+export { setAlert, registerUser, loginUser, loadUser, logout };

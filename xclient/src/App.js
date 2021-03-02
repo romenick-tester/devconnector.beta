@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -10,16 +10,20 @@ import {
     Error404Display,
     DashboardDisplay,
 } from "./displays"
-import { loadUser } from "./manager";
+import { loadUser, logout } from "./manager";
 
 function App() {
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
     const { token } = auth;
 
-    if (token) {
-        dispatch(loadUser());
-    }
+    useEffect(() => {
+        if (token) {
+            dispatch(loadUser())
+        } else {
+            dispatch(logout());
+        }
+    }, [token, dispatch])
 
     return (
         <Router>

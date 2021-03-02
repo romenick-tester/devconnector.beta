@@ -9,7 +9,9 @@ import {
     AUTH_LOGIN_ERROR, 
     AUTH_LOAD_USER_REQUEST,
     AUTH_LOAD_USER_SUCCESS,
-    AUTH_LOAD_USER_ERROR
+    AUTH_LOAD_USER_ERROR,
+    AUTH_LOGOUT_USER,
+    AUTH_CLEAR_USER,
 } from "../constants/authConstants";
 
 export const registerUser = (registerForm) => async (dispatch) => {
@@ -93,4 +95,9 @@ export const loadUser = () => async (dispatch, getState) => {
 
         dispatch({ type: AUTH_LOAD_USER_ERROR });
     }
+}
+
+export const logout = () => async (dispatch) => {
+    dispatch({ type: AUTH_LOGOUT_USER })
+    dispatch({ type: AUTH_CLEAR_USER })
 }
