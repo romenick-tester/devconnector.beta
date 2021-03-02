@@ -21,6 +21,7 @@ const Links = () => {
 
 const AuthLinks = () => {
     const dispatch = useDispatch();
+    const { info } = useSelector(state => state.user);
 
     return (
         <>
@@ -29,7 +30,7 @@ const AuthLinks = () => {
             </h1>
             <ul>
                 <li><Link to="/profiles">Developers</Link></li>
-                <li><Link to="/dashboard">User</Link></li>
+                <li><Link to="/dashboard">{info ? info.name : "User"}</Link></li>
                 <li><Link to="" onClick={() => dispatch(logout())}>Logout</Link></li>
             </ul>
         </>

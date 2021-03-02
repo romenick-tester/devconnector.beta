@@ -14,8 +14,7 @@ import { loadUser, logout } from "./manager";
 
 function App() {
     const dispatch = useDispatch();
-    const auth = useSelector(state => state.auth);
-    const { token } = auth;
+    const { token } = useSelector(state => state.auth);
 
     useEffect(() => {
         if (token) {
