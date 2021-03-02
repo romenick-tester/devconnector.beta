@@ -7,10 +7,9 @@ import {
     LandingDisplay,
     RegisterDisplay,
     LoginDisplay,
-    Error404Display,
     DashboardDisplay,
 } from "./displays"
-import { loadUser, logout } from "./manager";
+import { loadUser, logout, getUserProfile } from "./manager";
 
 function App() {
     const dispatch = useDispatch();
@@ -18,7 +17,8 @@ function App() {
 
     useEffect(() => {
         if (token) {
-            dispatch(loadUser())
+            dispatch(loadUser());
+            dispatch(getUserProfile());
         } else {
             dispatch(logout());
         }
@@ -26,17 +26,14 @@ function App() {
 
     return (
         <Router>
-            <Navbar/>
-            
-            <Route path="/" exact component={LandingDisplay}/>
-                
+            <Navbar />
+            <Route path="/" exact component={LandingDisplay} />
             <Main className="container">
                 <Alert />
                 <Switch>
                     <Route path="/dashboard" component={DashboardDisplay} />
                     <Route path="/register" component={RegisterDisplay}/>
-                    <Route path="/login" component={LoginDisplay}/>
-                    <Route path="*" component={Error404Display} />
+                    <Route path="/login" component={LoginDisplay} />
                 </Switch>
             </Main>
         </Router>

@@ -5,9 +5,9 @@ import styled from "styled-components";
 
 function LandingDisplay({ history }) {
     const auth = useSelector(state => state.auth);
-    const { auth_loading: loading, isAuthenticated } = auth;
+    const { isAuthenticated } = auth;
 
-    if (!loading && isAuthenticated) {
+    if (isAuthenticated) {
         history.push("/dashboard");
     }
 
