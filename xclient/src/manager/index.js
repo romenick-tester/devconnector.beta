@@ -1,6 +1,5 @@
-import { AppProvider, useGlobalContext } from "./agents/useGlobalContext";
-import { setAlert, registerUser, loginUser } from "./redux/actions";
+import { setAlert, registerUser, loginUser, loadUser } from "./redux/actions";
 import store from "./redux/store";
 
-export { AppProvider, useGlobalContext, store };
-export { setAlert, registerUser, loginUser };
+export { store };
+export { setAlert, registerUser, loginUser, loadUser };

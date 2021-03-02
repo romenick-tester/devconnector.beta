@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { loginUser } from "../manager";
+import { loadUser, loginUser } from "../manager";
 
-function LoginDisplay() {
+function LoginDisplay({ history }) {
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -12,6 +12,8 @@ function LoginDisplay() {
     const { email, password } = formData;
 
     const dispatch = useDispatch();
+    const auth = useSelector(state => state.auth);
+    const { auth_loading: loading, isAuthenticated } = auth;
 
     function changeHandler(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -19,13 +21,18 @@ function LoginDisplay() {
 
     const submitHandler = async(e) => {
         e.preventDefault();
-        dispatch(loginUser(formData))
+        dispatch(loginUser(formData));
+    }
+
+    if (!loading && isAuthenticated) {
+        dispatch(loadUser());
+        history.push("/dashboard")
     }
 
     return (
         <>
-            <h1 className="large text-primary">Sign Up</h1>
-            <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
+            <h1 className="large text-primary">Sign In</h1>
+            <p className="lead"><i className="fas fa-user"></i> Sign In To Your Account</p>
             <form className="form" onSubmit={(e) => submitHandler(e)}>
                 <div className="form-group">
                     <input 

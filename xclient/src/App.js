@@ -1,11 +1,25 @@
 import React from "react";
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { LandingDisplay, RegisterDisplay, LoginDisplay } from "./displays"
 import { Alert, Navbar, } from "./components"
-import { useSelector } from "react-redux";
+import {
+    LandingDisplay,
+    RegisterDisplay,
+    LoginDisplay,
+    Error404Display,
+    DashboardDisplay,
+} from "./displays"
+import { loadUser } from "./manager";
 
 function App() {
-    const alerts = useSelector(state => state.alerts);
+    const dispatch = useDispatch();
+    const auth = useSelector(state => state.auth);
+    const { token } = auth;
+
+    if (token) {
+        dispatch(loadUser());
+    }
 
     return (
         <Router>
@@ -13,17 +27,19 @@ function App() {
             
             <Route path="/" exact component={LandingDisplay}/>
                 
-            <section className="container">
-                {alerts.length > 0 && alerts.map((alert) => {
-                    return <Alert key={alert.id} {...alert} />
-                })}
+            <Main className="container">
+                <Alert />
                 <Switch>
+                    <Route path="/dashboard" component={DashboardDisplay} />
                     <Route path="/register" component={RegisterDisplay}/>
                     <Route path="/login" component={LoginDisplay}/>
+                    <Route path="*" component={Error404Display} />
                 </Switch>
-            </section>
+            </Main>
         </Router>
     )
 }
+
+const Main = styled.section``
 
 export default App

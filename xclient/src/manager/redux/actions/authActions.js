@@ -7,12 +7,12 @@ import {
     AUTH_LOGIN_REQUEST, 
     AUTH_LOGIN_SUCCESS, 
     AUTH_LOGIN_ERROR, 
-    AUTH_PROFILE_REQUEST,
-    AUTH_PROFILE_SUCCESS,
-    AUTH_PROFILE_ERROR
+    AUTH_LOAD_USER_REQUEST,
+    AUTH_LOAD_USER_SUCCESS,
+    AUTH_LOAD_USER_ERROR
 } from "../constants/authConstants";
 
-export const registerUser = (name, email, password) => async(dispatch) => {
+export const registerUser = (registerForm) => async (dispatch) => {
     try {
         dispatch({ type: AUTH_REGISTER_REQUEST });
 
@@ -22,23 +22,29 @@ export const registerUser = (name, email, password) => async(dispatch) => {
             }
         }
 
-        const body = JSON.stringify({
-            name, email, password
-        });
+        const body = JSON.stringify(registerForm);
 
         const { data } = await axios.post("/api/users", body, config );
 
-        dispatch({ type: AUTH_REGISTER_SUCCESS, payload: data.token })
+        dispatch({ type: AUTH_REGISTER_SUCCESS, payload: data.token });
+
+        localStorage.setItem("token", JSON.stringify({ token: data.token }));
+
+        if (data) {
+            dispatch(loadUser());
+        }
     } catch (error) {
         const errors = error.response.data.errors;
+
         if(errors){
             errors.forEach((err) => dispatch(setAlert("danger", err.msg)));
         }
+
         dispatch({ type: AUTH_REGISTER_ERROR });
     }
 }
 
-export const loginUser = (logindata) => async(dispatch) => {
+export const loginUser = (loginForm) => async (dispatch) => {
     try {
         dispatch({ type: AUTH_LOGIN_REQUEST });
 
@@ -48,44 +54,43 @@ export const loginUser = (logindata) => async(dispatch) => {
             }
         }
 
-        const body = JSON.stringify(logindata);
+        const body = JSON.stringify(loginForm);
 
         const { data } = await axios.post("/api/auth", body, config );
 
         dispatch({ type: AUTH_LOGIN_SUCCESS, payload: data.token });
 
         localStorage.setItem("token", JSON.stringify(data.token));
+
     } catch (error) {
         const errors = error.response.data.errors;
+
         if(errors){
             errors.forEach((err) => dispatch(setAlert("danger", err.msg)));
         }
+
         dispatch({ type: AUTH_LOGIN_ERROR });
     }
 }
 
-export const myDetails = () => async(dispatch, getState) => {
+export const loadUser = () => async (dispatch, getState) => {
     try {
-        dispatch({ type: AUTH_PROFILE_REQUEST });
+        dispatch({ type: AUTH_LOAD_USER_REQUEST });
 
         const { auth: { token } } = getState();
 
         const config = {
             headers: {
-                "auth-token": `${token}`
+                "Auth-Token": `${token}`
             }
         }
 
         const { data } = await axios.get("/api/auth/me", config );
 
-        dispatch({ type: AUTH_PROFILE_SUCCESS, payload: data });
+        dispatch({ type: AUTH_LOAD_USER_SUCCESS, payload: data });
 
-        localStorage.setItem("token", JSON.stringify(data.token));
     } catch (error) {
-        const errors = error.response.data.errors;
-        if(errors){
-            errors.forEach((err) => dispatch(setAlert("danger", err.msg)));
-        }
-        dispatch({ type: AUTH_PROFILE_ERROR });
+
+        dispatch({ type: AUTH_LOAD_USER_ERROR });
     }
 }
