@@ -9,6 +9,7 @@ import {
     LoginDisplay,
     DashboardDisplay,
     PrivateRoute,
+    CreateProfileDisplay,
 } from "./displays"
 import { loadUser, getUserProfile } from "./manager";
 
@@ -31,6 +32,7 @@ function App() {
                 <Alert />
                 <Switch>
                     <PrivateRoute path="/dashboard" component={DashboardDisplay} />
+                    <PrivateRoute path="/create-profile" component={CreateProfileDisplay} />
                     <Route path="/register" component={RegisterDisplay}/>
                     <Route path="/login" component={LoginDisplay} />
                 </Switch>

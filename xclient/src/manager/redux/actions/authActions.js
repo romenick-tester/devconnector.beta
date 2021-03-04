@@ -14,7 +14,7 @@ import {
     AUTH_CLEAR_USER,
 } from "../constants/authConstants";
 
-export const registerUser = (registerForm) => async (dispatch) => {
+export const registerUser = (registerForm, history) => async (dispatch) => {
     try {
         dispatch({ type: AUTH_REGISTER_REQUEST });
 
@@ -35,6 +35,8 @@ export const registerUser = (registerForm) => async (dispatch) => {
         if (data) {
             dispatch(loadUser());
         }
+
+        history.push("/dashboard");
     } catch (error) {
         const errors = error.response.data.errors;
 

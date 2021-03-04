@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAlert, registerUser } from "../manager";
 
-function RegisterDisplay() {
+function RegisterDisplay({ history }) {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -27,7 +27,7 @@ function RegisterDisplay() {
             return;
         }
 
-        dispatch(registerUser(name, email, password));
+        dispatch(registerUser({ name, email, password }, history));
         dispatch(setAlert("success", "Successfully registered!"))
     }
 

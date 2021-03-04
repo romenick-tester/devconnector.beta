@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from "styled-components";
 import { useSelector } from "react-redux";
 import SingleEducation from "./SingleEducation";
 
@@ -25,8 +26,16 @@ function ProfileEducation() {
         setEducations(newEducations);
     }
 
+    function deleteEducation() {
+        const isConfirmed = window.confirm("you want to delete this?");
+
+        if (isConfirmed) {
+            console.log("deleted!");
+        }
+    }
+
     return (
-        <table className="table" style={{ minWidth: "700px" }}>
+        <Table className="table">
             <thead>
                 <tr>
                     <td colSpan={4}>
@@ -44,24 +53,36 @@ function ProfileEducation() {
                 {educations.map((item) => {
                     return <SingleEducation key={item._id} {...item} removeEdu={removeEdu} />
                 })}
-                <tr>
-                    <td>Westminster College</td>
-                    <td className="hide-sm">
-                        <small>BTEC</small><br />
-                        Product Engineer
-                    </td>
-                    <td className="hide-sm">
-                        2008 - 2018
-                    </td>
-                    <td>
-                        <button className="btn btn-danger" >
-                            Delete
-                        </button>
-                    </td>
-                </tr>
+                {educations.length === 0 && (
+                    <tr>
+                        <td><span>sample</span> Westminster College</td>
+                        <td className="hide-sm">
+                            <small><span>sample</span> BTEC</small><br />
+                            Product Engineer
+                        </td>
+                        <td className="hide-sm">
+                            <span>sample</span> 2008 - 2018
+                        </td>
+                        <td>
+                            <button className="btn btn-danger" onClick={() => deleteEducation()} >
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                )}
             </tbody>
-        </table>
+        </Table>
     )
 }
+
+const Table = styled.table`
+    min-width: 700px;
+
+    span {
+        color: grey;
+        font-size: 0.6rem;
+        display: block;
+    }
+`
 
 export default ProfileEducation;

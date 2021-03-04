@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from "styled-components";
 import { useSelector } from "react-redux";
 import SingleExperience from "./SingleExperience";
 
@@ -26,7 +27,7 @@ function ProfileExperience() {
     }
 
     return (
-        <table className="table" style={{ minWidth: "700px" }}>
+        <Table className="table">
             <thead>
                 <tr>
                     <td colSpan={4}>
@@ -44,21 +45,33 @@ function ProfileExperience() {
                 {experiences.map((item) => {
                     return <SingleExperience key={item._id} {...item} removeExp={removeExp} />
                 })}
-                <tr>
-                    <td>Traversy Media</td>
-                    <td className="hide-sm">Instructor & Developer</td>
-                    <td className="hide-sm">
-                        02-03-2015 - Now
-                    </td>
-                    <td>
-                        <button className="btn btn-danger">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
+                {experiences.length === 0 && (
+                    <tr>
+                        <td><span>sample</span> Traversy Media</td>
+                        <td className="hide-sm"><span>sample</span>Instructor & Developer</td>
+                        <td className="hide-sm">
+                            <span>sample</span>02-03-2015 - Now
+                        </td>
+                        <td>
+                            <button className="btn btn-danger">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                )}
             </tbody>
-        </table>
+        </Table>
     )
 }
+
+const Table = styled.table`
+    min-width: 700px;
+
+    span {
+        color: grey;
+        font-size: 0.6rem;
+        display: block;
+    }
+`
 
 export default ProfileExperience;

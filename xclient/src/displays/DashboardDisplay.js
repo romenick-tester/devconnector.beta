@@ -30,12 +30,23 @@ function DashboardDisplay() {
         return (
             <>
                 <h1 className="large text-primary">
-                    Error...
+                    Dashboard
                 </h1>
                 <p className="lead"><i className="fas fa-user"></i> Welcome {info ? info.name : "to DevConnector"} !</p>
                 <Link to="/create-profile" className="btn">Create Profile</Link>
+                <small style={{ color: "orangered" }}>NO PROFILE SET</small>
             </>
         )
+    }
+
+    function deleteAccount() {
+        const isConfirmed = window.confirm("Are you sure you want to delete your account?");
+
+        if (isConfirmed) {
+            console.log("account deleted");
+            //dispatch action here
+        }
+
     }
 
     return (
@@ -64,6 +75,14 @@ function DashboardDisplay() {
                 <>
                     <ProfileEducation />
                     <ProfileExperience />
+
+                    <div class="my-2" onClick={() => deleteAccount()}>
+                        <button class="btn btn-danger">
+                            <i class="fas fa-user-minus"></i>
+
+                        Delete My Account
+                    </button>
+                    </div>
                 </>
             )}
 
