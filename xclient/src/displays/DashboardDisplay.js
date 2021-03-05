@@ -57,10 +57,17 @@ function DashboardDisplay() {
             <p className="lead"><i className="fas fa-user"></i> Welcome {info ? info.name : "to DevConnector"} !</p>
 
             <div className="dash-buttons">
-                <Link to="/create-profile" className="btn btn-light">
-                    <i className="fas fa-user-circle text-primary"></i>
-                    {!details ? "Create Profile" : "Edit Profile"}
-                </Link>
+                {!details ? (
+                    <Link to="/create-profile" className="btn btn-light">
+                        <i className="fas fa-user-circle text-primary"></i>
+                        Create Profile
+                    </Link>
+                ) : (
+                    <Link to="/edit-profile" className="btn btn-light">
+                        <i className="fas fa-user-circle text-primary"></i>
+                            Edit Profile
+                    </Link>
+                )}
 
                 <Link to="/add-experience" className="btn btn-light">
                     <i className="fab fa-black-tie text-primary"></i> Add Experience
