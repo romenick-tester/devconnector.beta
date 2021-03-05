@@ -6,6 +6,8 @@ import DashboardDisplay from "./DashboardDisplay";
 import PrivateRoute from "./PrivateRoute";
 import CreateProfileDisplay from "./CreateProfileDisplay";
 import EditProfileDisplay from "./EditProfileDisplay";
+import AddEducationDisplay from "./AddEducationDisplay";
+import AddExperienceDisplay from "./AddExperienceDisplay";
 
 export {
     LandingDisplay,
@@ -16,4 +18,6 @@ export {
     PrivateRoute,
     CreateProfileDisplay,
     EditProfileDisplay,
+    AddEducationDisplay,
+    AddExperienceDisplay,
 };
