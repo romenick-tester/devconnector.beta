@@ -8,9 +8,16 @@ import {
     PROFILE_CREATE_ERROR,
     PROFILE_UPDATE_REQUEST,
     PROFILE_UPDATE_SUCCESS,
-    PROFILE_UPDATE_ERROR
+    PROFILE_UPDATE_ERROR,
+    PROFILE_DELETE_EDU_REQUEST,
+    PROFILE_DELETE_EDU_SUCCESS,
+    PROFILE_DELETE_EDU_ERROR,
+    PROFILE_DELETE_EXP_REQUEST,
+    PROFILE_DELETE_EXP_SUCCESS,
+    PROFILE_DELETE_EXP_ERROR,
 } from "../constants/profileConstants";
 import { setAlert } from "./alertActions";
+import { logout } from "./authActions";
 
 export const getUserProfile = () => async (dispatch, getState) => {
     dispatch({ type: PROFILE_USER_PROFILE_REQUEST });
@@ -139,5 +146,71 @@ export const addProfileEducation = (form) => async (dispatch, getState) => {
             console.error(error.message);
             dispatch({ type: PROFILE_UPDATE_ERROR });
         }
+    }
+}
+
+export const deleteProfile = () => async (dispatch, getState) => {
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const { data } = await axios.delete(`/api/profile`, config);
+
+        dispatch(setAlert("success", data.msg));
+
+        dispatch(logout());
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+export const deleteProfileEducation = (id) => async (dispatch, getState) => {
+    dispatch({ type: PROFILE_DELETE_EDU_REQUEST });
+
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const { data } = await axios.delete(`/api/profile/education/${id}`, config);
+
+        dispatch({ type: PROFILE_DELETE_EDU_SUCCESS, payload: data });
+
+        dispatch(setAlert("success", "Education deleted!"));
+    } catch (error) {
+        console.error(error.message);
+        dispatch({ type: PROFILE_DELETE_EDU_ERROR });
+    }
+}
+
+export const deleteProfileExperience = (id) => async (dispatch, getState) => {
+    dispatch({ type: PROFILE_DELETE_EXP_REQUEST });
+
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const { data } = await axios.delete(`/api/profile/experience/${id}`, config);
+
+        dispatch({ type: PROFILE_DELETE_EXP_SUCCESS, payload: data });
+
+        dispatch(setAlert("success", "Experience deleted!"));
+    } catch (error) {
+        console.error(error.message);
+        dispatch({ type: PROFILE_DELETE_EXP_ERROR });
     }
 }

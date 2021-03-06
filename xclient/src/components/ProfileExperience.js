@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteProfileExperience } from "../manager";
 import SingleExperience from "./SingleExperience";
 
 function ProfileExperience() {
@@ -12,6 +13,8 @@ function ProfileExperience() {
         single_profile_error: error,
         single_profile: details,
     } = single_profile;
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (!loading && details) {
@@ -28,7 +31,11 @@ function ProfileExperience() {
     }
 
     function removeExp(id) {
-        console.log(id);
+        const isConfirmed = window.confirm("You want to delete ?");
+
+        if (isConfirmed) {
+            dispatch(deleteProfileExperience(id));
+        }
     }
 
     return (
@@ -70,7 +77,7 @@ function ProfileExperience() {
 }
 
 const Table = styled.table`
-    min-width: 700px;
+    min-width: 800px;
 
     span {
         color: grey;

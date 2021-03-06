@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteProfile } from "../manager";
 import { ProfileEducation, ProfileExperience } from "../components";
 
-function DashboardDisplay() {
+function DashboardDisplay({ history }) {
     const user = useSelector(state => state.user);
     const { info } = user;
 
@@ -13,6 +14,8 @@ function DashboardDisplay() {
         single_profile_error: error,
         single_profile: details,
     } = single_profile;
+
+    const dispatch = useDispatch();
 
     if (loading) {
         return (
@@ -43,9 +46,13 @@ function DashboardDisplay() {
         const isConfirmed = window.confirm("Are you sure you want to delete your account?");
 
         if (isConfirmed) {
-            console.log("account deleted");
-            //dispatch action here
+            const isForSure = window.confirm("Final check ?");
+
+            if (isForSure) {
+                dispatch(deleteProfile());
+            }
         }
+
 
     }
 

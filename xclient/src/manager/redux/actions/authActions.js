@@ -30,7 +30,7 @@ export const registerUser = (registerForm, history) => async (dispatch) => {
 
         dispatch({ type: AUTH_REGISTER_SUCCESS, payload: data.token });
 
-        localStorage.setItem("token", JSON.stringify({ token: data.token }));
+        localStorage.setItem("token", JSON.stringify(data.token));
 
         if (data) {
             dispatch(loadUser());
