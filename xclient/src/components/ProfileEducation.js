@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import SingleEducation from "./SingleEducation";
 
 function ProfileEducation() {
+    const [educations, setEducations] = useState([]);
+
     const single_profile = useSelector(state => state.user_profile);
     const {
         single_profile_loading: loading,
@@ -11,7 +13,11 @@ function ProfileEducation() {
         single_profile: details,
     } = single_profile;
 
-    const [educations, setEducations] = useState(details && details.education ? details.education : []);
+    useEffect(() => {
+        if (!loading && details) {
+            setEducations(details.education)
+        }
+    }, [loading, details]);
 
     if (loading) {
         return <h3>Loading...</h3>
@@ -22,16 +28,7 @@ function ProfileEducation() {
     }
 
     function removeEdu(id) {
-        const newEducations = educations.filter((item) => item._id !== id);
-        setEducations(newEducations);
-    }
-
-    function deleteEducation() {
-        const isConfirmed = window.confirm("you want to delete this?");
-
-        if (isConfirmed) {
-            console.log("deleted!");
-        }
+        console.log(id);
     }
 
     return (
@@ -64,7 +61,7 @@ function ProfileEducation() {
                             <span>sample</span> 2008 - 2018
                         </td>
                         <td>
-                            <button className="btn btn-danger" onClick={() => deleteEducation()} >
+                            <button className="btn btn-danger">
                                 Delete
                             </button>
                         </td>

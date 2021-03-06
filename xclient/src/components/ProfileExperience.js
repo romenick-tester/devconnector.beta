@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import SingleExperience from "./SingleExperience";
 
 function ProfileExperience() {
+    const [experiences, setExperiences] = useState([]);
+
     const single_profile = useSelector(state => state.user_profile);
     const {
         single_profile_loading: loading,
@@ -11,7 +13,11 @@ function ProfileExperience() {
         single_profile: details,
     } = single_profile;
 
-    const [experiences, setExperiences] = useState(details && details.experience ? details.experience : []);
+    useEffect(() => {
+        if (!loading && details) {
+            setExperiences(details.experience);
+        }
+    }, [loading, details])
 
     if (loading) {
         return <h3>loading...</h3>
@@ -22,8 +28,7 @@ function ProfileExperience() {
     }
 
     function removeExp(id) {
-        const newExperiences = experiences.filter((item) => item._id !== id);
-        setExperiences(newExperiences);
+        console.log(id);
     }
 
     return (

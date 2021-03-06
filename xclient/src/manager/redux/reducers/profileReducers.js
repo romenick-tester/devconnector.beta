@@ -8,7 +8,7 @@ import {
 } from "../constants/profileConstants";
 
 const single_profile_state = {
-    single_profile_loading: false,
+    single_profile_loading: true,
     single_profile_error: false,
     single_profile: null,
 }
