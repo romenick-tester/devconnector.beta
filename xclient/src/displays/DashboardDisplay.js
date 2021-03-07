@@ -46,14 +46,15 @@ function DashboardDisplay({ history }) {
         const isConfirmed = window.confirm("Are you sure you want to delete your account?");
 
         if (isConfirmed) {
-            const isForSure = window.confirm("Final check ?");
+            setTimeout(async () => {
+                const isForSure = window.confirm("Final check ?");
 
-            if (isForSure) {
-                dispatch(deleteProfile());
-            }
+                if (isForSure) {
+                    dispatch(deleteProfile());
+                }
+            }, 1500);
+
         }
-
-
     }
 
     return (

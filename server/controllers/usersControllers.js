@@ -23,7 +23,7 @@ const registerUser = async(req,res) => {
         let user = await User.findOne({ email });
 
         if(user) {
-            return res.status(400).json({ errors: [ { msg: "User already exist!" } ] });
+            return res.status(400).json({ errors: [{ msg: "User already exist! 🚩" }] });
         }
 
         const avatar = normalize(gravatar.url(email, {
@@ -54,14 +54,14 @@ const registerUser = async(req,res) => {
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 360000 });
 
         if(!token) {
-            return res.status(400).json({ errors: [ { msg: "400: Bad request" } ] })
+            return res.status(400).json({ errors: [{ msg: "Invalid credentials 🚩 " }] })
         }
 
         res.json({token});
 
     } catch (error) {
         console.error(error.message);
-        res.status(500).send("Server Error");
+        res.status(500).send("There was a problem with the server, please try again. 🚩");
     }
 }
 
@@ -70,7 +70,7 @@ const getAllUsers = async(req, res) => {
         const users = await User.find().select(["email", "-_id"]);
         
         if(!users) {
-            return res.status(400).json({ errors: [{ msg: "No users found!" }] });
+            return res.status(400).json({ errors: [{ msg: "No users found! 🚩" }] });
         }
     
         res.json(users)

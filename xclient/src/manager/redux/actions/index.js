@@ -1,14 +1,28 @@
 import { setAlert } from "./alertActions";
 import { loginUser, registerUser, loadUser, logout } from "./authActions";
 import {
-    getUserProfile, createUserProfile,
-    addProfileEducation, addProfileExperience,
-    deleteProfileEducation, deleteProfileExperience, deleteProfile,
+    getUserProfile,
+    createUserProfile,
+    addProfileEducation,
+    addProfileExperience,
+    deleteProfileEducation,
+    deleteProfileExperience,
+    deleteProfile,
+    getProfileList,
 } from "./profileActions";
 
-export { setAlert };
-export { registerUser, loginUser, loadUser, logout };
 export {
-    getUserProfile, createUserProfile, addProfileEducation,
-    addProfileExperience, deleteProfileEducation, deleteProfileExperience, deleteProfile,
+    setAlert,
+    registerUser,
+    loginUser,
+    loadUser,
+    logout,
+    getUserProfile,
+    createUserProfile,
+    addProfileEducation,
+    addProfileExperience,
+    deleteProfileEducation,
+    deleteProfileExperience,
+    deleteProfile,
+    getProfileList,
 };

@@ -15,9 +15,30 @@ import {
     PROFILE_DELETE_EXP_REQUEST,
     PROFILE_DELETE_EXP_SUCCESS,
     PROFILE_DELETE_EXP_ERROR,
+    PROFILE_LIST_REQUEST,
+    PROFILE_LIST_SUCCESS,
 } from "../constants/profileConstants";
 import { setAlert } from "./alertActions";
 import { logout } from "./authActions";
+
+export const getProfileList = () => async (dispatch) => {
+    dispatch({ type: PROFILE_LIST_REQUEST })
+
+    try {
+        const { data } = await axios.get("/api/profile");
+
+        dispatch({ type: PROFILE_LIST_SUCCESS, payload: data });
+
+    } catch (err) {
+        const errors = err.response && err.response.data.message ? err.response.data.message : err.message;
+
+        if (errors) {
+            errors.map((error) => dispatch(setAlert("danger", error.msg)));
+        } else {
+            console.error(err.message);
+        }
+    }
+}
 
 export const getUserProfile = () => async (dispatch, getState) => {
     dispatch({ type: PROFILE_USER_PROFILE_REQUEST });

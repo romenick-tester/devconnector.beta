@@ -65,7 +65,7 @@ const deleteProfileExperience = async(req,res) => {
         res.json(profile);
     } catch (err) {
       console.error(err.message);
-      return res.status(500).send('Server Error');
+        return res.status(500).send('There was a problem with the server, please try again.');
     }
 }
 
@@ -191,7 +191,7 @@ const createUserProfile = async(req,res) => {
 //access:       private  
 const getUserProfile = async(req,res) => {
     try {
-        const profile = await Profile.findOne({ user: req.user.id }).populate("User", ["name", "avatar"]);
+        const profile = await Profile.findOne({ user: req.user.id }).populate("user", ["name", "avatar"]);
 
         if(!profile) {
             return res.status(400).json({ errors: [{ msg: "There is no profile for this user." }] });
@@ -200,7 +200,7 @@ const getUserProfile = async(req,res) => {
         res.json(profile)
     } catch (error) {
         console.error(error.message);
-        res.status(500).json({ errors: [{ msg: "500: Server error" }] })
+        res.status(500).json({ errors: [{ msg: "There was a  problem with the server, please try again." }] })
     }
 }
 
@@ -209,7 +209,7 @@ const getUserProfile = async(req,res) => {
 //access:       public  
 const getAllProfiles = async(req,res) => {
     try {
-        const profiles = await Profile.find().populate("User", ["name", "avatar"]);
+        const profiles = await Profile.find().populate("user", ["name", "avatar"]);
         
         if(!profiles) {
             return res.status(404).json({ errors: [{ msg: "No profiles found!" }] })
@@ -227,7 +227,7 @@ const getAllProfiles = async(req,res) => {
 //access:       private  
 const getUserProfileByID = async(req,res) => {
     try {
-        const profile = await Profile.findOne({user: req.params.user_id}).populate("User", ["name", "avatar"]);
+        const profile = await Profile.findOne({ user: req.params.user_id }).populate("user", ["name", "avatar"]);
     
         if(!profile) {
             return res.status(400).json({ errors: [{ msg: "No profile found!" }] });
