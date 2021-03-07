@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileList } from "../manager";
+import { SingleProfile } from "../components";
 
 function ProfilesDisplay() {
     const [developers, setDevelopers] = useState([]);
@@ -31,12 +32,9 @@ function ProfilesDisplay() {
     return (
         <div>
             <h1>Current Users:</h1>
-            <ul>
-                {developers.map((dev) => {
-                    const { user } = dev;
-                    return <li key={dev._id}>{user.name}</li>
-                })}
-            </ul>
+            {developers.map((dev) => {
+                return <SingleProfile key={dev._id} {...dev} />
+            })}
         </div>
     )
 }

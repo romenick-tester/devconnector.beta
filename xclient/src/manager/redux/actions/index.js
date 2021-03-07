@@ -9,6 +9,7 @@ import {
     deleteProfileExperience,
     deleteProfile,
     getProfileList,
+    getUserProfileById,
 } from "./profileActions";
 
 export {
@@ -25,4 +26,5 @@ export {
     deleteProfileExperience,
     deleteProfile,
     getProfileList,
+    getUserProfileById,
 };

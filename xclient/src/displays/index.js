@@ -9,6 +9,7 @@ import EditProfileDisplay from "./EditProfileDisplay";
 import AddEducationDisplay from "./AddEducationDisplay";
 import AddExperienceDisplay from "./AddExperienceDisplay";
 import ProfilesDisplay from "./ProfilesDisplay";
+import SingleProfileDisplay from "./SingleProfileDisplay";
 
 export {
     LandingDisplay,
@@ -21,5 +22,6 @@ export {
     EditProfileDisplay,
     AddEducationDisplay,
     AddExperienceDisplay,
-    ProfilesDisplay
+    ProfilesDisplay,
+    SingleProfileDisplay,
 };

@@ -13,6 +13,7 @@ import {
     deleteProfileExperience,
     deleteProfile,
     getProfileList,
+    getUserProfileById,
 } from "./redux/actions";
 
 export { store };
@@ -30,4 +31,5 @@ export {
     deleteProfileExperience,
     deleteProfile,
     getProfileList,
+    getUserProfileById,
 };

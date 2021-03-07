@@ -14,6 +14,9 @@ import {
     PROFILE_LIST_REQUEST,
     PROFILE_LIST_SUCCESS,
     PROFILE_LIST_ERROR,
+    PROFILE_BY_ID_REQUEST,
+    PROFILE_BY_ID_SUCCESS,
+    PROFILE_BY_ID_ERROR,
 } from "../constants/profileConstants";
 
 const single_profile_state = {
@@ -96,6 +99,45 @@ export const listProfileReducer = (state = profile_list_initial_state, action) =
                 profile_list_loading: false,
                 profile_list_error: true,
                 profile_list: []
+            }
+
+        default:
+            return state;
+    }
+}
+
+const profile_byId_initial_state = {
+    profile_byId_loading: false,
+    profile_byId_error: false,
+    profile_byId: {}
+}
+
+export const profileByIdReducer = (state = profile_byId_initial_state, action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+        case PROFILE_BY_ID_REQUEST:
+            return {
+                ...state,
+                profile_byId_loading: true,
+                profile_byId_error: false,
+                profile_byId: {}
+            }
+
+        case PROFILE_BY_ID_SUCCESS:
+            return {
+                ...state,
+                profile_byId_loading: false,
+                profile_byId_error: false,
+                profile_byId: payload
+            }
+
+        case PROFILE_BY_ID_ERROR:
+            return {
+                ...state,
+                profile_byId_loading: false,
+                profile_byId_error: true,
+                profile_byId: {}
             }
 
         default:

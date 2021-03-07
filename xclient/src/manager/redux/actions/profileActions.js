@@ -17,6 +17,9 @@ import {
     PROFILE_DELETE_EXP_ERROR,
     PROFILE_LIST_REQUEST,
     PROFILE_LIST_SUCCESS,
+    PROFILE_BY_ID_REQUEST,
+    PROFILE_BY_ID_SUCCESS,
+    PROFILE_BY_ID_ERROR,
 } from "../constants/profileConstants";
 import { setAlert } from "./alertActions";
 import { logout } from "./authActions";
@@ -36,6 +39,26 @@ export const getProfileList = () => async (dispatch) => {
             errors.map((error) => dispatch(setAlert("danger", error.msg)));
         } else {
             console.error(err.message);
+        }
+    }
+}
+
+export const getUserProfileById = (userId) => async (dispatch) => {
+    dispatch({ type: PROFILE_BY_ID_REQUEST });
+
+    try {
+        const { data } = await axios.get(`/api/profile/user/${userId}`);
+
+        dispatch({ type: PROFILE_BY_ID_SUCCESS, payload: data });
+    } catch (error) {
+        const errors = error.response && error.response.data.errors && error.response.data.errors;
+
+        if (errors) {
+            errors.map((err) => dispatch(setAlert("danger", err.msg)));
+
+        } else {
+            console.error(error.message);
+            dispatch({ type: PROFILE_BY_ID_ERROR });
         }
     }
 }
