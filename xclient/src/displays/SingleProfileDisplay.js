@@ -19,9 +19,7 @@ function SingleProfileDisplay({ match }) {
     }, [userId, dispatch]);
 
     useEffect(() => {
-        if (profile) {
-            setDeveloper(profile);
-        }
+        setDeveloper(profile);
     }, [profile]);
 
     if (loading) {
@@ -32,10 +30,16 @@ function SingleProfileDisplay({ match }) {
         return <h4>Error...</h4>
     }
 
-    console.log(developer);
+    const {
+        bio = "", company = "", education = [], experience = [], githubusername = "",
+        location = "", skills = [], social = {}, status = "", user = {} } = developer;
     return (
         <div>
-            <h4>single profile display component</h4>
+            <h1>{user.name}</h1>
+            <h4>Experiences:</h4>
+            <ul>{experience.map((exp, index) => {
+                return <li key={index}>{exp.title}</li>
+            })}</ul>
         </div>
     )
 }

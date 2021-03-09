@@ -3,7 +3,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { alertReducers } from "./reducers/alertReducers";
 import { authReducer, userDetailsReducer } from "./reducers/authReducers";
-import { singleProfileReducer, listProfileReducer, profileByIdReducer } from "./reducers/profileReducers";
+import {
+    singleProfileReducer,
+    listProfileReducer,
+    profileByIdReducer,
+    githubReposReducer,
+} from "./reducers/profileReducers";
 
 const reducers = combineReducers({
     alerts: alertReducers,
@@ -12,6 +17,7 @@ const reducers = combineReducers({
     user_profile: singleProfileReducer,
     profiles: listProfileReducer,
     user_byId: profileByIdReducer,
+    repos: githubReposReducer,
 });
 
 const initialState = {};

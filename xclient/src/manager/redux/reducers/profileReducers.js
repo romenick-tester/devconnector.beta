@@ -17,12 +17,17 @@ import {
     PROFILE_BY_ID_REQUEST,
     PROFILE_BY_ID_SUCCESS,
     PROFILE_BY_ID_ERROR,
+    PROFILE_GITHUB_REPOS_REQUEST,
+    PROFILE_GITHUB_REPOS_SUCCESS,
+    PROFILE_GITHUB_REPOS_ERROR,
+    PROFILE_CLEAR_REPOS,
 } from "../constants/profileConstants";
 
 const single_profile_state = {
     single_profile_loading: true,
     single_profile_error: false,
     single_profile: {},
+    repos: [],
 }
 
 export const singleProfileReducer = (state = single_profile_state, action) => {
@@ -109,7 +114,8 @@ export const listProfileReducer = (state = profile_list_initial_state, action) =
 const profile_byId_initial_state = {
     profile_byId_loading: false,
     profile_byId_error: false,
-    profile_byId: {}
+    profile_byId: {},
+    repos: []
 }
 
 export const profileByIdReducer = (state = profile_byId_initial_state, action) => {
@@ -142,5 +148,45 @@ export const profileByIdReducer = (state = profile_byId_initial_state, action) =
 
         default:
             return state;
+    }
+}
+
+const repos_initial_state = {
+    repos_loading: false,
+    repos_error: false,
+    github_repos: []
+}
+
+export const githubReposReducer = (state = repos_initial_state, action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+        case PROFILE_GITHUB_REPOS_REQUEST:
+            return {
+                ...state,
+                repos_loading: true,
+                repos_error: false,
+                github_repos: [],
+            }
+
+        case PROFILE_GITHUB_REPOS_SUCCESS:
+            return {
+                ...state,
+                repos_loading: false,
+                repos_error: false,
+                github_repos: payload
+            }
+
+        case PROFILE_CLEAR_REPOS:
+        case PROFILE_GITHUB_REPOS_ERROR:
+            return {
+                ...state,
+                repos_loading: false,
+                repos_error: true,
+                github_repos: []
+            }
+
+        default:
+            return state
     }
 }

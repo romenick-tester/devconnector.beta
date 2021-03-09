@@ -267,7 +267,8 @@ const deleteUserProfile = async(req,res) => {
 
 //route:        GET api/profile/github/:username
 //desc:         get user repos from github
-//access:       public  
+//access:       public
+//note:         https://api.github.com/users/romenick-tester/repos?per_page=5&sort=created:asc
 const getGithubRepo = async(req,res) => {
     const mainUrl = "https://api.github.com/users/";
 

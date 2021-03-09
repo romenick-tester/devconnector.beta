@@ -14,6 +14,7 @@ import {
     deleteProfile,
     getProfileList,
     getUserProfileById,
+    getUserRepos,
 } from "./redux/actions";
 
 export { store };
@@ -32,4 +33,5 @@ export {
     deleteProfile,
     getProfileList,
     getUserProfileById,
+    getUserRepos,
 };

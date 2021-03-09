@@ -13,6 +13,7 @@ import {
     AUTH_LOGOUT_USER,
     AUTH_CLEAR_USER,
 } from "../constants/authConstants";
+import { PROFILE_CLEAR_REPOS } from "../constants/profileConstants";
 
 export const registerUser = (registerForm, history) => async (dispatch) => {
     try {
@@ -100,6 +101,7 @@ export const loadUser = () => async (dispatch, getState) => {
 }
 
 export const logout = () => async (dispatch) => {
-    dispatch({ type: AUTH_LOGOUT_USER })
-    dispatch({ type: AUTH_CLEAR_USER })
+    dispatch({ type: PROFILE_CLEAR_REPOS });
+    dispatch({ type: AUTH_CLEAR_USER });
+    dispatch({ type: AUTH_LOGOUT_USER });
 }

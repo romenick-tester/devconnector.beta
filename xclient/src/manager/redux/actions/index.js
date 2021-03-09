@@ -10,6 +10,7 @@ import {
     deleteProfile,
     getProfileList,
     getUserProfileById,
+    getUserRepos,
 } from "./profileActions";
 
 export {
@@ -27,4 +28,5 @@ export {
     deleteProfile,
     getProfileList,
     getUserProfileById,
+    getUserRepos,
 };
