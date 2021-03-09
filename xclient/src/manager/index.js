@@ -1,4 +1,5 @@
 import store from "./redux/store";
+import spinner from "./miscs/spinner.gif";
 import {
     setAlert,
     registerUser,
@@ -34,4 +35,5 @@ export {
     getProfileList,
     getUserProfileById,
     getUserRepos,
+    spinner,
 };

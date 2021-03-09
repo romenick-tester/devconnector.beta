@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileList } from "../manager";
-import { SingleProfile } from "../components";
+import { getProfileList, setAlert } from "../manager";
+import { SingleProfile, Loader } from "../components";
 
 function ProfilesDisplay() {
     const [developers, setDevelopers] = useState([]);
@@ -22,11 +22,11 @@ function ProfilesDisplay() {
     }, [profiles]);
 
     if (loading) {
-        return <h1>Loading... </h1>
+        return <Loader />
     }
 
     if (error) {
-        return <h1>Error...</h1>
+        dispatch(setAlert("danger", "Profile list not found!"));
     }
 
     return (
