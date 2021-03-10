@@ -114,8 +114,7 @@ export const listProfileReducer = (state = profile_list_initial_state, action) =
 const profile_byId_initial_state = {
     profile_byId_loading: false,
     profile_byId_error: false,
-    profile_byId: {},
-    repos: []
+    profile_byId: {}
 }
 
 export const profileByIdReducer = (state = profile_byId_initial_state, action) => {
