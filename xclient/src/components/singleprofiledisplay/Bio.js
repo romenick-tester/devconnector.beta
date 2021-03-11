@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Bio({ bio, user }) {
+function Bio({ bio, user: { name = "" } }) {
 
     return (
         <>
-            <h2 class="text-primary">{user.name.split(" ")[0]}'s Bio</h2>
+            <h2 class="text-primary">{name.split(" ")[0]}'s Bio</h2>
             <p> {bio} </p>
         </>
     )
