@@ -1,5 +1,5 @@
 import store from "./redux/store";
-import spinner from "./miscs/spinner.gif";
+import spinner from "./miscs/images/spinner.gif";
 import {
     setAlert,
     registerUser,

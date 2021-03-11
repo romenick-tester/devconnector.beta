@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { getUserProfileById, getUserRepos } from "../manager";
+import { getUserProfileById } from "../manager";
 import { About, Edu, Exp, Repos, Header } from "../components";
 
 function SingleProfileDisplay({ match }) {
@@ -14,21 +14,9 @@ function SingleProfileDisplay({ match }) {
         profile_byId: profile
     } = useSelector(state => state.user_byId);
 
-    const {
-        repos_loading,
-        repos_error,
-        github_repos: repos
-    } = useSelector(state => state.repos);
-
     useEffect(() => {
         dispatch(getUserProfileById(userId))
     }, [userId, dispatch]);
-
-    useEffect(() => {
-        if (profile.githubusername) {
-            dispatch(getUserRepos(profile.githubusername));
-        }
-    }, [profile, dispatch]);
 
     if (loading) {
         return <h4>Loading...</h4>
@@ -57,9 +45,8 @@ function SingleProfileDisplay({ match }) {
 
                 <Edu education={education} />
 
-                {repos_loading ? <h4>Loading... </h4> : repos_error ? <h4>Repos not available... </h4> : repos && (
-                    <Repos githubusername={githubusername} repos={repos} />
-                )}
+                <Repos githubusername={githubusername} />
+
             </div>
         </>
     )

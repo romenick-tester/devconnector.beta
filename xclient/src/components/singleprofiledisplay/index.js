@@ -1,6 +1,6 @@
 import Edu from "./Education";
 import Exp from "./Experience";
-import Repos from "./GithubRepos";
+import Repos from "./Repos";
 import Header from "./Header";
 import About from "./About";
 
