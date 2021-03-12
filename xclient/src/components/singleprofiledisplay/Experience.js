@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import ExperienceItem from "./ExperienceItem";
+import ExpItem from "./ExperienceItem";
 
 function Experience({ experience }) {
 
@@ -8,8 +8,9 @@ function Experience({ experience }) {
         <div className="profile-exp bg-white p-2">
             <h2 className="text-primary">Experience</h2>
             <Wrapper>
+                {experience.length === 0 && <p>Experience not provided</p>}
                 {experience.map((exp) => {
-                    return <ExperienceItem key={exp._id} exp={exp} />
+                    return <ExpItem key={exp._id} exp={exp} />
                 })}
             </Wrapper>
         </div>

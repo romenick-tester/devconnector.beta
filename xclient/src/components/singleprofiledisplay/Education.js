@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from "styled-components";
-import EducationItem from "./EducationItem";
+import EduItem from "./EducationItem";
 
 function Education({ education }) {
     return (
         <div className="profile-edu bg-white p-2">
             <h2 className="text-primary">Education</h2>
             <Wrapper>
+                {education.length === 0 && <p>Education not provided</p>}
                 {education.map((edu) => {
-                    return <EducationItem key={edu._id} edu={edu} />
+                    return <EduItem key={edu._id} edu={edu} />
                 })}
             </Wrapper>
         </div>

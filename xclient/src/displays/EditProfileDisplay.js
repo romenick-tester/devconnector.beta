@@ -4,27 +4,27 @@ import { Link } from "react-router-dom";
 import { createUserProfile } from "../manager";
 
 function EditProfileDisplay({ history }) {
-    const dispatch = useDispatch();
-    const { single_profile_loading: loading, single_profile: profile } = useSelector(state => state.user_profile);
     const [show, setShow] = useState(false);
-    const [form, setForm] = useState({
-        company: !loading && profile && profile.company ? profile.company : "",
-        website: !loading && profile && profile.website ? profile.website : "",
-        location: !loading && profile && profile.location ? profile.location : "",
-        status: !loading && profile && profile.status ? profile.status : "",
-        skills: !loading && profile && profile.skills ? profile.skills : "",
-        bio: !loading && profile && profile.bio ? profile.bio : "",
-        githubusername: !loading && profile && profile.githubusername ? profile.githubusername : "",
-        youtube: !loading && profile && profile.youtube ? profile.youtube : "",
-        twitter: !loading && profile && profile.twitter ? profile.twitter : "",
-        facebook: !loading && profile && profile.facebook ? profile.facebook : "",
-        linkedin: !loading && profile && profile.linkedin ? profile.linkedin : "",
-        instagram: !loading && profile && profile.instagram ? profile.instagram : ""
-    });
+
+    const { single_profile: profile = {} } = useSelector(state => state.user_profile);
 
     const {
-        company, website, location, status, skills, bio, githubusername,
-        youtube, twitter, facebook, linkedin, instagram } = form;
+        company = "", website = "", location = "", status = "", skills = [],
+        bio = "", githubusername = "", social = {} } = profile;
+
+    const { youtube = "", twitter = "", facebook = "", linkedin = "", instagram = "" } = social;
+
+    const [form, setForm] = useState({
+        _company: company, _website: website, _location: location, _status: status,
+        _skills: skills, _bio: bio, _githubusername: githubusername, _youtube: youtube,
+        _twitter: twitter, _facebook: facebook, _linkedin: linkedin, _instagram: instagram
+    });
+    
+    const {
+        _company, _website, _location, _status, _skills, _bio, _githubusername,
+        _youtube, _twitter, _facebook, _linkedin, _instagram } = form;
+
+    const dispatch = useDispatch();
 
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
@@ -48,7 +48,7 @@ function EditProfileDisplay({ history }) {
             <small>* = required field</small>
             <form className="form" onSubmit={(e) => onSubmitHandler(e)}>
                 <div className="form-group">
-                    <select name="status" value={status} onChange={(e) => onChangeHandler(e)}>
+                    <select name="status" value={_status} onChange={(e) => onChangeHandler(e)}>
                         <option value="0">* Select Professional Status</option>
                         <option value="Developer">Developer</option>
                         <option value="Junior Developer">Junior Developer</option>
@@ -64,23 +64,23 @@ function EditProfileDisplay({ history }) {
 
                 </div>
                 <div className="form-group">
-                    <input type="text" placeholder="Company" name="company" value={company} onChange={(e) => onChangeHandler(e)} />
+                    <input type="text" placeholder="Company" name="company" value={_company} onChange={(e) => onChangeHandler(e)} />
                     <small className="form-text">
                         Could be your own company or one you work for</small>
                 </div>
                 <div className="form-group">
-                    <input type="text" placeholder="Website" name="website" value={website} onChange={(e) => onChangeHandler(e)} />
+                    <input type="text" placeholder="Website" name="website" value={_website} onChange={(e) => onChangeHandler(e)} />
                     <small className="form-text">
                         Could be your own or a company website</small>
                 </div>
                 <div className="form-group">
-                    <input type="text" placeholder="Location" name="location" value={location} onChange={(e) => onChangeHandler(e)} />
+                    <input type="text" placeholder="Location" name="location" value={_location} onChange={(e) => onChangeHandler(e)} />
                     <small className="form-text">
                         City & state suggested (eg. Boston, MA)</small>
 
                 </div>
                 <div className="form-group">
-                    <input type="text" placeholder="* Skills" name="skills" value={skills} onChange={(e) => onChangeHandler(e)} />
+                    <input type="text" placeholder="* Skills" name="skills" value={_skills} onChange={(e) => onChangeHandler(e)} />
                     <small className="form-text">
                         Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)</small>
                 </div>
@@ -88,13 +88,13 @@ function EditProfileDisplay({ history }) {
                     <input
                         type="text"
                         placeholder="Github Username"
-                        name="githubusername" value={githubusername} onChange={(e) => onChangeHandler(e)}
+                        name="githubusername" value={_githubusername} onChange={(e) => onChangeHandler(e)}
                     />
                     <small className="form-text">
                         If you want your latest repos and a Github link, include your username</small>
                 </div>
                 <div className="form-group">
-                    <textarea placeholder="A short bio of yourself" name="bio" value={bio} onChange={(e) => onChangeHandler(e)}></textarea>
+                    <textarea placeholder="A short bio of yourself" name="bio" value={_bio} onChange={(e) => onChangeHandler(e)}></textarea>
                     <small className="form-text">Tell us a little about yourself</small>
                 </div>
 
@@ -108,27 +108,27 @@ function EditProfileDisplay({ history }) {
                     <>
                         <div className="form-group social-input">
                             <i className="fab fa-twitter fa-2x"></i>
-                            <input type="text" placeholder="Twitter URL" name="twitter" value={twitter} onChange={(e) => onChangeHandler(e)} />
+                            <input type="text" placeholder="Twitter URL" name="twitter" value={_twitter} onChange={(e) => onChangeHandler(e)} />
                         </div>
 
                         <div className="form-group social-input">
                             <i className="fab fa-facebook fa-2x"></i>
-                            <input type="text" placeholder="Facebook URL" name="facebook" value={facebook} onChange={(e) => onChangeHandler(e)} />
+                            <input type="text" placeholder="Facebook URL" name="facebook" value={_facebook} onChange={(e) => onChangeHandler(e)} />
                         </div>
 
                         <div className="form-group social-input">
                             <i className="fab fa-youtube fa-2x"></i>
-                            <input type="text" placeholder="YouTube URL" name="youtube" value={youtube} onChange={(e) => onChangeHandler(e)} />
+                            <input type="text" placeholder="YouTube URL" name="youtube" value={_youtube} onChange={(e) => onChangeHandler(e)} />
                         </div>
 
                         <div className="form-group social-input">
                             <i className="fab fa-linkedin fa-2x"></i>
-                            <input type="text" placeholder="Linkedin URL" name="linkedin" value={linkedin} onChange={(e) => onChangeHandler(e)} />
+                            <input type="text" placeholder="Linkedin URL" name="linkedin" value={_linkedin} onChange={(e) => onChangeHandler(e)} />
                         </div>
 
                         <div className="form-group social-input">
                             <i className="fab fa-instagram fa-2x"></i>
-                            <input type="text" placeholder="Instagram URL" name="instagram" value={instagram} onChange={(e) => onChangeHandler(e)} />
+                            <input type="text" placeholder="Instagram URL" name="instagram" value={_instagram} onChange={(e) => onChangeHandler(e)} />
                         </div>
                     </>
                 )}
