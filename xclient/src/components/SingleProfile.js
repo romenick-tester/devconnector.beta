@@ -12,7 +12,7 @@ function SingleProfile({ coder }) {
         <div className="profile bg-light">
             <img src={avatar} alt={name} className="round-img" />
 
-            <div>
+            <div style={{ textTransform: "capitalize" }}>
                 <h2>{name}</h2>
                 <p>{status} {company && <span>at {company}</span>}</p>
                 <p className="my-1">{location && <span>{location}</span>}</p>

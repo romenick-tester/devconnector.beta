@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-    RiUserFill, RiProfileFill, RiCodeBoxLine,
+    RiUserFill, RiProfileFill, RiBaseStationFill,
     RiLoginBoxFill, RiLogoutBoxRFill
 } from "react-icons/ri";
 import { logout } from "../manager";
@@ -12,7 +12,7 @@ const PublicLinks = () => {
     return (
         <>
             <h1>
-                <Link to="/"><RiCodeBoxLine /> DevConnector</Link>
+                <Link to="/"><RiBaseStationFill /> DevConnector</Link>
             </h1>
             <ul>
                 <li><Link to="/profiles"><RiProfileFill /> Developers</Link></li>
@@ -29,7 +29,7 @@ const PrivateLinks = () => {
     return (
         <>
             <h1>
-                <Link to="#!"><RiCodeBoxLine /> DevConnector</Link>
+                <Link to="#!"><RiBaseStationFill /> DevConnector</Link>
             </h1>
             <ul>
                 <li><Link to="/profiles"><RiProfileFill /> Developers</Link></li>
