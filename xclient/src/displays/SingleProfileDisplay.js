@@ -28,7 +28,7 @@ function SingleProfileDisplay({ match }) {
 
     const {
         bio = "", company = "", education = [], experience = [], githubusername = "",
-        location = "", skills = [], social = {}, status = "", user = {} } = profile;
+        location = "", skills = [], social = {}, website = "", status = "", user = {} } = profile;
     
     const header = { status, company, location };
 
@@ -37,7 +37,7 @@ function SingleProfileDisplay({ match }) {
             <Link to="/profiles" className="btn btn-light">Back To Profiles</Link>
 
             <div className="profile-grid my-1">
-                <Header {...header} user={user} social={social} />
+                <Header {...header} user={user} social={social} website={website} />
 
                 <About skills={skills} bio={bio} user={user} />
 
