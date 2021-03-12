@@ -13,6 +13,7 @@ function ProfilesDisplay() {
         profile_list_error: error,
         profile_list: profiles
     } = useSelector(state => state.profiles);
+    const { single_profile } = useSelector(state => state.user_profile);
 
     useEffect(() => {
         dispatch(getProfileList());
@@ -38,7 +39,7 @@ function ProfilesDisplay() {
                 <FaConnectdevelop /> Browse and connect with developers
             </p>
             <div className="profiles">
-                {coders.map((coder) => {
+                {coders.filter((x) => x._id !== single_profile._id).map((coder) => {
                     return <SingleProfile key={coder._id} coder={coder} />
                 })}
             </div>
