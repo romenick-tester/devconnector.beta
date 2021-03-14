@@ -16,7 +16,7 @@ import {
     ProfilesDisplay,
     SingleProfileDisplay,
 } from "./displays"
-import { loadUser, getUserProfile } from "./manager";
+import { loadUser, getUserProfile, logout } from "./manager";
 
 function App() {
     const dispatch = useDispatch();
@@ -26,7 +26,9 @@ function App() {
         if (!auth_loading && isAuthenticated && token) {
             dispatch(loadUser());
             dispatch(getUserProfile());
-        } 
+        } else if (!isAuthenticated && !token) {
+            dispatch(logout());
+        }
     }, [auth_loading, isAuthenticated, token, dispatch])
 
     return (

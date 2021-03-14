@@ -4,7 +4,7 @@ function Bio({ bio, user: { name = "" } }) {
 
     return (
         <>
-            <h2 class="text-primary">{name.split(" ")[0]}'s Bio</h2>
+            <h2 className="text-primary">{name.split(" ")[0]}'s Bio</h2>
             <p> {bio} </p>
         </>
     )

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { loadUser, loginUser } from "../manager";
+import { loadUser, loginUser, logout } from "../manager";
 
 function LoginDisplay({ history }) {
     const [formData, setFormData] = useState({
@@ -12,6 +12,12 @@ function LoginDisplay({ history }) {
     const { email, password } = formData;
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(logout());
+        // eslint-disable-next-line
+    }, [])
+
     const auth = useSelector(state => state.auth);
     const { auth_loading: loading, isAuthenticated } = auth;
 

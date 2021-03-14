@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setAlert, registerUser } from "../manager";
+import { setAlert, registerUser, logout } from "../manager";
 
 function RegisterDisplay({ history }) {
     const [formData, setFormData] = useState({
@@ -14,6 +14,11 @@ function RegisterDisplay({ history }) {
     const { name, email, password, password2 } = formData;
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(logout());
+        // eslint-disable-next-line
+    }, [])
 
     function changeHandler(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value })

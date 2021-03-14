@@ -17,6 +17,7 @@ import {
     PROFILE_BY_ID_REQUEST,
     PROFILE_BY_ID_SUCCESS,
     PROFILE_BY_ID_ERROR,
+    PROFILE_BY_ID_CLEAR,
     PROFILE_GITHUB_REPOS_REQUEST,
     PROFILE_GITHUB_REPOS_SUCCESS,
     PROFILE_GITHUB_REPOS_ERROR,
@@ -142,6 +143,14 @@ export const profileByIdReducer = (state = profile_byId_initial_state, action) =
                 ...state,
                 profile_byId_loading: false,
                 profile_byId_error: true,
+                profile_byId: {}
+            }
+        
+        case PROFILE_BY_ID_CLEAR:
+            return {
+                ...state,
+                profile_byId_loading: false,
+                profile_byId_error: false,
                 profile_byId: {}
             }
 

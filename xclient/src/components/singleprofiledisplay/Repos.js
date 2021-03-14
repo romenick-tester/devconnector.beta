@@ -37,7 +37,7 @@ function GithubRepos({ githubusername }) {
                 </a>)
             </h2>
             {repos.sort((a, b) => b.size - a.size).slice(0, 3).map((item, index) => {
-                return <ReposItem key={item._id} project={item} index={index + 1} />
+                return <ReposItem key={index} project={item} index={index + 1} />
             })}
         </div>
     )

@@ -8,7 +8,7 @@ function About({ bio, skills, user }) {
             { bio && (
                 <>
                     < Bio bio={bio} user={user} />
-                    <div class="line"></div>
+                    <div className="line"></div>
                 </>
             )}
                 
