@@ -1,5 +1,5 @@
 const { validationResult } = require("express-validator");
-const { Post, User, Profile } = require("../settings");
+const { Post, User } = require("../settings");
 
 //route:        POST /api/posts
 //desc:         create post

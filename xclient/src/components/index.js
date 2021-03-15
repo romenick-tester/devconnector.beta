@@ -5,8 +5,9 @@ import ProfileExperience from "./ProfileExperience";
 import SingleProfile from "./SingleProfile";
 import Loader from "./Loader";
 import { About, Edu, Exp, Repos, Header } from "./singleprofiledisplay";
+import PostItem from "./postsdisplay/PostItem";
 
 export {
     Navbar, Alert, ProfileEducation, ProfileExperience, SingleProfile, Loader,
-    About, Edu, Exp, Repos, Header
+    About, Edu, Exp, Repos, Header, PostItem,
 }

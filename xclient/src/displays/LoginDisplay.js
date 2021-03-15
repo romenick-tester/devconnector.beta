@@ -12,19 +12,20 @@ function LoginDisplay({ history }) {
     const { email, password } = formData;
 
     const dispatch = useDispatch();
+    const auth = useSelector(state => state.auth);
+    const { auth_loading: loading, isAuthenticated } = auth;
+
+    useEffect(() => {
+        if (!loading && isAuthenticated) {
+            dispatch(loadUser());
+            history.push("/dashboard")
+        }
+    }, [dispatch, history, loading, isAuthenticated])
 
     useEffect(() => {
         dispatch(logout());
         // eslint-disable-next-line
     }, [])
-
-    const auth = useSelector(state => state.auth);
-    const { auth_loading: loading, isAuthenticated } = auth;
-
-    if (!loading && isAuthenticated) {
-        dispatch(loadUser());
-        history.push("/dashboard")
-    }
 
     function changeHandler(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value })

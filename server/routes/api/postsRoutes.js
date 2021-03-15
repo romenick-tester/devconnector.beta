@@ -8,7 +8,7 @@ const {
 
 router
     .route("/")
-    .get(auth, getAllPosts)
+    .get(getAllPosts)
     .post([auth, postValidations], createPost);
 
 router

@@ -15,6 +15,7 @@ import {
     AddExperienceDisplay,
     ProfilesDisplay,
     SingleProfileDisplay,
+    PostsDisplay,
 } from "./displays"
 import { loadUser, getUserProfile, logout } from "./manager";
 
@@ -38,6 +39,7 @@ function App() {
             <Main className="container">
                 <Alert />
                 <Switch>
+                    <PrivateRoute path="/posts" component={PostsDisplay} />
                     <PrivateRoute path="/dashboard" component={DashboardDisplay} />
                     <PrivateRoute path="/create-profile" component={CreateProfileDisplay} />
                     <PrivateRoute path="/edit-profile" component={EditProfileDisplay} />
