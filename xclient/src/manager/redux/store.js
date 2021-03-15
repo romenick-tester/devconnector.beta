@@ -9,6 +9,7 @@ import {
     profileByIdReducer,
     githubReposReducer,
 } from "./reducers/profileReducers";
+import { singlePostReducer, allPostsReducer } from "./reducers/postReducers";
 
 const reducers = combineReducers({
     alerts: alertReducers,
@@ -18,6 +19,8 @@ const reducers = combineReducers({
     profiles: listProfileReducer,
     user_byId: profileByIdReducer,
     repos: githubReposReducer,
+    allPosts: allPostsReducer,
+    singlePost: singlePostReducer,
 });
 
 const initialState = {};

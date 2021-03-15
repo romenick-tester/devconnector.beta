@@ -16,6 +16,8 @@ import {
     getProfileList,
     getUserProfileById,
     getUserRepos,
+    getAllPosts,
+    getSinglePost,
 } from "./redux/actions";
 
 export { store };
@@ -35,5 +37,7 @@ export {
     getProfileList,
     getUserProfileById,
     getUserRepos,
+    getAllPosts,
+    getSinglePost,
     spinner,
 };

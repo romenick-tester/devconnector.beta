@@ -12,6 +12,10 @@ import {
     getUserProfileById,
     getUserRepos,
 } from "./profileActions";
+import {
+    getAllPosts,
+    getSinglePost,
+} from "./postActions";
 
 export {
     setAlert,
@@ -29,4 +33,6 @@ export {
     getProfileList,
     getUserProfileById,
     getUserRepos,
+    getAllPosts,
+    getSinglePost,
 };
