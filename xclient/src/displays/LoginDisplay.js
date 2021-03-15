@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { loadUser, loginUser, logout } from "../manager";
+import { loadUser, loginUser } from "../manager";
 
 function LoginDisplay({ history }) {
     const [formData, setFormData] = useState({
@@ -21,11 +21,6 @@ function LoginDisplay({ history }) {
             history.push("/dashboard")
         }
     }, [dispatch, history, loading, isAuthenticated])
-
-    useEffect(() => {
-        dispatch(logout());
-        // eslint-disable-next-line
-    }, [])
 
     function changeHandler(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value })

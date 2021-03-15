@@ -15,11 +15,6 @@ function RegisterDisplay({ history }) {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(logout());
-        // eslint-disable-next-line
-    }, [])
-
     function changeHandler(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
