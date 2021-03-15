@@ -34,16 +34,16 @@ function AddEducationDisplay({ history }) {
 
     return (
         <>
-            <h1 class="large text-primary">
+            <h1 className="large text-primary">
                 Add Your Education
             </h1>
-            <p class="lead">
-                <i class="fas fa-graduation-cap"></i>
+            <p className="lead">
+                <i className="fas fa-graduation-cap"></i>
                     Add any school, bootcamp, etc that you have attended
             </p>
             <small>* = required field</small>
-            <form class="form" onSubmit={onSubmit}>
-                <div class="form-group">
+            <form className="form" onSubmit={onSubmit}>
+                <div className="form-group">
                     <input
                         type="text"
                         placeholder="* School or Bootcamp"
@@ -53,7 +53,7 @@ function AddEducationDisplay({ history }) {
                         required
                     />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <input
                         type="text"
                         placeholder="* Level or Certificate"
@@ -63,7 +63,7 @@ function AddEducationDisplay({ history }) {
                         required
                     />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <input
                         type="text"
                         placeholder="Field Of Study"
@@ -71,7 +71,7 @@ function AddEducationDisplay({ history }) {
                         value={fieldofstudy}
                         onChange={(e) => onChange(e)} />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <h4>From Date</h4>
                     <input
                         type="date"
@@ -79,7 +79,7 @@ function AddEducationDisplay({ history }) {
                         value={from}
                         onChange={(e) => onChange(e)} />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <p ref={checkboxRef}>
                         <input
                             type="checkbox"
@@ -94,7 +94,7 @@ function AddEducationDisplay({ history }) {
                             }} /> Current ?
                     </p>
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <h4 ref={h4ToDateRef}>To Date</h4>
                     <input
                         type="date"
@@ -103,7 +103,7 @@ function AddEducationDisplay({ history }) {
                         onChange={(e) => onChange(e)}
                         disabled={toDateDisabled} />
                 </div>
-                <div class="form-group">
+                <div className="form-group">
                     <textarea
                         name="description"
                         value={description} onChange={(e) => onChange(e)}
@@ -112,8 +112,8 @@ function AddEducationDisplay({ history }) {
                         placeholder="Program Description">
                     </textarea>
                 </div>
-                <input type="submit" class="btn btn-primary my-1" />
-                <Link to="/dashboard" class="btn btn-light my-1">Go Back</Link>
+                <input type="submit" className="btn btn-primary my-1" />
+                <Link to="/dashboard" className="btn btn-light my-1">Go Back</Link>
             </form>
         </>
     )

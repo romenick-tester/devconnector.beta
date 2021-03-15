@@ -54,9 +54,15 @@ function ProfileEducation() {
                 </tr>
             </thead>
             <tbody>
-                {educations.map((item) => {
-                    return <SingleEducation key={item._id} {...item} removeEdu={removeEdu} />
-                })}
+                {educations
+                    .sort((a, b) => {
+                        const sortByFromDate = (Number(b.from.slice(0, 4))) - (Number(a.from.slice(0, 4)))
+                        return sortByFromDate;
+                    })
+                    .map((item) => {
+                        return <SingleEducation key={item._id} {...item} removeEdu={removeEdu} />
+                    })
+                }
                 {educations.length === 0 && (
                     <tr>
                         <td><span>sample</span> Westminster College</td>

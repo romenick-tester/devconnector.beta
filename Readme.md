@@ -19,3 +19,6 @@
 | "mongoose": "^5.11.15" |
 | "normalize-url": "^5.3.0" |
 | "uuid": "^8.3.2" |
+
+Credits:
+bradtraversy - mernstack course

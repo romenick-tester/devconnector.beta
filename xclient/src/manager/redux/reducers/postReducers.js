@@ -1,4 +1,11 @@
-import { } from "../constants/postConstants";
+import {
+    GET_ALL_POSTS_REQUEST,
+    GET_ALL_POSTS_SUCCESS,
+    GET_ALL_POSTS_ERROR,
+    GET_SINGLE_POST_REQUEST,
+    GET_SINGLE_POST_SUCCESS,
+    GET_SINGLE_POST_ERROR,
+} from "../constants/postConstants";
 
 const allposts_initial_state = {
     loading: true,

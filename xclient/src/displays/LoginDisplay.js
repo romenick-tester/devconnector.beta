@@ -21,25 +21,25 @@ function LoginDisplay({ history }) {
     const auth = useSelector(state => state.auth);
     const { auth_loading: loading, isAuthenticated } = auth;
 
+    if (!loading && isAuthenticated) {
+        dispatch(loadUser());
+        history.push("/dashboard")
+    }
+
     function changeHandler(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
-    const submitHandler = async(e) => {
+    const submitHandler = (e) => {
         e.preventDefault();
         dispatch(loginUser(formData));
-    }
-
-    if (!loading && isAuthenticated) {
-        dispatch(loadUser());
-        history.push("/dashboard")
     }
 
     return (
         <>
             <h1 className="large text-primary">Sign In</h1>
             <p className="lead"><i className="fas fa-user"></i> Sign In To Your Account</p>
-            <form className="form" onSubmit={(e) => submitHandler(e)}>
+            <form className="form" onSubmit={submitHandler}>
                 <div className="form-group">
                     <input 
                         type="email" 

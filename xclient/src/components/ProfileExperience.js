@@ -17,10 +17,10 @@ function ProfileExperience() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!loading && details) {
+        if (details) {
             setExperiences(details.experience);
         }
-    }, [loading, details])
+    }, [details])
 
     if (loading) {
         return <h3>loading...</h3>
@@ -54,9 +54,15 @@ function ProfileExperience() {
                 </tr>
             </thead>
             <tbody>
-                {experiences.map((item) => {
-                    return <SingleExperience key={item._id} {...item} removeExp={removeExp} />
-                })}
+                {experiences
+                    .sort((a, b) => {
+                        const sortByFromDate = (Number(b.from.slice(0, 4))) - (Number(a.from.slice(0, 4)))
+                        return sortByFromDate;
+                    })
+                    .map((item) => {
+                        return <SingleExperience key={item._id} {...item} removeExp={removeExp} />
+                    })
+                }
                 {experiences.length === 0 && (
                     <tr>
                         <td><span>sample</span> Traversy Media</td>

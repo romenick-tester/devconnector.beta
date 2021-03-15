@@ -91,12 +91,11 @@ function DashboardDisplay({ history }) {
                     <ProfileEducation />
                     <ProfileExperience />
 
-                    <div class="my-2" onClick={() => deleteAccount()}>
-                        <button class="btn btn-danger">
-                            <i class="fas fa-user-minus"></i>
-
-                        Delete My Account
-                    </button>
+                    <div className="my-2">
+                        <button className="btn btn-danger" onClick={() => deleteAccount()}>
+                            <i className="fas fa-user-minus"></i>
+                            Delete My Account
+                        </button>
                     </div>
                 </>
             )}
