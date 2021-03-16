@@ -3,18 +3,21 @@ const jwt = require("jsonwebtoken");
 
 dotenv.config();
 
-const auth = async (req, res, next) => {
+const auth = (req, res, next) => {
+    const token = req.header("auth-token");
+
+    if (!token) {
+        return res.status(401).json({ errors: [{ msg: "No token, access denied!" }] })
+    }
+
     try {
-        const token = await req.header("auth-token");
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        const decoded = await jwt.verify(token, process.env.JWT_SECRET);
-
-        req.user = decoded && decoded.user;
+        req.user = decoded.user;
 
         next();
     } catch (error) {
-        console.error(error.message);
-        res.status(401).json({ errors: [{ msg: "401: Invalid token, access denied!" }] });
+        res.status(401).json({ errors: [{ msg: "Invalid token, access denied!" }] });
     }
 }
 

@@ -5,6 +5,6 @@ const { auth } = require("../../settings");
 
 router.get("/", auth, getAllUsers);
 
-router.get("/user", auth, userDetails);
+router.get("/current", auth, userDetails);
 
 module.exports = router;

@@ -7,7 +7,7 @@ const userDetails = async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select("-password");
 
-        res.json(user);
+        res.json({ user });
     } catch (error) {
         console.error(error.message);
         res.status(400).json({ errors: [{ msg: "Invalid credentials 🚩" }] });
@@ -22,7 +22,7 @@ const getAllUsers = async(req, res) => {
             return res.status(400).json({ errors: [{ msg: "No users found! 🚩" }] });
         }
     
-        res.json(users)
+        res.json({ users })
     } catch (error) {
         console.error(error.message);
     }

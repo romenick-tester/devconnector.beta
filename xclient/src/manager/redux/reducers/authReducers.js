@@ -5,6 +5,8 @@ import {
     AUTH_LOGIN_REQUEST,
     AUTH_LOGIN_SUCCESS,
     AUTH_LOGIN_ERROR,
+    AUTH_LOAD_USER_DETAILS,
+    AUTH_LOAD_USER_ERROR,
 } from "../constants/authConstants";
 
 const initiState = {
@@ -35,14 +37,27 @@ const authReducer = (state = initiState, action) => {
                 loading: false,
                 authenticated: true,
                 token: payload.token,
+                error: null,
             };
 
+        case AUTH_LOAD_USER_DETAILS:
+            return {
+                ...state,
+                user: payload.user,
+                error: null,
+            }
+
+        case AUTH_LOAD_USER_ERROR:
         case AUTH_LOGIN_ERROR:
         case AUTH_REGISTER_ERROR:
+            localStorage.removeItem("token");
             return {
                 ...state,
                 loading: false,
-                error: payload.msg
+                authenticated: false,
+                error: payload,
+                user: null,
+                token: null,
             };
 
         default:

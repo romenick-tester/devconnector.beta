@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Alert, Navbar, } from "./components"
@@ -15,9 +15,21 @@ import {
     // ProfilesDisplay,
     // SingleProfileDisplay,
     // PostsDisplay,
-} from "./displays"
+} from "./displays";
+import { useDispatch, useSelector } from "react-redux";
+import { loadUser } from "./manager";
 
 function App() {
+
+    const dispatch = useDispatch();
+    const auth = useSelector(state => state.auth);
+    const { loading, authenticated } = auth;
+
+    useEffect(() => {
+        if (!loading && authenticated) {
+            dispatch(loadUser());
+        }
+    }, [dispatch, loading, authenticated])
 
     return (
         <Router>

@@ -4,11 +4,14 @@ import {
     setAlert,
     register,
     login,
+    loadUser,
 } from "./redux/actions";
-export { store };
+
 export {
+    store,
     spinner,
     setAlert,
     register,
     login,
+    loadUser,
 };

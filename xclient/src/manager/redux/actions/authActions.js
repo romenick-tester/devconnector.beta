@@ -6,8 +6,29 @@ import {
     AUTH_LOGIN_REQUEST,
     AUTH_LOGIN_SUCCESS,
     AUTH_LOGIN_ERROR,
+    AUTH_LOAD_USER_DETAILS,
+    AUTH_LOAD_USER_ERROR,
 } from "../constants/authConstants";
 import setAlert from "./alertActions";
+
+export const loadUser = () => async (dispatch, getState) => {
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "auth-token": `${token}`
+            }
+        }
+
+        const { data } = await axios.get("/api/users/current", config);
+
+        dispatch({ type: AUTH_LOAD_USER_DETAILS, payload: data });
+
+    } catch (error) {
+        dispatch({ type: AUTH_LOAD_USER_ERROR, payload: error.message })
+    }
+}
 
 export const register = (form) => async (dispatch) => {
     dispatch({ type: AUTH_REGISTER_REQUEST });
@@ -23,9 +44,10 @@ export const register = (form) => async (dispatch) => {
 
         const { data } = await axios.post("/api/auth/register", body, config);
 
-        dispatch({ type: AUTH_REGISTER_SUCCESS, payload: { token: data.token } });
+        dispatch({ type: AUTH_REGISTER_SUCCESS, payload: data });
 
-        dispatch(setAlert("success", "User registered!"))
+        dispatch(setAlert("success", "User registered!"));
+
     } catch (err) {
         const errors = err.response && err.response.data.errors ? err.response.data.errors : err.message;
 
@@ -33,7 +55,7 @@ export const register = (form) => async (dispatch) => {
             errors.map((error) => dispatch(setAlert("danger", error.msg)));
         }
 
-        dispatch({ type: AUTH_REGISTER_ERROR, payload: { msg: err.message } });
+        dispatch({ type: AUTH_REGISTER_ERROR, payload: err.message });
     }
 };
 
@@ -51,7 +73,7 @@ export const login = (form) => async (dispatch) => {
 
         const { data } = await axios.post("/api/auth/login", body, config);
 
-        dispatch({ type: AUTH_LOGIN_SUCCESS, payload: { token: data.token } });
+        dispatch({ type: AUTH_LOGIN_SUCCESS, payload: data });
 
     } catch (err) {
         const errors = err.response && err.response.data.errors ? err.response.data.errors : err.message;
@@ -60,6 +82,6 @@ export const login = (form) => async (dispatch) => {
             errors.map((error) => dispatch(setAlert("danger", error.msg)));
         }
 
-        dispatch({ type: AUTH_LOGIN_ERROR, payload: { msg: err.message } });
+        dispatch({ type: AUTH_LOGIN_ERROR, payload: err.message });
     }
 };

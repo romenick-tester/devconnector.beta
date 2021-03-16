@@ -12,6 +12,8 @@ const reducers = combineReducers({
 
 const initialState = {
     auth: {
+        loading: tokenFromStorage && false,
+        authenticated: tokenFromStorage && true,
         token: tokenFromStorage
     }
 };
