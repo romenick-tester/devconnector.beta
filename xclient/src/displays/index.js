@@ -1,27 +1,29 @@
-import LandingDisplay from "./LandingDisplay";
-import RegisterDisplay from "./RegisterDisplay";
-import LoginDisplay from "./LoginDisplay";
-import DashboardDisplay from "./DashboardDisplay";
-import PrivateRoute from "./PrivateRoute";
-import CreateProfileDisplay from "./CreateProfileDisplay";
-import EditProfileDisplay from "./EditProfileDisplay";
-import AddEducationDisplay from "./AddEducationDisplay";
-import AddExperienceDisplay from "./AddExperienceDisplay";
-import ProfilesDisplay from "./ProfilesDisplay";
-import SingleProfileDisplay from "./SingleProfileDisplay";
-import PostsDisplay from "./PostsDisplay";
+import LandingDisplay from "./publicDisplays/LandingDisplay";
+import RegisterDisplay from "./publicDisplays/RegisterDisplay";
+import LoginDisplay from "./publicDisplays/LoginDisplay";
+// import ProfilesDisplay from "./publicDisplays/ProfilesDisplay";
+// import SingleProfileDisplay from "./publicDisplays/SingleProfileDisplay";
+
+// import DashboardDisplay from "./privateDisplays/DashboardDisplay";
+// import CreateProfileDisplay from "./privateDisplays/CreateProfileDisplay";
+// import EditProfileDisplay from "./privateDisplays/EditProfileDisplay";
+// import AddEducationDisplay from "./privateDisplays/AddEducationDisplay";
+// import AddExperienceDisplay from "./privateDisplays/AddExperienceDisplay";
+// import PostsDisplay from "./privateDisplays/PostsDisplay";
+
+// import PrivateRoute from "./PrivateRoute";
 
 export {
     LandingDisplay,
     RegisterDisplay,
     LoginDisplay,
-    DashboardDisplay,
-    PrivateRoute,
-    CreateProfileDisplay,
-    EditProfileDisplay,
-    AddEducationDisplay,
-    AddExperienceDisplay,
-    ProfilesDisplay,
-    SingleProfileDisplay,
-    PostsDisplay,
+    // PrivateRoute,
+    // DashboardDisplay,
+    // CreateProfileDisplay,
+    // EditProfileDisplay,
+    // AddEducationDisplay,
+    // AddExperienceDisplay,
+    // ProfilesDisplay,
+    // SingleProfileDisplay,
+    // PostsDisplay,
 };

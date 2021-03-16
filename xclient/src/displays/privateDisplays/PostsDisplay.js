@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { FaUser } from "react-icons/fa";
 //import { useDispatch, useSelector } from "react-redux";
-import { Loader, PostItem } from "../components";
+import { Loader, PostItem } from "../../components";
 
 function PostsDisplay() {
     const loading = false;

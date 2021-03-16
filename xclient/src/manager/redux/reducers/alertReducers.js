@@ -1,6 +1,6 @@
 import { ALERT_SET, ALERT_REMOVE } from "../constants/alertConstants";
 
-const alertReducers = (state = [], action) => {
+const alertReducer = (state = [], action) => {
     const { type, payload } = action;
 
     switch(type) {
@@ -15,4 +15,4 @@ const alertReducers = (state = [], action) => {
     }
 }
 
-export { alertReducers };
+export default alertReducer;
