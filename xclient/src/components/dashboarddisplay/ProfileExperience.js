@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteProfileExperience } from "../manager";
+import { useDispatch } from "react-redux";
 import SingleExperience from "./SingleExperience";
 
 function ProfileExperience({ experience: exp }) {
@@ -21,14 +20,6 @@ function ProfileExperience({ experience: exp }) {
             setError(true);
         }
     }, [exp]);
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (details) {
-            setExperiences(details.experience);
-        }
-    }, [details])
 
     if (loading) {
         return <h3>loading...</h3>

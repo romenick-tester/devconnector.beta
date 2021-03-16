@@ -22,6 +22,7 @@ const authReducer = (state = initiState, action) => {
             };
 
         case AUTH_REGISTER_SUCCESS:
+            localStorage.setItem("token", JSON.stringify(payload.token));
             return {
                 ...state,
                 loading: false,
@@ -32,7 +33,7 @@ const authReducer = (state = initiState, action) => {
             return {
                 ...state,
                 loading: false,
-                error: payload
+                error: payload.msg
             };
 
         default:

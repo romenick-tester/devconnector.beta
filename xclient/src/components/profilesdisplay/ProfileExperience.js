@@ -1,26 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteProfileExperience } from "../../manager";
+import { useDispatch } from "react-redux";
 import SingleExperience from "./SingleExperience";
 
 function ProfileExperience() {
-    const [experiences, setExperiences] = useState([]);
-
-    const single_profile = useSelector(state => state.user_profile);
-    const {
-        single_profile_loading: loading,
-        single_profile_error: error,
-        single_profile: details,
-    } = single_profile;
+    const loading = false;
+    const error = false;
+    const experience = [];
 
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (details) {
-            setExperiences(details.experience);
-        }
-    }, [details])
 
     if (loading) {
         return <h3>loading...</h3>
@@ -34,7 +22,7 @@ function ProfileExperience() {
         const isConfirmed = window.confirm("You want to delete ?");
 
         if (isConfirmed) {
-            dispatch(deleteProfileExperience(id));
+            //dispatch(deleteProfileExperience(id));
         }
     }
 
@@ -54,29 +42,14 @@ function ProfileExperience() {
                 </tr>
             </thead>
             <tbody>
-                {experiences
+                {experience
                     .sort((a, b) => {
-                        const sortByFromDate = (Number(b.from.slice(0, 4))) - (Number(a.from.slice(0, 4)))
-                        return sortByFromDate;
+                        return (Number(b.from.slice(0, 4))) - (Number(a.from.slice(0, 4)))
                     })
                     .map((item) => {
                         return <SingleExperience key={item._id} {...item} removeExp={removeExp} />
                     })
                 }
-                {experiences.length === 0 && (
-                    <tr>
-                        <td><span>sample</span> Traversy Media</td>
-                        <td className="hide-sm"><span>sample</span>Instructor & Developer</td>
-                        <td className="hide-sm">
-                            <span>sample</span>02-03-2015 - Now
-                        </td>
-                        <td>
-                            <button className="btn btn-danger">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-                )}
             </tbody>
         </Table>
     )

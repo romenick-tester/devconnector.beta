@@ -1,23 +1,14 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { getUserRepos } from "../../manager";
+import React from 'react';
+import { useDispatch } from "react-redux";
 import { FaGithub } from "react-icons/fa";
 import ReposItem from "./ReposItem";
 
 function GithubRepos({ githubusername }) {
+    const loading = false;
+    const error = false;
+    const repos = [];
+
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (githubusername) {
-            dispatch(getUserRepos(githubusername))
-        }
-    }, [githubusername, dispatch])
-
-    const {
-        repos_loadingL: loading,
-        repos_error: error,
-        github_repos: repos
-    } = useSelector(state => state.repos);
 
     if (loading) {
         return <h4>Loading...</h4>

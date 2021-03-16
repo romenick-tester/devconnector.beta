@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 // import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -13,9 +14,11 @@ function LoginDisplay({ history }) {
     const isLoading = false;
     const isAuthenticated = false;
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         if (isAuthenticated) {
-            dispatch(loadUser());
+            //dispatch(loadUser());
             history.push("/dashboard")
         }
     }, [dispatch, history, isLoading, isAuthenticated])

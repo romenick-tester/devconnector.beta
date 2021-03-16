@@ -10,8 +10,8 @@ import LoginDisplay from "./publicDisplays/LoginDisplay";
 // import AddEducationDisplay from "./privateDisplays/AddEducationDisplay";
 // import AddExperienceDisplay from "./privateDisplays/AddExperienceDisplay";
 // import PostsDisplay from "./privateDisplays/PostsDisplay";
+// import PrivateRoute from "./privateDisplays/PrivateRoute";
 
-// import PrivateRoute from "./PrivateRoute";
 
 export {
     LandingDisplay,

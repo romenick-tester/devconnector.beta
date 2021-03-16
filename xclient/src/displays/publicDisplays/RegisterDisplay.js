@@ -1,22 +1,29 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setAlert } from "../manager";
+import { setAlert, register } from "../../manager";
 
 function RegisterDisplay({ history }) {
-    const [formData, setFormData] = useState({
+    const [form, setForm] = useState({
         name: "",
         email: "",
         password: "",
         password2: "",
     });
 
-    const { name, email, password, password2 } = formData;
+    const { name, email, password, password2 } = form;
 
     const dispatch = useDispatch();
 
     function changeHandler(e) {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
+        const { name, value } = e.target;
+
+        setForm((preState) => {
+            return {
+                ...preState,
+                [name]: value
+            }
+        });
     }
 
     function submitHandler(e) {
@@ -25,7 +32,7 @@ function RegisterDisplay({ history }) {
         if (password !== password2) {
             dispatch(setAlert("danger", "Password does not match!"))
         } else {
-            //dispatch(registerUser({ name, email, password }, history));
+            dispatch(register({ name, email, password }));
         }
     }
 
