@@ -1,13 +1,32 @@
 import Navbar from "./Navbar";
 import Alert from "./Alert";
-import ProfileEducation from "./profilesdisplay/ProfileEducation";
-import ProfileExperience from "./profilesdisplay/ProfileExperience";
-import SingleProfile from "./profilesdisplay/SingleProfile";
 import Loader from "./Loader";
+import { PostItem } from "./postsdisplay";
 import { About, Edu, Exp, Repos, Header } from "./singleprofiledisplay";
-import PostItem from "./postsdisplay/PostItem";
+import {
+    DashboardEducation,
+    DashboardExperience,
+    DashboardExpItem,
+    DashboardEduItem,
+} from "./dashboarddisplay";
+import {
+    ProfilesEducation,
+    ProfilesExperience,
+    ProfilesEduItem,
+    ProfilesExpItem,
+    ProfilesItem,
+} from "./profilesdisplay";
 
 export {
-    Navbar, Alert, ProfileEducation, ProfileExperience, SingleProfile, Loader,
+    Navbar, Alert, Loader,
     About, Edu, Exp, Repos, Header, PostItem,
+    DashboardEducation,
+    DashboardExperience,
+    DashboardEduItem,
+    DashboardExpItem,
+    ProfilesEducation,
+    ProfilesExperience,
+    ProfilesEduItem,
+    ProfilesExpItem,
+    ProfilesItem,
 }

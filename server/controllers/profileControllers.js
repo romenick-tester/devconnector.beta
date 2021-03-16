@@ -6,6 +6,70 @@ const { User, Profile } = require("../settings");
 
 dotenv.config();
 
+//route:        GET api/profile/me
+//desc:         get current user profile
+//access:       private  
+const getUserProfile = async (req, res) => {
+    try {
+        const profile = await Profile.findOne({ user: req.user.id }).populate("user", ["name", "avatar"]);
+
+        if (!profile) {
+            res.status(400).json({
+                errors: [{ msg: "There is no profile for this user." }]
+            });
+        } else {
+            res.json(profile)
+        }
+    } catch (error) {
+        res.status(500).json({
+            errors: [{ msg: "There was a  problem with the server, please try again." }]
+        });
+    }
+}
+
+//route:        POST api/profile
+//desc:         create or update user profile
+//access:       private 
+const createUserProfile = async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { website, skills, youtube, twitter, instagram, linkedin, facebook, ...rest } = req.body;
+
+    const profileFields = {
+        user: req.user.id,
+        website: website && website !== "" ? normalize(website, { forceHttps: true }) : "",
+        skills: Array.isArray(skills) ? skills : skills.split(',').map((skill) => ' ' + skill.trim()),
+        ...rest
+    };
+
+    const socialFields = { youtube, twitter, instagram, linkedin, facebook };
+
+    // normalize social fields to ensure valid url
+    for (const [key, value] of Object.entries(socialFields)) {
+        if (value && value.length > 0)
+            socialFields[key] = normalize(value, { forceHttps: true });
+    }
+
+    profileFields.social = socialFields;
+
+    try {
+        // Using upsert option (creates new doc if no match is found):
+        let profile = await Profile.findOneAndUpdate(
+            { user: req.user.id },
+            { $set: profileFields },
+            { new: true, upsert: true, setDefaultsOnInsert: true }
+        ).populate("user", ["name", "avatar"]);
+
+        return res.json(profile);
+    } catch (err) {
+        return res.status(500).json({ errors: [{ msg: err.message }] });
+    }
+}
+
 //route:        PUT api/profile/experience
 //desc:         add or update user profile experience
 //access:       private 
@@ -16,15 +80,7 @@ const addProfileExperience = async(req,res) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const {
-        title,
-        company,
-        location,
-        from,
-        to,
-        current,
-        description
-    } = req.body;
+    const { title, company, location, from, to, current, description } = req.body;
 
     const newExp = {
         title,
@@ -45,8 +101,7 @@ const addProfileExperience = async(req,res) => {
 
         res.json(profile);
     } catch (err) {
-      console.error(err.message);
-      return res.status(500).send('Server Error');
+        return res.status(500).json({ errors: [{ msg: err.message }] });
     }
 }
 
@@ -56,6 +111,7 @@ const addProfileExperience = async(req,res) => {
 const deleteProfileExperience = async(req,res) => {
     try {
         const profile = await Profile.findOne({ user: req.user.id });
+
         const removeIndex = profile.experience.map((exp) => exp.id).indexOf(req.params.exp_id);
 
         profile.experience.splice(removeIndex, 1);
@@ -64,8 +120,7 @@ const deleteProfileExperience = async(req,res) => {
 
         res.json(profile);
     } catch (err) {
-      console.error(err.message);
-        return res.status(500).send('There was a problem with the server, please try again.');
+        return res.status(500).json({ errors: [{ msg: err.message }] });
     }
 }
 
@@ -79,27 +134,17 @@ const addProfileEducation = async(req,res) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const {
-        school,
-        level,
-        fieldofstudy,
-        from,
-        to,
-        current,
-        description
-    } = req.body;
-
-    const newEdu = {
-        school,
-        level,
-        fieldofstudy,
-        from,
-        to,
-        current,
-        description
-    }
-
     try {
+        const newEdu = {
+            school: req.body.school,
+            level: req.body.level,
+            fieldofstudy: req.body.fieldofstudy,
+            from: req.body.from,
+            to: req.body.to,
+            current: req.body.current,
+            description: req.body.description
+        };
+
         const profile = await Profile.findOne({user: req.user.id});
 
         profile.education.unshift(newEdu);
@@ -108,8 +153,7 @@ const addProfileEducation = async(req,res) => {
 
         res.json(profile);
     } catch (err) {
-      console.error(err.message);
-      return res.status(500).send('Server Error');
+        return res.status(500).json({ errors: [{ msg: err.message }] });
     }
 }
 
@@ -119,6 +163,7 @@ const addProfileEducation = async(req,res) => {
 const deleteProfileEducation = async(req,res) => {
     try {
         const profile = await Profile.findOne({ user: req.user.id });
+
         const removeIndex = profile.education.map((edu) => edu.id).indexOf(req.params.edu_id);
 
         profile.education.splice(removeIndex, 1);
@@ -127,82 +172,10 @@ const deleteProfileEducation = async(req,res) => {
 
         res.json(profile);
     } catch (err) {
-      console.error(err.message);
-      return res.status(500).send('Server Error');
+        return res.status(500).json({ errors: [{ msg: err.message }] });
     }
 }
 
-//route:        POST api/profile
-//desc:         create or update user profile
-//access:       private 
-const createUserProfile = async(req,res) => {
-    const errors = validationResult(req);
-
-    if(!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
-    
-    const {
-        website,
-        skills,
-        youtube,
-        twitter,
-        instagram,
-        linkedin,
-        facebook,
-        ...rest
-    } = req.body;
-
-    const profileFields = {
-        user: req.user.id,
-        website: website && website !== "" ? normalize(website, { forceHttps: true }) : "",
-        skills: Array.isArray(skills) ? skills : skills.split(',').map((skill) => ' ' + skill.trim()),
-        ...rest
-    };
-
-    const socialFields = { youtube, twitter, instagram, linkedin, facebook };
-
-    // normalize social fields to ensure valid url
-    for (const [key, value] of Object.entries(socialFields)) {
-        if (value && value.length > 0)
-        socialFields[key] = normalize(value, { forceHttps: true });
-    }
-
-    // add to profileFields
-    profileFields.social = socialFields;
-
-    try {
-      // Using upsert option (creates new doc if no match is found):
-        let profile = await Profile.findOneAndUpdate(
-            { user: req.user.id },
-            { $set: profileFields },
-            { new: true, upsert: true, setDefaultsOnInsert: true }
-        ).populate("user", ["name", "avatar"]);
-
-        return res.json(profile);
-    } catch (err) {
-      console.error(err.message);
-      return res.status(500).send('Server Error');
-    }
-}
-
-//route:        GET api/profile/me
-//desc:         get current user profile
-//access:       private  
-const getUserProfile = async(req,res) => {
-    try {
-        const profile = await Profile.findOne({ user: req.user.id }).populate("user", ["name", "avatar"]);
-
-        if(!profile) {
-            return res.status(400).json({ errors: [{ msg: "There is no profile for this user." }] });
-        }
-
-        res.json(profile)
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).json({ errors: [{ msg: "There was a  problem with the server, please try again." }] })
-    }
-}
 
 //route:        GET api/profile
 //desc:         get all users profile
@@ -213,12 +186,11 @@ const getAllProfiles = async(req,res) => {
         
         if(!profiles) {
             return res.status(404).json({ errors: [{ msg: "No profiles found!" }] })
+        } else {
+            res.json(profiles);
         }
-    
-        res.json(profiles);
     } catch (error) {
-        console.error(error.message);
-        res.status(500).send("server error");
+        return res.status(500).json({ errors: [{ msg: err.message }] });
     }
 }
 
@@ -230,16 +202,15 @@ const getUserProfileByID = async(req,res) => {
         const profile = await Profile.findOne({ user: req.params.user_id }).populate("user", ["name", "avatar"]);
     
         if(!profile) {
+            res.status(400).json({ errors: [{ msg: "No profile found!" }] });
+        } else {
+            res.json(profile);
+        }
+    } catch (err) {
+        if (err.kind === "ObjectId") {
             return res.status(400).json({ errors: [{ msg: "No profile found!" }] });
         }
-        
-        res.json(profile);
-    } catch (error) {
-        console.error(error.message);
-        if(error.kind === "ObjectId") {
-            return res.status(400).json({ errors: [{ msg: "No profile found!" }] });
-        }
-        res.status(500).send("server error");
+        return res.status(500).json({ errors: [{ msg: err.message }] });
     }
 }
 
@@ -255,7 +226,7 @@ const deleteUserProfile = async(req,res) => {
         //remove user
         await User.findOneAndRemove({_id: req.user.id});
 
-        res.json({ msg: "user deleted!" })
+        res.status(200).json({ msg: "user deleted!" });
     } catch (error) {
         console.error(error.message);
         if(error.kind === "ObjectId") {
@@ -280,12 +251,11 @@ const getGithubRepo = async(req,res) => {
             Authorization: `token ${process.env.GITHUB_ACCESS_TOKEN}`
         };
           
-        const gitHubResponse = await axios.get(uri, { headers });
+        const { data } = await axios.get(uri, { headers });
 
-        return res.json(gitHubResponse.data);
+        res.json(data);
     } catch (error) {
-        console.error(error.message);
-        res.status(500).send("server error");
+        return res.status(500).json({ errors: [{ msg: err.message }] });
     }
 }
 

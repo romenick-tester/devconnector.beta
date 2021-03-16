@@ -1,19 +1,13 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteProfile } from "../manager";
 import { ProfileEducation, ProfileExperience } from "../components";
 
-function DashboardDisplay({ history }) {
-    const user = useSelector(state => state.user);
-    const { info } = user;
-
-    const single_profile = useSelector(state => state.user_profile);
-    const {
-        single_profile_loading: loading,
-        single_profile_error: error,
-        single_profile: details,
-    } = single_profile;
+function DashboardDisplay() {
+    const loading = false;
+    const error = false;
+    const details = {};
 
     const dispatch = useDispatch();
 
@@ -62,27 +56,29 @@ function DashboardDisplay({ history }) {
             <h1 className="large text-primary">
                 Dashboard
             </h1>
-            <p className="lead"><i className="fas fa-user"></i> Welcome {info ? info.name : "to DevConnector"} !</p>
+            <p className="lead"><i className="fas fa-user"></i> Welcome to DevConnector !</p>
 
             <div className="dash-buttons">
-                {!details ? (
-                    <Link to="/create-profile" className="btn btn-light">
-                        <i className="fas fa-user-circle text-primary"></i>
-                        Create Profile
-                    </Link>
-                ) : (
+                {details ? (
                     <Link to="/edit-profile" className="btn btn-light">
-                        <i className="fas fa-user-circle text-primary"></i>
+                        {/* <i className="fas fa-user-circle text-primary"></i> */}
                             Edit Profile
                     </Link>
+                ) : (
+                    <Link to="/create-profile" className="btn btn-light">
+                            {/* <i className="fas fa-user-circle text-primary"></i> */}
+                        Create Profile
+                        </Link>
                 )}
 
                 <Link to="/add-experience" className="btn btn-light">
-                    <i className="fab fa-black-tie text-primary"></i> Add Experience
+                    {/* <i className="fab fa-black-tie text-primary"></i> */}
+                    Add Experience
                 </Link>
 
                 <Link to="/add-education" className="btn btn-light">
-                    <i className="fas fa-graduation-cap text-primary"></i> Add Education
+                    {/* <i className="fas fa-graduation-cap text-primary"></i> */}
+                    Add Education
                 </Link>
             </div>
 

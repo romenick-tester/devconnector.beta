@@ -2,7 +2,7 @@ import React from 'react';
 import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-function SingleProfile({ coder }) {
+function ProfilesItem({ coder }) {
 
     const { _id = "", name = "", avatar = "" } = coder.user ? coder.user : {};
 
@@ -20,7 +20,7 @@ function SingleProfile({ coder }) {
             </div>
             <ul>
                 {skills.slice(0, 4).map((skill, index) => (
-                    <li key={index} className="tex-primary">
+                    <li key={index} className="text-primary">
                         <FaCheck /> {skill}
                     </li>
                 ))}
@@ -29,4 +29,4 @@ function SingleProfile({ coder }) {
     )
 }
 
-export default SingleProfile;
+export default ProfilesItem;

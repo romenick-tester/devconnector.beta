@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import { FaUser } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts } from "../manager";
+//import { useDispatch, useSelector } from "react-redux";
 import { Loader, PostItem } from "../components";
 
 function PostsDisplay() {
+    const loading = false;
+    const error = null;
+    const posts = [];
 
     const dispatch = useDispatch();
 
-    const allPosts = useSelector(state => state.allPosts);
-    const { loading, error, posts } = allPosts;
-
     useEffect(() => {
-        dispatch(getAllPosts());
+        //dispatch(getAllPosts());
     }, [dispatch]);
 
     if (loading) {
@@ -22,6 +21,8 @@ function PostsDisplay() {
     if (error) {
         return <h4>{error.msg}</h4>
     }
+
+    posts._id = "";
 
     return (
         <>

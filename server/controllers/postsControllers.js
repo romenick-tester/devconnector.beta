@@ -85,12 +85,12 @@ const deletePost = async(req,res) => {
         await post.remove();
 
         res.json({ msg: "Post deleted!" });
-    } catch (error) {
-        console.error(error.message);
-        if(error.kind === "ObjectId") {
+    } catch (err) {
+        if (err.kind === "ObjectId") {
             return res.status(404).json({ errors: [{ msg: "No post found!" }] });
+        } else {
+            return res.status(500).json({ errors: [{ msg: err.message }] });
         }
-        res.status(500).send("server error");
     }
 };
 
@@ -101,7 +101,7 @@ const likePost = async(req,res) => {
     try {
         const post = await Post.findById(req.params.id);
 
-        const likes = post.likes.filter((like) => like.user.toString() === req.user.id);
+        const likes = post.likes.filter((like) => String(like.user) === req.user.id);
 
         if(likes.length > 0) {
             return res.status(400).json({ msg: "You already liked this post." })
@@ -111,11 +111,9 @@ const likePost = async(req,res) => {
         
         await post.save();
 
-        console.log("comment liked!");
-        res.json(post.likes);
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).json({ msg: "Error server" });
+        res.status(200).json({ likes: post.likes });
+    } catch (err) {
+        return res.status(500).json({ errors: [{ msg: err.message }] });
     }
 };
 
@@ -126,23 +124,21 @@ const unlikePost = async(req,res) => {
     try {
         const post = await Post.findById(req.params.id);
 
-        const likes = post.likes.filter((like) => like.user.toString() === req.user.id);
+        const likes = post.likes.filter((like) => String(like.user) === req.user.id);
 
         if(likes.length === 0) {
             return res.status(400).json({ msg: "You have not liked this post yet to unlike." })
         }
 
-        const removeIndex = post.likes.map((like) => like.user.toString()).indexOf(req.user.id);
+        const removeIndex = post.likes.map((like) => String(like.user)).indexOf(req.user.id);
 
         post.likes.splice(removeIndex, 1);
         
         await post.save();
 
-        console.log("post unliked!");
-        res.json(post.likes);
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).json({ msg: "Error server" });
+        res.status(200).json({ likes: post.likes });
+    } catch (err) {
+        return res.status(500).json({ errors: [{ msg: err.message }] });
     }
 };
 
@@ -153,14 +149,15 @@ const editPost = async(req,res) => {
     try {
         const post = await Post.findById(req.params.id);
 
-        if(post.comments > 0) {
-            return res.status(400).json({ msg: "People already commented, cannot edit this post now." })
-        }
+        if (post.comments.length > 0) {
+            res.status(400).json({
+                errors: [{ msg: "People already commented, cannot edit this post now." }]
+            })
+        } 
 
-        res.json(post.likes);
+        res.status(200).json({ post });
     } catch (error) {
-        console.error(error.message);
-        res.status(500).json({ msg: "Server error" })
+        return res.status(500).json({ errors: [{ msg: err.message }] });
     }
 };
 
@@ -190,10 +187,9 @@ const createPostComment = async(req,res) => {
         await post.save();
 
         console.log("comment added!");
-        res.status(201).json(post.comments);
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).send("server error");
+        res.status(201).json({ comments: post.comments });
+    } catch (err) {
+        return res.status(500).json({ errors: [{ msg: err.message }] });
     }
 };
 
@@ -226,11 +222,9 @@ const deletePostComment = async(req,res) => {
         
         await post.save();
 
-        console.log("comment deleted!");
-        res.json(post.comments);
+        res.status(200).json({ comments: post.comments });
     } catch (error) {
-        console.error(error.message);
-        res.status(500).send("server error");
+        return res.status(500).json({ errors: [{ msg: err.message }] });
     }
 };
 

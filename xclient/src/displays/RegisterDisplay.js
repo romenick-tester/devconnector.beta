@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAlert, registerUser, logout } from "../manager";
@@ -22,37 +22,35 @@ function RegisterDisplay({ history }) {
     function submitHandler(e) {
         e.preventDefault();
 
-        if(password !== password2) {
+        if (password !== password2) {
             dispatch(setAlert("danger", "Password does not match!"))
-            return;
+        } else {
+            //dispatch(registerUser({ name, email, password }, history));
         }
-
-        dispatch(registerUser({ name, email, password }, history));
-        dispatch(setAlert("success", "Successfully registered!"))
     }
 
     return (
         <>
             <h1 className="large text-primary">Sign Up</h1>
             <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
-            <form className="form" onSubmit={(e) => submitHandler(e)}>
+            <form className="form" onSubmit={submitHandler}>
                 <div className="form-group">
-                    <input 
-                        type="text" 
-                        placeholder="Name" 
+                    <input
+                        type="text"
+                        placeholder="Name"
                         name="name"
                         value={name}
                         onChange={(e) => changeHandler(e)} />
                 </div>
                 <div className="form-group">
-                    <input 
-                        type="email" 
-                        placeholder="Email Address" 
+                    <input
+                        type="email"
+                        placeholder="Email Address"
                         name="email"
                         value={email}
                         onChange={(e) => changeHandler(e)} />
                     <small className="form-text">
-                    This site uses Gravatar so if you want a profile image, use a
+                        This site uses Gravatar so if you want a profile image, use a
                     Gravatar email</small>
                 </div>
                 <div className="form-group">
@@ -65,11 +63,11 @@ function RegisterDisplay({ history }) {
                 </div>
                 <div className="form-group">
                     <input
-                    type="password"
-                    placeholder="Confirm Password"
-                    name="password2"
-                    value={password2}
-                    onChange={(e) => changeHandler(e)} />
+                        type="password"
+                        placeholder="Confirm Password"
+                        name="password2"
+                        value={password2}
+                        onChange={(e) => changeHandler(e)} />
                 </div>
                 <input type="submit" className="btn btn-primary" value="Register" />
             </form>

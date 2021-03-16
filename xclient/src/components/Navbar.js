@@ -1,12 +1,25 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-    RiUserFill, RiProfileFill, RiBaseStationFill,
-    RiLoginBoxFill, RiLogoutBoxRFill, RiMessageFill
-} from "react-icons/ri";
-import { logout } from "../manager";
+//import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import {
+    RiUserFill,
+    RiProfileFill,
+    RiBaseStationFill,
+    RiLoginBoxFill,
+    RiLogoutBoxRFill,
+    RiMessageFill
+} from "react-icons/ri";
+
+function Navbar() {
+    const isAuthenticated = false;
+
+    return (
+        <Nav className="navbar bg-dark">
+            {isAuthenticated ? <PrivateLinks /> : <PublicLinks />}
+        </Nav>
+    )
+}
 
 const PublicLinks = () => {
     return (
@@ -23,9 +36,7 @@ const PublicLinks = () => {
 }
 
 const PrivateLinks = () => {
-    const dispatch = useDispatch();
-    const user = useSelector(state => state.user);
-    const { info = {} } = user;
+    //const dispatch = useDispatch();
 
     return (
         <>
@@ -35,21 +46,10 @@ const PrivateLinks = () => {
             <ul>
                 <li><Link to="/profiles"><RiProfileFill /> Developers</Link></li>
                 <li><Link to="/posts"><RiMessageFill /> Posts</Link></li>
-                <li><Link to="/dashboard"><RiUserFill /> {info && info.name && info.name.split(" ")[1]}</Link></li>
-                <li><Link to="" onClick={() => dispatch(logout())}><RiLogoutBoxRFill /> Logout</Link></li>
+                <li><Link to="/dashboard"><RiUserFill /> Dashboard </Link></li>
+                <li><Link to="" onClick={() => console.log("logout")} ><RiLogoutBoxRFill /> Logout</Link></li>
             </ul>
         </>
-    )
-}
-
-function Navbar() {
-    const auth = useSelector(state => state.auth);
-    const { isAuthenticated } = auth;
-
-    return (
-        <Nav className="navbar bg-dark">
-            {isAuthenticated ? <PrivateLinks /> : <PublicLinks />}
-        </Nav>
     )
 }
 

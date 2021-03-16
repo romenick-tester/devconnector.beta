@@ -10,8 +10,14 @@ const {
     deleteProfileExperience, 
     addProfileEducation, 
     deleteProfileEducation, 
-    getGithubRepo } = require("../../controllers");
-const { profileValidations, experienceValidations, educationValidations } = require("../../settings");
+    getGithubRepo
+} = require("../../controllers");
+const {
+    profileValidations,
+    experienceValidations,
+    educationValidations
+} = require("../../settings");
+
 const { auth } = require("../../settings");
 
 router
@@ -25,7 +31,7 @@ router
     .get(getUserProfileByID);
 
 router
-    .route("/me")
+    .route("/current")
     .get(auth, getUserProfile);
 
 router

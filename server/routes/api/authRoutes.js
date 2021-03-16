@@ -1,14 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { userDetails, loginUser } = require("../../controllers");
-const { loginValidations } = require("../../settings");
+const { loginUser, registerUser } = require("../../controllers");
+const { loginValidations, registerValidations } = require("../../settings");
 const { auth } = require("../../settings");
 
-router
-    .post("/", loginValidations, loginUser);
+router.post("/login", loginValidations, loginUser);
 
-
-router
-    .get("/me", auth, userDetails);
+router.post("/register", registerValidations, registerUser);
 
 module.exports = router;

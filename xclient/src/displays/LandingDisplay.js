@@ -1,16 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function LandingDisplay({ history }) {
-    const auth = useSelector(state => state.auth);
-    const { isAuthenticated } = auth;
-
-    if (isAuthenticated) {
-        history.push("/dashboard");
-    }
-
+function LandingDisplay() {
     return (
         <Wrapper className="landing">
             <div className="dark-overlay">

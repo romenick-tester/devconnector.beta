@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { createUserProfile } from "../manager";
 
 function CreateProfileDisplay({ history }) {
     const [show, setShow] = useState(false);
@@ -33,7 +32,7 @@ function CreateProfileDisplay({ history }) {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        dispatch(createUserProfile(form, history));
+        // dispatch(createUserProfile(form, history));
     }
 
     return (

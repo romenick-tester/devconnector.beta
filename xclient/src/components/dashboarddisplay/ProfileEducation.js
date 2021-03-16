@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteProfileEducation } from "../manager";
+import { useDispatch } from "react-redux";
+//import { deleteProfileEducation } from "../manager";
 import SingleEducation from "./SingleEducation";
 
-function ProfileEducation() {
-    const [educations, setEducations] = useState([]);
-
-    const single_profile = useSelector(state => state.user_profile);
-    const {
-        single_profile_loading: loading,
-        single_profile_error: error,
-        single_profile: details,
-    } = single_profile;
+function ProfileEducation({ education: edu }) {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const [education, setEducation] = useState([]);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!loading && details) {
-            setEducations(details.education)
+        setLoading(true);
+        if (edu) {
+            setEducation(edu);
+            setLoading(false);
+        } else {
+            setLoading(false);
+            setError(true);
         }
-    }, [loading, details]);
+    }, [edu]);
 
     if (loading) {
         return <h3>Loading...</h3>
@@ -34,7 +34,8 @@ function ProfileEducation() {
         const isConfirmed = window.confirm("You want to delete?");
 
         if (isConfirmed) {
-            dispatch(deleteProfileEducation(id));
+            console.log("education deleted!");
+            //dispatch(deleteProfileEducation(id));
         }
     }
 
@@ -54,29 +55,19 @@ function ProfileEducation() {
                 </tr>
             </thead>
             <tbody>
-                {educations
+                {education
                     .sort((a, b) => {
                         const sortByFromDate = (Number(b.from.slice(0, 4))) - (Number(a.from.slice(0, 4)))
                         return sortByFromDate;
                     })
-                    .map((item) => {
+                    .map((item = { _id: "" }) => {
                         return <SingleEducation key={item._id} {...item} removeEdu={removeEdu} />
                     })
                 }
-                {educations.length === 0 && (
+                {education.length === 0 && (
                     <tr>
-                        <td><span>sample</span> Westminster College</td>
-                        <td className="hide-sm">
-                            <small><span>sample</span> BTEC</small><br />
-                            Product Engineer
-                        </td>
-                        <td className="hide-sm">
-                            <span>sample</span> 2008 - 2018
-                        </td>
-                        <td>
-                            <button className="btn btn-danger">
-                                Delete
-                            </button>
+                        <td colSpan={4}>
+                            N/A
                         </td>
                     </tr>
                 )}

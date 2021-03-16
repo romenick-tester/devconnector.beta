@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { createUserProfile } from "../manager";
 
 function EditProfileDisplay({ history }) {
     const [show, setShow] = useState(false);
 
-    const { single_profile: profile = {} } = useSelector(state => state.user_profile);
+    const profile = {};
 
     const {
         company = "", website = "", location = "", status = "", skills = [],
@@ -33,7 +32,7 @@ function EditProfileDisplay({ history }) {
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
-        dispatch(createUserProfile(form, history, true));
+        // dispatch(createUserProfile(form, history, true));
     }
 
     return (

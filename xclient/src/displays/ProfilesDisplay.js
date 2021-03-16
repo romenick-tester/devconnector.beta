@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaConnectdevelop } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { getProfileList, setAlert } from "../manager";
-import { SingleProfile, Loader } from "../components";
+//import { useDispatch, useSelector } from "react-redux";
+import { ProfilesItem, Loader } from "../components";
 
 function ProfilesDisplay() {
     const [coders, setCoders] = useState([])
@@ -15,7 +14,7 @@ function ProfilesDisplay() {
     } = useSelector(state => state.profiles);
 
     useEffect(() => {
-        dispatch(getProfileList());
+        //dispatch(getProfileList());
     }, [dispatch]);
 
     useEffect(() => {
@@ -39,7 +38,7 @@ function ProfilesDisplay() {
             </p>
             <div className="profiles">
                 {coders.map((coder) => {
-                    return <SingleProfile key={coder._id} coder={coder} />
+                    return <ProfilesItem key={coder._id} coder={coder} />
                 })}
             </div>
         </>

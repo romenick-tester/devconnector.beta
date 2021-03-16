@@ -4,15 +4,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { deleteProfileExperience } from "../manager";
 import SingleExperience from "./SingleExperience";
 
-function ProfileExperience() {
-    const [experiences, setExperiences] = useState([]);
+function ProfileExperience({ experience: exp }) {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const [experience, setExperience] = useState([]);
 
-    const single_profile = useSelector(state => state.user_profile);
-    const {
-        single_profile_loading: loading,
-        single_profile_error: error,
-        single_profile: details,
-    } = single_profile;
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        setLoading(true);
+        if (exp) {
+            setExperience(exp);
+            setLoading(false);
+        } else {
+            setLoading(false);
+            setError(true);
+        }
+    }, [exp]);
 
     const dispatch = useDispatch();
 
@@ -34,7 +42,8 @@ function ProfileExperience() {
         const isConfirmed = window.confirm("You want to delete ?");
 
         if (isConfirmed) {
-            dispatch(deleteProfileExperience(id));
+            console.log("experience deleted!");
+            //dispatch(deleteProfileExperience(id));
         }
     }
 
@@ -54,26 +63,19 @@ function ProfileExperience() {
                 </tr>
             </thead>
             <tbody>
-                {experiences
+                {experience
                     .sort((a, b) => {
                         const sortByFromDate = (Number(b.from.slice(0, 4))) - (Number(a.from.slice(0, 4)))
                         return sortByFromDate;
                     })
-                    .map((item) => {
+                    .map((item = { _id: "" }) => {
                         return <SingleExperience key={item._id} {...item} removeExp={removeExp} />
                     })
                 }
-                {experiences.length === 0 && (
+                {experience.length === 0 && (
                     <tr>
-                        <td><span>sample</span> Traversy Media</td>
-                        <td className="hide-sm"><span>sample</span>Instructor & Developer</td>
-                        <td className="hide-sm">
-                            <span>sample</span>02-03-2015 - Now
-                        </td>
-                        <td>
-                            <button className="btn btn-danger">
-                                Delete
-                            </button>
+                        <td colSpan={4}>
+                            N/A
                         </td>
                     </tr>
                 )}

@@ -1,21 +1,19 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
-import { getUserProfileById } from "../manager";
+//import { useDispatch, useSelector } from "react-redux";
 import { About, Edu, Exp, Repos, Header } from "../components";
 
 function SingleProfileDisplay({ match }) {
+    const loading = false;
+    const error = false;
+    const profile = {};
+
     const userId = match.params.id;
 
     const dispatch = useDispatch();
-    const {
-        profile_byId_loading: loading,
-        profile_byId_error: error,
-        profile_byId: profile
-    } = useSelector(state => state.user_byId);
 
     useEffect(() => {
-        dispatch(getUserProfileById(userId))
+        //dispatch(getUserProfileById(userId))
     }, [userId, dispatch]);
 
     if (loading) {

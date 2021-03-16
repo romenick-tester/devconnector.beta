@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Alert, Navbar, } from "./components"
 import {
@@ -17,20 +16,8 @@ import {
     SingleProfileDisplay,
     PostsDisplay,
 } from "./displays"
-import { loadUser, getUserProfile, logout } from "./manager";
 
 function App() {
-    const dispatch = useDispatch();
-    const { auth_loading, isAuthenticated, token } = useSelector(state => state.auth);
-
-    useEffect(() => {
-        if (!auth_loading && isAuthenticated && token) {
-            dispatch(loadUser());
-            dispatch(getUserProfile());
-        } else if (!isAuthenticated && !token) {
-            dispatch(logout());
-        }
-    }, [auth_loading, isAuthenticated, token, dispatch])
 
     return (
         <Router>
@@ -47,7 +34,7 @@ function App() {
                     <PrivateRoute path="/add-experience" component={AddExperienceDisplay} />
                     <Route path="/profile/:id" component={SingleProfileDisplay} />
                     <Route path="/profiles" component={ProfilesDisplay} />
-                    <Route path="/register" component={RegisterDisplay}/>
+                    <Route path="/register" component={RegisterDisplay} />
                     <Route path="/login" component={LoginDisplay} />
                 </Switch>
             </Main>
