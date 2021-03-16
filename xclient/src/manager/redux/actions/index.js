@@ -1,7 +1,8 @@
 import setAlert from "./alertActions";
-import { register } from "./authActions";
+import { register, login } from "./authActions";
 
 export {
     setAlert,
     register,
+    login,
 };

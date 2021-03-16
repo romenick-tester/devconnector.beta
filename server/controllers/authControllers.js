@@ -30,7 +30,7 @@ const loginUser = async(req,res) => {
 
             res.json({ token });
         } else {
-            return res.status(400).json({ errors: [{ msg: "Invalid credentials! 🚩" }] })
+            res.status(400).json({ errors: [{ msg: "Invalid credentials! 🚩" }] })
         }
     } catch (error) {
         res.status(500).json({ errors: [{ msg: "Server error 🚩" }] });

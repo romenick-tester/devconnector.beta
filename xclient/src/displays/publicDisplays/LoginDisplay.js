@@ -1,35 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-// import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login, setAlert } from "../../manager";
 
-function LoginDisplay({ history }) {
-    const [formData, setFormData] = useState({
+function LoginDisplay() {
+    const [form, setForm] = useState({
         email: "",
         password: ""
     });
 
-    const { email, password } = formData;
-
-    const isLoading = false;
-    const isAuthenticated = false;
+    const { email, password } = form;
 
     const dispatch = useDispatch();
 
+    const auth = useSelector(state => state.auth);
+    const { loading, authenticated } = auth;
+
     useEffect(() => {
-        if (isAuthenticated) {
-            //dispatch(loadUser());
-            history.push("/dashboard")
+        if (!loading && authenticated) {
+            dispatch(setAlert("success", "logged in!"))
         }
-    }, [dispatch, history, isLoading, isAuthenticated])
+        console.log("not logged in");
+    }, [dispatch, loading, authenticated])
 
     function changeHandler(e) {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
+        setForm({ ...form, [e.target.name]: e.target.value })
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        //dispatch(loginUser(formData));
+
+        dispatch(login(form));
     }
 
     return (
