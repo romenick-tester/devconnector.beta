@@ -1,5 +1,5 @@
 import React from "react";
-//import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {
@@ -12,11 +12,12 @@ import {
 } from "react-icons/ri";
 
 function Navbar() {
-    const isAuthenticated = false;
+    const auth = useSelector(state => state.auth);
+    const { loading, authenticated, user } = auth;
 
     return (
         <Nav className="navbar bg-dark">
-            {isAuthenticated ? <PrivateLinks /> : <PublicLinks />}
+            {!loading && authenticated ? <PrivateLinks user={user} /> : <PublicLinks />}
         </Nav>
     )
 }
@@ -35,8 +36,8 @@ const PublicLinks = () => {
     )
 }
 
-const PrivateLinks = () => {
-    //const dispatch = useDispatch();
+const PrivateLinks = ({ user }) => {
+    const dispatch = useDispatch();
 
     return (
         <>

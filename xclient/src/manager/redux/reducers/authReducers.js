@@ -5,8 +5,8 @@ import {
     AUTH_LOGIN_REQUEST,
     AUTH_LOGIN_SUCCESS,
     AUTH_LOGIN_ERROR,
-    AUTH_LOAD_USER_DETAILS,
-    AUTH_LOAD_USER_ERROR,
+    AUTH_LOAD_USER,
+    AUTH_LOAD_ERROR,
 } from "../constants/authConstants";
 
 const initiState = {
@@ -40,14 +40,14 @@ const authReducer = (state = initiState, action) => {
                 error: null,
             };
 
-        case AUTH_LOAD_USER_DETAILS:
+        case AUTH_LOAD_USER:
             return {
                 ...state,
                 user: payload.user,
                 error: null,
             }
 
-        case AUTH_LOAD_USER_ERROR:
+        case AUTH_LOAD_ERROR:
         case AUTH_LOGIN_ERROR:
         case AUTH_REGISTER_ERROR:
             localStorage.removeItem("token");

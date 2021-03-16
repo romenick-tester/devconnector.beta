@@ -6,8 +6,8 @@ import {
     AUTH_LOGIN_REQUEST,
     AUTH_LOGIN_SUCCESS,
     AUTH_LOGIN_ERROR,
-    AUTH_LOAD_USER_DETAILS,
-    AUTH_LOAD_USER_ERROR,
+    AUTH_LOAD_USER,
+    AUTH_LOAD_ERROR,
 } from "../constants/authConstants";
 import setAlert from "./alertActions";
 
@@ -23,10 +23,10 @@ export const loadUser = () => async (dispatch, getState) => {
 
         const { data } = await axios.get("/api/users/current", config);
 
-        dispatch({ type: AUTH_LOAD_USER_DETAILS, payload: data });
+        dispatch({ type: AUTH_LOAD_USER, payload: data });
 
     } catch (error) {
-        dispatch({ type: AUTH_LOAD_USER_ERROR, payload: error.message })
+        dispatch({ type: AUTH_LOAD_ERROR, payload: error.message })
     }
 }
 
@@ -36,7 +36,7 @@ export const register = (form) => async (dispatch) => {
     try {
         const body = JSON.stringify(form);
 
-        const config = {
+        const con
             headers: {
                 "content-type": "application/json"
             }
