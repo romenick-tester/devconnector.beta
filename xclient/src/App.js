@@ -6,14 +6,14 @@ import {
     LandingDisplay,
     RegisterDisplay,
     LoginDisplay,
-    // DashboardDisplay,
-    // PrivateRoute,
+    DashboardDisplay,
+    PrivateRoute,
+    // SingleProfileDisplay,
     // CreateProfileDisplay,
     // EditProfileDisplay,
     // AddEducationDisplay,
     // AddExperienceDisplay,
     // ProfilesDisplay,
-    // SingleProfileDisplay,
     // PostsDisplay,
 } from "./displays";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,14 +38,14 @@ function App() {
             <Main className="container">
                 <Alert />
                 <Switch>
-                    {/* <PrivateRoute path="/posts" component={PostsDisplay} />
+                    {/* <PrivateRoute path="/posts" component={PostsDisplay} /> */}
+                    {/* <PrivateRoute path="/edit-profile" component={EditProfileDisplay} /> */}
+                    {/* <PrivateRoute path="/add-education" component={AddEducationDisplay} /> */}
+                    {/* <PrivateRoute path="/add-experience" component={AddExperienceDisplay} /> */}
+                    {/* <Route path="/profile/:id" component={SingleProfileDisplay} /> */}
+                    {/* <Route path="/profiles" component={ProfilesDisplay} /> */}
+                    {/* <PrivateRoute path="/create-profile" component={CreateProfileDisplay} /> */}
                     <PrivateRoute path="/dashboard" component={DashboardDisplay} />
-                    <PrivateRoute path="/create-profile" component={CreateProfileDisplay} />
-                    <PrivateRoute path="/edit-profile" component={EditProfileDisplay} />
-                    <PrivateRoute path="/add-education" component={AddEducationDisplay} />
-                    <PrivateRoute path="/add-experience" component={AddExperienceDisplay} />
-                    <Route path="/profile/:id" component={SingleProfileDisplay} />
-                    <Route path="/profiles" component={ProfilesDisplay} /> */}
                     <Route path="/register" component={RegisterDisplay} />
                     <Route path="/login" component={LoginDisplay} />
                 </Switch>

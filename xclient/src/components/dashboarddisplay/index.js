@@ -1,7 +1,7 @@
-import DashboardEducation from "./ProfileEducation"
-import DashboardExperience from "./ProfileExperience"
-import DashboardEduItem from "./SingleEducation"
-import DashboardExpItem from "./SingleExperience"
+import DashboardEducation from "./DashboardEducation"
+import DashboardExperience from "./DashboardExperience"
+import DashboardEduItem from "./DashboardEducationItem"
+import DashboardExpItem from "./DashboardExperienceItem"
 
 export {
     DashboardEducation,

@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { deleteProfile } from "../manager";
-import { ProfileEducation, ProfileExperience } from "../components";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile } from "../../manager";
+import { DashboardEducation, DashboardExperience } from "../../components";
 
 function DashboardDisplay() {
-    const loading = false;
-    const error = false;
-    const details = {};
-
+    
     const dispatch = useDispatch();
+    const profile = useSelector(state => state.profile);
+    const { loading, error, privateProfile } = profile;
+
+    useEffect(() => {
+        dispatch(getProfile());
+    }, [dispatch, privateProfile])
 
     if (loading) {
         return (
@@ -17,7 +20,7 @@ function DashboardDisplay() {
                 <h1 className="large text-primary">
                     Loading...
                 </h1>
-                <p className="lead"><i className="fas fa-user"></i> Welcome {info ? info.name : "to DevConnector"} !</p>
+                <p className="lead"><i className="fas fa-user"></i> Welcome to DevConnector !</p>
                 <Link to="/create-profile" className="btn">Create Profile</Link>
             </>
         )
@@ -29,27 +32,28 @@ function DashboardDisplay() {
                 <h1 className="large text-primary">
                     Dashboard
                 </h1>
-                <p className="lead"><i className="fas fa-user"></i> Welcome {info ? info.name : "to DevConnector"} !</p>
+                <p className="lead"><i className="fas fa-user"></i> {error.msg}</p>
                 <Link to="/create-profile" className="btn">Create Profile</Link>
-                <small style={{ color: "orangered" }}>NO PROFILE SET</small>
+                <small style={{ color: "orangered" }}>{error}</small>
             </>
         )
     }
 
-    function deleteAccount() {
-        const isConfirmed = window.confirm("Are you sure you want to delete your account?");
+    // function deleteAccount() {
+    //     const isConfirmed = window.confirm("Are you sure you want to delete your account?");
 
-        if (isConfirmed) {
-            setTimeout(async () => {
-                const isForSure = window.confirm("Final check ?");
+    //     if (isConfirmed) {
+    //         setTimeout(async () => {
+    //             const isForSure = window.confirm("Final check ?");
 
-                if (isForSure) {
-                    dispatch(deleteProfile());
-                }
-            }, 1500);
+    //             if (isForSure) {
+    //                 console.log("deleted!");
+    //                 //dispatch(deleteProfile());
+    //             }
+    //         }, 1500);
 
-        }
-    }
+    //     }
+    // }
 
     return (
         <>
@@ -59,7 +63,7 @@ function DashboardDisplay() {
             <p className="lead"><i className="fas fa-user"></i> Welcome to DevConnector !</p>
 
             <div className="dash-buttons">
-                {details ? (
+                {!profile ? (
                     <Link to="/edit-profile" className="btn btn-light">
                         {/* <i className="fas fa-user-circle text-primary"></i> */}
                             Edit Profile
@@ -82,13 +86,13 @@ function DashboardDisplay() {
                 </Link>
             </div>
 
-            {details && (
+            {profile && (
                 <>
-                    <ProfileEducation />
-                    <ProfileExperience />
+                    <DashboardEducation />
+                    <DashboardExperience />
 
                     <div className="my-2">
-                        <button className="btn btn-danger" onClick={() => deleteAccount()}>
+                        <button className="btn btn-danger" /* onClick={() => deleteAccount()} */>
                             <i className="fas fa-user-minus"></i>
                             Delete My Account
                         </button>

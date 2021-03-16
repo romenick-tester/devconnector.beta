@@ -14,7 +14,7 @@ const getUserProfile = async (req, res) => {
         const profile = await Profile.findOne({ user: req.user.id }).populate("user", ["name", "avatar"]);
 
         if (!profile) {
-            res.status(400).json({
+            res.status(404).json({
                 errors: [{ msg: "There is no profile for this user." }]
             });
         } else {

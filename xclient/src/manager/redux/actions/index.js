@@ -5,6 +5,9 @@ import {
     loadUser,
     logout,
 } from "./authActions";
+import {
+    getProfile
+} from "./profileActions";
 
 export {
     setAlert,
@@ -12,4 +15,5 @@ export {
     login,
     loadUser,
     logout,
+    getProfile,
 };

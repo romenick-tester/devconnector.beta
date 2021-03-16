@@ -1,70 +1,69 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-//import { deleteProfileEducation } from "../manager";
-import SingleEducation from "./SingleEducation";
+import DashboardExpItem from "./DashboardExperienceItem";
 
-function ProfileEducation({ education: edu }) {
+function ProfileExperience({ experience: exp }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [education, setEducation] = useState([]);
+    const [experience, setExperience] = useState([]);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         setLoading(true);
-        if (edu) {
-            setEducation(edu);
+        if (exp) {
+            setExperience(exp);
             setLoading(false);
         } else {
             setLoading(false);
             setError(true);
         }
-    }, [edu]);
+    }, [exp]);
 
     if (loading) {
-        return <h3>Loading...</h3>
+        return <h3>loading...</h3>
     }
 
     if (error) {
         return <h3>Error...</h3>
     }
 
-    function removeEdu(id) {
-        const isConfirmed = window.confirm("You want to delete?");
+    // function removeExp(id) {
+    //     const isConfirmed = window.confirm("You want to delete ?");
 
-        if (isConfirmed) {
-            console.log("education deleted!");
-            //dispatch(deleteProfileEducation(id));
-        }
-    }
+    //     if (isConfirmed) {
+    //         console.log("experience deleted!");
+    //         //dispatch(deleteProfileExperience(id));
+    //     }
+    // }
 
     return (
         <Table className="table">
             <thead>
                 <tr>
                     <td colSpan={4}>
-                        <h2>Education</h2>
+                        <h2 className="my-2">Experience</h2>
                     </td>
                 </tr>
                 <tr>
-                    <th>School</th>
-                    <th className="hide-sm">Level</th>
+                    <th>Company</th>
+                    <th className="hide-sm">Title</th>
                     <th className="hide-sm">Years</th>
-                    <th />
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                {education
+                {experience
                     .sort((a, b) => {
                         const sortByFromDate = (Number(b.from.slice(0, 4))) - (Number(a.from.slice(0, 4)))
                         return sortByFromDate;
                     })
                     .map((item = { _id: "" }) => {
-                        return <SingleEducation key={item._id} {...item} removeEdu={removeEdu} />
+                        return <DashboardExpItem key={item._id} {...item} /* removeExp={removeExp} */ />
                     })
                 }
-                {education.length === 0 && (
+                {experience.length === 0 && (
                     <tr>
                         <td colSpan={4}>
                             N/A
@@ -86,4 +85,4 @@ const Table = styled.table`
     }
 `
 
-export default ProfileEducation;
+export default ProfileExperience;

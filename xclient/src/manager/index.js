@@ -6,6 +6,7 @@ import {
     login,
     loadUser,
     logout,
+    getProfile,
 } from "./redux/actions";
 
 export {
@@ -16,4 +17,5 @@ export {
     login,
     loadUser,
     logout,
+    getProfile,
 };
