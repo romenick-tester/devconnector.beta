@@ -8,6 +8,7 @@ import {
     AUTH_LOGIN_ERROR,
     AUTH_LOAD_USER,
     AUTH_LOAD_ERROR,
+    AUTH_LOGOUT,
 } from "../constants/authConstants";
 import setAlert from "./alertActions";
 
@@ -36,7 +37,7 @@ export const register = (form) => async (dispatch) => {
     try {
         const body = JSON.stringify(form);
 
-        const con
+        const config = {
             headers: {
                 "content-type": "application/json"
             }
@@ -85,3 +86,7 @@ export const login = (form) => async (dispatch) => {
         dispatch({ type: AUTH_LOGIN_ERROR, payload: err.message });
     }
 };
+
+export const logout = () => (dispatch) => {
+    dispatch({ type: AUTH_LOGOUT });
+}

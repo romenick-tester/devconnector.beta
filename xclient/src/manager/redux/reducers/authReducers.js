@@ -7,6 +7,7 @@ import {
     AUTH_LOGIN_ERROR,
     AUTH_LOAD_USER,
     AUTH_LOAD_ERROR,
+    AUTH_LOGOUT,
 } from "../constants/authConstants";
 
 const initiState = {
@@ -47,6 +48,7 @@ const authReducer = (state = initiState, action) => {
                 error: null,
             }
 
+        case AUTH_LOGOUT:
         case AUTH_LOAD_ERROR:
         case AUTH_LOGIN_ERROR:
         case AUTH_REGISTER_ERROR:
