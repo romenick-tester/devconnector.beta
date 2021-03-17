@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+//import { useDispatch } from "react-redux";
 //import { deleteProfileEducation } from "../manager";
 import DashboardEduItem from "./DashboardEducationItem";
 
@@ -9,7 +9,7 @@ function ProfileEducation({ education: edu }) {
     const [error, setError] = useState(false);
     const [education, setEducation] = useState([]);
 
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
     useEffect(() => {
         setLoading(true);
@@ -40,39 +40,37 @@ function ProfileEducation({ education: edu }) {
     // }
 
     return (
-        <Table className="table">
-            <thead>
-                <tr>
-                    <td colSpan={4}>
-                        <h2>Education</h2>
-                    </td>
-                </tr>
-                <tr>
-                    <th>School</th>
-                    <th className="hide-sm">Level</th>
-                    <th className="hide-sm">Years</th>
-                    <th />
-                </tr>
-            </thead>
-            <tbody>
-                {education
-                    .sort((a, b) => {
-                        const sortByFromDate = (Number(b.from.slice(0, 4))) - (Number(a.from.slice(0, 4)))
-                        return sortByFromDate;
-                    })
-                    .map((item = { _id: "" }) => {
-                        return <DashboardEduItem key={item._id} {...item} /* removeEdu={removeEdu} */ />
-                    })
-                }
-                {education.length === 0 && (
+        <>
+            <h2 className="my-2">Education</h2>
+            <Table className="table">
+                <thead>
                     <tr>
-                        <td colSpan={4}>
-                            N/A
-                        </td>
+                        <th>School</th>
+                        <th className="hide-sm">Level</th>
+                        <th className="hide-sm">Years</th>
+                        <th />
                     </tr>
-                )}
-            </tbody>
-        </Table>
+                </thead>
+                <tbody>
+                    {education
+                        .sort((a, b) => {
+                            const sortByFromDate = (Number(b.from.slice(0, 4))) - (Number(a.from.slice(0, 4)))
+                            return sortByFromDate;
+                        })
+                        .map((item = { _id: "" }) => {
+                            return <DashboardEduItem key={item._id} {...item} /* removeEdu={removeEdu} */ />
+                        })
+                    }
+                    {education.length === 0 && (
+                        <tr>
+                            <td colSpan={4}>
+                                N/A
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+            </Table>
+        </>
     )
 }
 

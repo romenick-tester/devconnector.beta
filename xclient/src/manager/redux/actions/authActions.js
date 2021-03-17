@@ -10,6 +10,9 @@ import {
     AUTH_LOAD_ERROR,
     AUTH_LOGOUT,
 } from "../constants/authConstants";
+import {
+    PROFILE_CLEAR_USER,
+} from "../constants/profileConstants";
 import setAlert from "./alertActions";
 
 export const loadUser = () => async (dispatch, getState) => {
@@ -18,7 +21,7 @@ export const loadUser = () => async (dispatch, getState) => {
 
         const config = {
             headers: {
-                "auth-token": `${token}`
+                "Auth-Token": `${token}`
             }
         }
 
@@ -39,7 +42,7 @@ export const register = (form) => async (dispatch) => {
 
         const config = {
             headers: {
-                "content-type": "application/json"
+                "Content-Type": "application/json"
             }
         }
 
@@ -68,7 +71,7 @@ export const login = (form) => async (dispatch) => {
 
         const config = {
             headers: {
-                "content-type": "application/json"
+                "Content-Type": "application/json"
             }
         }
 
@@ -88,5 +91,6 @@ export const login = (form) => async (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
+    dispatch({ type: PROFILE_CLEAR_USER });
     dispatch({ type: AUTH_LOGOUT });
 }

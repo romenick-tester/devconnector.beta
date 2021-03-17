@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login, setAlert } from "../../manager";
+import { login } from "../../manager";
 
-function LoginDisplay() {
+function LoginDisplay({ history, location }) {
     const [form, setForm] = useState({
         email: "",
         password: ""
@@ -18,10 +18,9 @@ function LoginDisplay() {
 
     useEffect(() => {
         if (!loading && authenticated) {
-            dispatch(setAlert("success", "logged in!"))
+            history.push("/dashboard");
         }
-        console.log("not logged in");
-    }, [dispatch, loading, authenticated])
+    }, [dispatch, loading, authenticated, history])
 
     function changeHandler(e) {
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -29,7 +28,6 @@ function LoginDisplay() {
 
     const submitHandler = (e) => {
         e.preventDefault();
-
         dispatch(login(form));
     }
 

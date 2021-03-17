@@ -18,7 +18,7 @@ const getUserProfile = async (req, res) => {
                 errors: [{ msg: "There is no profile for this user." }]
             });
         } else {
-            res.json(profile)
+            res.json({ profile })
         }
     } catch (error) {
         res.status(500).json({
@@ -64,7 +64,7 @@ const createUserProfile = async (req, res) => {
             { new: true, upsert: true, setDefaultsOnInsert: true }
         ).populate("user", ["name", "avatar"]);
 
-        return res.json(profile);
+        return res.json({ profile });
     } catch (err) {
         return res.status(500).json({ errors: [{ msg: err.message }] });
     }
@@ -99,7 +99,7 @@ const addProfileExperience = async(req,res) => {
 
         await profile.save();
 
-        res.json(profile);
+        res.json({ profile });
     } catch (err) {
         return res.status(500).json({ errors: [{ msg: err.message }] });
     }
@@ -118,7 +118,7 @@ const deleteProfileExperience = async(req,res) => {
 
         await profile.save();
 
-        res.json(profile);
+        res.json({ profile });
     } catch (err) {
         return res.status(500).json({ errors: [{ msg: err.message }] });
     }
@@ -151,7 +151,7 @@ const addProfileEducation = async(req,res) => {
 
         await profile.save();
 
-        res.json(profile);
+        res.json({ profile });
     } catch (err) {
         return res.status(500).json({ errors: [{ msg: err.message }] });
     }
@@ -170,7 +170,7 @@ const deleteProfileEducation = async(req,res) => {
 
         await profile.save();
 
-        res.json(profile);
+        res.json({ profile });
     } catch (err) {
         return res.status(500).json({ errors: [{ msg: err.message }] });
     }
@@ -187,7 +187,7 @@ const getAllProfiles = async(req,res) => {
         if(!profiles) {
             return res.status(404).json({ errors: [{ msg: "No profiles found!" }] })
         } else {
-            res.json(profiles);
+            res.json({ profiles });
         }
     } catch (error) {
         return res.status(500).json({ errors: [{ msg: err.message }] });
@@ -204,7 +204,7 @@ const getUserProfileByID = async(req,res) => {
         if(!profile) {
             res.status(400).json({ errors: [{ msg: "No profile found!" }] });
         } else {
-            res.json(profile);
+            res.json({ profile });
         }
     } catch (err) {
         if (err.kind === "ObjectId") {
@@ -226,7 +226,7 @@ const deleteUserProfile = async(req,res) => {
         //remove user
         await User.findOneAndRemove({_id: req.user.id});
 
-        res.status(200).json({ msg: "user deleted!" });
+        res.status(200).json({ profile: "user deleted!" });
     } catch (error) {
         console.error(error.message);
         if(error.kind === "ObjectId") {
@@ -253,7 +253,7 @@ const getGithubRepo = async(req,res) => {
           
         const { data } = await axios.get(uri, { headers });
 
-        res.json(data);
+        res.json({ repos: data });
     } catch (error) {
         return res.status(500).json({ errors: [{ msg: err.message }] });
     }

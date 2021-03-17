@@ -39,39 +39,37 @@ function ProfileExperience({ experience: exp }) {
     // }
 
     return (
-        <Table className="table">
-            <thead>
-                <tr>
-                    <td colSpan={4}>
-                        <h2 className="my-2">Experience</h2>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Company</th>
-                    <th className="hide-sm">Title</th>
-                    <th className="hide-sm">Years</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {experience
-                    .sort((a, b) => {
-                        const sortByFromDate = (Number(b.from.slice(0, 4))) - (Number(a.from.slice(0, 4)))
-                        return sortByFromDate;
-                    })
-                    .map((item = { _id: "" }) => {
-                        return <DashboardExpItem key={item._id} {...item} /* removeExp={removeExp} */ />
-                    })
-                }
-                {experience.length === 0 && (
+        <>
+            <h2 className="my-2">Experience</h2>
+            <Table className="table">
+                <thead>
                     <tr>
-                        <td colSpan={4}>
-                            N/A
-                        </td>
+                        <th>Company</th>
+                        <th className="hide-sm">Title</th>
+                        <th className="hide-sm">Years</th>
+                        <th></th>
                     </tr>
-                )}
-            </tbody>
-        </Table>
+                </thead>
+                <tbody>
+                    {experience
+                        .sort((a, b) => {
+                            const sortByFromDate = (Number(b.from.slice(0, 4))) - (Number(a.from.slice(0, 4)))
+                            return sortByFromDate;
+                        })
+                        .map((item = { _id: "" }) => {
+                            return <DashboardExpItem key={item._id} {...item} /* removeExp={removeExp} */ />
+                        })
+                    }
+                    {experience.length === 0 && (
+                        <tr>
+                            <td colSpan={4}>
+                                N/A
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+            </Table>
+        </>
     )
 }
 

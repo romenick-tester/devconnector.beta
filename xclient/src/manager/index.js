@@ -7,6 +7,7 @@ import {
     loadUser,
     logout,
     getProfile,
+    createProfile,
 } from "./redux/actions";
 
 export {
@@ -18,4 +19,5 @@ export {
     loadUser,
     logout,
     getProfile,
+    createProfile,
 };

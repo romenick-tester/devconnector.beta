@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setAlert, register } from "../../manager";
 
-function RegisterDisplay({ history }) {
+function RegisterDisplay({ history, location }) {
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -14,6 +14,14 @@ function RegisterDisplay({ history }) {
     const { name, email, password, password2 } = form;
 
     const dispatch = useDispatch();
+    const auth = useSelector(state => state.auth);
+    const { loading, authenticated } = auth;
+
+    useEffect(() => {
+        if (!loading && authenticated) {
+            history.push("/dashboard");
+        }
+    }, [loading, authenticated, dispatch, history]);
 
     function changeHandler(e) {
         const { name, value } = e.target;

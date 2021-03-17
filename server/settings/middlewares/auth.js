@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 dotenv.config();
 
 const auth = (req, res, next) => {
-    const token = req.header("auth-token");
+    const token = req.header("Auth-Token");
 
     if (!token) {
         return res.status(401).json({ errors: [{ msg: "No token, access denied!" }] })

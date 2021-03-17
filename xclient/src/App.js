@@ -6,10 +6,10 @@ import {
     LandingDisplay,
     RegisterDisplay,
     LoginDisplay,
-    DashboardDisplay,
     PrivateRoute,
+    DashboardDisplay,
+    CreateProfileDisplay,
     // SingleProfileDisplay,
-    // CreateProfileDisplay,
     // EditProfileDisplay,
     // AddEducationDisplay,
     // AddExperienceDisplay,
@@ -44,7 +44,7 @@ function App() {
                     {/* <PrivateRoute path="/add-experience" component={AddExperienceDisplay} /> */}
                     {/* <Route path="/profile/:id" component={SingleProfileDisplay} /> */}
                     {/* <Route path="/profiles" component={ProfilesDisplay} /> */}
-                    {/* <PrivateRoute path="/create-profile" component={CreateProfileDisplay} /> */}
+                    <PrivateRoute path="/create-profile" component={CreateProfileDisplay} />
                     <PrivateRoute path="/dashboard" component={DashboardDisplay} />
                     <Route path="/register" component={RegisterDisplay} />
                     <Route path="/login" component={LoginDisplay} />

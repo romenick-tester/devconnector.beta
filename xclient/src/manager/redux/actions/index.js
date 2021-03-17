@@ -6,7 +6,8 @@ import {
     logout,
 } from "./authActions";
 import {
-    getProfile
+    getProfile,
+    createProfile,
 } from "./profileActions";
 
 export {
@@ -16,4 +17,5 @@ export {
     loadUser,
     logout,
     getProfile,
+    createProfile,
 };

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { FaUser, FaUserEdit, FaUserCircle, FaUserGraduate, FaBlackTie, FaUserMinus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfile } from "../../manager";
 import { DashboardEducation, DashboardExperience } from "../../components";
@@ -8,11 +9,11 @@ function DashboardDisplay() {
     
     const dispatch = useDispatch();
     const profile = useSelector(state => state.profile);
-    const { loading, error, privateProfile } = profile;
+    const { loading, error, privateProfile: profiling } = profile;
 
     useEffect(() => {
         dispatch(getProfile());
-    }, [dispatch, privateProfile])
+    }, [dispatch])
 
     if (loading) {
         return (
@@ -20,7 +21,7 @@ function DashboardDisplay() {
                 <h1 className="large text-primary">
                     Loading...
                 </h1>
-                <p className="lead"><i className="fas fa-user"></i> Welcome to DevConnector !</p>
+                <p className="lead"><FaUser /> Welcome to DevConnector !</p>
                 <Link to="/create-profile" className="btn">Create Profile</Link>
             </>
         )
@@ -32,12 +33,14 @@ function DashboardDisplay() {
                 <h1 className="large text-primary">
                     Dashboard
                 </h1>
-                <p className="lead"><i className="fas fa-user"></i> {error.msg}</p>
+                <p className="lead"><FaUser /> {error.msg}</p>
                 <Link to="/create-profile" className="btn">Create Profile</Link>
                 <small style={{ color: "orangered" }}>{error}</small>
             </>
         )
     }
+
+    const { education = [], experience = [], user = {} } = profiling;
 
     // function deleteAccount() {
     //     const isConfirmed = window.confirm("Are you sure you want to delete your account?");
@@ -60,41 +63,36 @@ function DashboardDisplay() {
             <h1 className="large text-primary">
                 Dashboard
             </h1>
-            <p className="lead"><i className="fas fa-user"></i> Welcome to DevConnector !</p>
+            <p className="lead"><i className="fas fa-user"></i> Welcome {user && user.name} !</p>
 
             <div className="dash-buttons">
-                {!profile ? (
+                {profiling ? (
                     <Link to="/edit-profile" className="btn btn-light">
-                        {/* <i className="fas fa-user-circle text-primary"></i> */}
-                            Edit Profile
+                        <FaUserEdit /> Edit Profile
                     </Link>
                 ) : (
                     <Link to="/create-profile" className="btn btn-light">
-                            {/* <i className="fas fa-user-circle text-primary"></i> */}
-                        Create Profile
-                        </Link>
+                            <FaUserCircle /> Create Profile
+                    </Link>
                 )}
 
                 <Link to="/add-experience" className="btn btn-light">
-                    {/* <i className="fab fa-black-tie text-primary"></i> */}
-                    Add Experience
+                    <FaBlackTie /> Add Experience
                 </Link>
 
                 <Link to="/add-education" className="btn btn-light">
-                    {/* <i className="fas fa-graduation-cap text-primary"></i> */}
-                    Add Education
+                    <FaUserGraduate /> Add Education
                 </Link>
             </div>
 
-            {profile && (
+            {profiling && (
                 <>
-                    <DashboardEducation />
-                    <DashboardExperience />
+                    <DashboardEducation education={education} />
+                    <DashboardExperience experience={experience} />
 
                     <div className="my-2">
                         <button className="btn btn-danger" /* onClick={() => deleteAccount()} */>
-                            <i className="fas fa-user-minus"></i>
-                            Delete My Account
+                            <FaUserMinus /> Delete My Account
                         </button>
                     </div>
                 </>
