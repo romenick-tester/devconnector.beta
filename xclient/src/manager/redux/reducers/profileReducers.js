@@ -6,6 +6,8 @@ import {
     PROFILE_CREATE_REQUEST,
     PROFILE_CREATE_SUCCESS,
     PROFILE_CREATE_ERROR,
+    PROFILE_ADD_EDUCATION,
+    PROFILE_ADD_EXPERIENCE,
 } from "../constants/profileConstants";
 
 const initialState = {
@@ -27,13 +29,15 @@ const profileReducer = (state = initialState, action) => {
                 loading: true,
             }
 
+        case PROFILE_ADD_EDUCATION:
+        case PROFILE_ADD_EXPERIENCE:
         case PROFILE_CREATE_SUCCESS:
         case PROFILE_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 privateProfile: payload.profile,
-                error: null,
+                error: null
             }
 
         case PROFILE_CREATE_ERROR:

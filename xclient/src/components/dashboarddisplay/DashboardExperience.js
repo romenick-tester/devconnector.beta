@@ -44,10 +44,10 @@ function ProfileExperience({ experience: exp }) {
             <Table className="table">
                 <thead>
                     <tr>
-                        <th>Company</th>
+                        <th style={{ width: "250px" }}>Company</th>
                         <th className="hide-sm">Title</th>
                         <th className="hide-sm">Years</th>
-                        <th></th>
+                        <th style={{ width: "100px" }}></th>
                     </tr>
                 </thead>
                 <tbody>

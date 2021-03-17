@@ -8,8 +8,8 @@ import PrivateRoute from "./privateDisplays/PrivateRoute";
 import DashboardDisplay from "./privateDisplays/DashboardDisplay";
 import CreateProfileDisplay from "./privateDisplays/CreateProfileDisplay";
 // import EditProfileDisplay from "./privateDisplays/EditProfileDisplay";
-// import AddEducationDisplay from "./privateDisplays/AddEducationDisplay";
-// import AddExperienceDisplay from "./privateDisplays/AddExperienceDisplay";
+import AddEducationDisplay from "./privateDisplays/AddEducationDisplay";
+import AddExperienceDisplay from "./privateDisplays/AddExperienceDisplay";
 // import PostsDisplay from "./privateDisplays/PostsDisplay";
 
 
@@ -21,8 +21,8 @@ export {
     DashboardDisplay,
     CreateProfileDisplay,
     // EditProfileDisplay,
-    // AddEducationDisplay,
-    // AddExperienceDisplay,
+    AddEducationDisplay,
+    AddExperienceDisplay,
     // ProfilesDisplay,
     // SingleProfileDisplay,
     // PostsDisplay,

@@ -8,6 +8,8 @@ import {
     logout,
     getProfile,
     createProfile,
+    addEducation,
+    addExperience,
 } from "./redux/actions";
 
 export {
@@ -20,4 +22,6 @@ export {
     logout,
     getProfile,
     createProfile,
+    addEducation,
+    addExperience,
 };

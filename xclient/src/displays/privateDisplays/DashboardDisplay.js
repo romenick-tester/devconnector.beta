@@ -40,7 +40,7 @@ function DashboardDisplay() {
         )
     }
 
-    const { education = [], experience = [], user = {} } = profiling;
+    const { education = [], experience = [], user = {} } = profiling ? profiling : {};
 
     // function deleteAccount() {
     //     const isConfirmed = window.confirm("Are you sure you want to delete your account?");
@@ -76,12 +76,12 @@ function DashboardDisplay() {
                     </Link>
                 )}
 
-                <Link to="/add-experience" className="btn btn-light">
-                    <FaBlackTie /> Add Experience
-                </Link>
-
                 <Link to="/add-education" className="btn btn-light">
                     <FaUserGraduate /> Add Education
+                </Link>
+
+                <Link to="/add-experience" className="btn btn-light">
+                    <FaBlackTie /> Add Experience
                 </Link>
             </div>
 

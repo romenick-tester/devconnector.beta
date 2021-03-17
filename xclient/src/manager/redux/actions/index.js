@@ -7,7 +7,9 @@ import {
 } from "./authActions";
 import {
     getProfile,
-    createProfile,
+    createProfile, 
+    addEducation,
+    addExperience,
 } from "./profileActions";
 
 export {
@@ -17,5 +19,7 @@ export {
     loadUser,
     logout,
     getProfile,
-    createProfile,
+    createProfile, 
+    addEducation,
+    addExperience,
 };

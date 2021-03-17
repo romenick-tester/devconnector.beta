@@ -45,10 +45,10 @@ function ProfileEducation({ education: edu }) {
             <Table className="table">
                 <thead>
                     <tr>
-                        <th>School</th>
+                        <th style={{ width: "250px" }}>School</th>
                         <th className="hide-sm">Level</th>
                         <th className="hide-sm">Years</th>
-                        <th />
+                        <th style={{ width: "100px" }}></th>
                     </tr>
                 </thead>
                 <tbody>

@@ -53,7 +53,7 @@ export const register = (form) => async (dispatch) => {
         dispatch(setAlert("success", "User registered!"));
 
     } catch (err) {
-        const errors = err.response && err.response.data.errors ? err.response.data.errors : err.message;
+        const errors = err.response && err.response.data.errors ? err.response.data.errors : [{ msg: err.message }];
 
         if (errors) {
             errors.map((error) => dispatch(setAlert("danger", error.msg)));
@@ -80,7 +80,7 @@ export const login = (form) => async (dispatch) => {
         dispatch({ type: AUTH_LOGIN_SUCCESS, payload: data });
 
     } catch (err) {
-        const errors = err.response && err.response.data.errors ? err.response.data.errors : err.message;
+        const errors = err.response && err.response.data.errors ? err.response.data.errors : [{ msg: err.message }];
 
         if (errors) {
             errors.map((error) => dispatch(setAlert("danger", error.msg)));

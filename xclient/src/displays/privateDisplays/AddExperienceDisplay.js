@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { addExperience } from "../../manager"
 
 function AddExperienceDisplay({ history }) {
     const [toDateDisabled, setToDateDisabled] = useState(false);
@@ -27,8 +28,7 @@ function AddExperienceDisplay({ history }) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        //dispatch addExperience(form)
-        history.push("/dashboard");
+        dispatch(addExperience(form, history));
     }
 
     return (
