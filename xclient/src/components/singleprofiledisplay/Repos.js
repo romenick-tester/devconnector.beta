@@ -1,33 +1,34 @@
-import React from 'react';
-import { useDispatch } from "react-redux";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { getRepos } from "../../manager";
 import { FaGithub } from "react-icons/fa";
 import ReposItem from "./ReposItem";
+import Loader from "../Loader";
 
 function GithubRepos({ githubusername }) {
-    const loading = false;
-    const error = false;
-    const repos = [];
 
     const dispatch = useDispatch();
+    const profiles = useSelector(state => state.profiles);
+    const { loading, error, repos } = profiles;
+
+    useEffect(() => {
+        dispatch(getRepos(githubusername));
+    }, [dispatch, githubusername])
 
     if (loading) {
-        return <h4>Loading...</h4>
-    }
-
-    if (error) {
-        return <h4>Repositories not available...</h4>
+        return <Loader />
     }
 
     return (
         <div className="profile-github">
             <h2 className="text-primary my-1">
                 <FaGithub />{" "}
-                Github Repos
+                {error ? error : "Github Repos"}
                 (<a href={`https://github.com/${githubusername}`} target="_blank" rel="noopener noreferrer">
                     {githubusername}
                 </a>)
             </h2>
-            {repos.sort((a, b) => b.size - a.size).slice(0, 3).map((item, index) => {
+            {repos && repos.sort((a, b) => b.size - a.size).slice(0, 3).map((item, index) => {
                 return <ReposItem key={index} project={item} index={index + 1} />
             })}
         </div>

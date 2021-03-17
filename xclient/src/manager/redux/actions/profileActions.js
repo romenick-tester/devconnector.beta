@@ -14,9 +14,30 @@ import {
     PROFILE_USER_ID_REQUEST,
     PROFILE_USER_ID_SUCCESS,
     PROFILE_USER_ID_ERROR,
+    PROFILE_REPOS_REQUEST,
+    PROFILE_REPOS_SUCCESS,
+    PROFILE_REPOS_ERROR,
 
 } from "../constants/profileConstants";
 import setAlert from "./alertActions";
+
+export const getRepos = (username) => async (dispatch) => {
+    dispatch({ type: PROFILE_REPOS_REQUEST });
+
+    try {
+        const { data } = await axios.get(`/api/profile/github?username=${username}`);
+
+        dispatch({ type: PROFILE_REPOS_SUCCESS, payload: data });
+
+    } catch (error) {
+        const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
+
+        dispatch({
+            type: PROFILE_REPOS_ERROR,
+            payload: errors ? errors.map((err) => err.msg)[0] : error.message
+        })
+    }
+};
 
 export const getProfileById = (id) => async (dispatch) => {
     dispatch({ type: PROFILE_USER_ID_REQUEST });

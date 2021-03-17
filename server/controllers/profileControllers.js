@@ -244,7 +244,7 @@ const getGithubRepo = async(req,res) => {
     const mainUrl = "https://api.github.com/users/";
 
     try {
-        const uri = encodeURI(`${mainUrl}${req.params.username}/repos?per_page=5&sort=created:asc`);
+        const uri = encodeURI(`${mainUrl}${req.query.username}/repos?per_page=5&sort=created:asc`);
             
         const headers = {
             "user-agent": "node.js",

@@ -12,6 +12,7 @@ import {
     addExperience,
     getAllProfiles,
     getProfileById,
+    getRepos,
 } from "./profileActions";
 
 export {
@@ -26,4 +27,5 @@ export {
     addExperience,
     getAllProfiles,
     getProfileById,
+    getRepos,
 };
