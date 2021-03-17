@@ -14,6 +14,7 @@ import {
     PROFILE_USER_ID_REQUEST,
     PROFILE_USER_ID_SUCCESS,
     PROFILE_USER_ID_ERROR,
+    PROFILE_USER_ID_CLEAR,
 } from "../constants/profileConstants";
 
 const profile_initial_state = {
@@ -117,6 +118,14 @@ const profilesReducer = (state = profiles_initial_state, action) => {
                 loading: false,
                 single: null,
                 error: payload,
+            }
+
+        case PROFILE_USER_ID_CLEAR:
+            return {
+                ...state,
+                loading: false,
+                single: null,
+                error: null,
             }
 
         default:

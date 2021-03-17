@@ -30,7 +30,12 @@ export const loadUser = () => async (dispatch, getState) => {
         dispatch({ type: AUTH_LOAD_USER, payload: data });
 
     } catch (error) {
-        dispatch({ type: AUTH_LOAD_ERROR, payload: error.message })
+        const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
+
+        dispatch({
+            type: AUTH_LOAD_ERROR,
+            payload: errors ? errors.map((err) => err.msg)[0] : error.message
+        })
     }
 }
 

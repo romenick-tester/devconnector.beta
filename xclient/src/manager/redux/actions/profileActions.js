@@ -31,7 +31,7 @@ export const getProfileById = (id) => async (dispatch) => {
 
         dispatch({
             type: PROFILE_USER_ID_ERROR,
-            payload: errors ? errors.map((err) => err[0].msg) : error.message
+            payload: errors ? errors.map((err) => err.msg)[0] : error.message
         })
     }
 };
@@ -49,7 +49,7 @@ export const getAllProfiles = () => async (dispatch) => {
 
         dispatch({
             type: PROFILE_LIST_ERROR,
-            payload: errors ? errors.map((err) => err[0].msg) : error.message
+            payload: errors ? errors.map((err) => err.msg)[0] : error.message
         })
     }
 };
@@ -75,7 +75,7 @@ export const getProfile = () => async (dispatch, getState) => {
 
         dispatch({
             type: PROFILE_USER_ERROR,
-            payload: errors ? errors.map((err) => err[0].msg) : error.message
+            payload: errors ? errors.map((err) => err.msg)[0] : error.message
         })
     }
 };
@@ -119,10 +119,9 @@ export const createProfile = (form, history, edit = false) => async (dispatch, g
 
         dispatch({ type: PROFILE_CREATE_SUCCESS, payload: data });
 
-        dispatch(setAlert("success", "Updated profile!"))
+        dispatch(setAlert("success", edit ? "Profile updated!" : "Profile created!"))
 
         if (!edit) {
-            dispatch(setAlert("success", "Created profile!"))
             history.push("/dashboard");
         }
 
@@ -135,7 +134,7 @@ export const createProfile = (form, history, edit = false) => async (dispatch, g
         
         dispatch({
             type: PROFILE_CREATE_ERROR,
-            payload: errors ? errors.map((err) => err[0].msg) : error.message
+            payload: errors ? errors.map((err) => err.msg)[0] : error.message
         })
     }
 };

@@ -29,13 +29,12 @@ function DashboardDisplay() {
     }
 
     if (error) {
-        dispatch(setAlert("danger", error))
         return (
             <>
                 <h1 className="large text-primary">
                     Dashboard
                 </h1>
-                <p className="lead"><FaUser /> {error}</p>
+                <p className="lead"><FaUser /> Welcome to DevConnector !</p>
                 <Link to="/create-profile" className="btn">Create Profile</Link>
                 <small style={{ color: "orangered" }}>{error}</small>
             </>
