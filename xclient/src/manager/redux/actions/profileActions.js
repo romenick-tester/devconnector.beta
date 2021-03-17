@@ -11,8 +11,30 @@ import {
     PROFILE_LIST_REQUEST,
     PROFILE_LIST_SUCCESS,
     PROFILE_LIST_ERROR,
+    PROFILE_USER_ID_REQUEST,
+    PROFILE_USER_ID_SUCCESS,
+    PROFILE_USER_ID_ERROR,
+
 } from "../constants/profileConstants";
 import setAlert from "./alertActions";
+
+export const getProfileById = (id) => async (dispatch) => {
+    dispatch({ type: PROFILE_USER_ID_REQUEST });
+
+    try {
+        const { data } = await axios.get(`/api/profile/user?id=${id}`);
+
+        dispatch({ type: PROFILE_USER_ID_SUCCESS, payload: data });
+
+    } catch (error) {
+        const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
+
+        dispatch({
+            type: PROFILE_USER_ID_ERROR,
+            payload: errors ? errors.map((err) => err[0].msg) : error.message
+        })
+    }
+};
 
 export const getAllProfiles = () => async (dispatch) => {
     dispatch({ type: PROFILE_LIST_REQUEST });

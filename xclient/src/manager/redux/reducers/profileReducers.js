@@ -11,6 +11,9 @@ import {
     PROFILE_LIST_REQUEST,
     PROFILE_LIST_SUCCESS,
     PROFILE_LIST_ERROR,
+    PROFILE_USER_ID_REQUEST,
+    PROFILE_USER_ID_SUCCESS,
+    PROFILE_USER_ID_ERROR,
 } from "../constants/profileConstants";
 
 const profile_initial_state = {
@@ -68,6 +71,7 @@ const profiles_initial_state = {
     loading: false,
     error: null,
     list: null,
+    single: null,
     repos: null,
 }
 
@@ -76,6 +80,7 @@ const profilesReducer = (state = profiles_initial_state, action) => {
 
     switch (type) {
 
+        case PROFILE_USER_ID_REQUEST:
         case PROFILE_LIST_REQUEST:
             return {
                 ...state,
@@ -89,12 +94,28 @@ const profilesReducer = (state = profiles_initial_state, action) => {
                 list: payload.profiles,
                 error: null
             }
+        
+        case PROFILE_USER_ID_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                single: payload.profile,
+                error: null
+            }
 
         case PROFILE_LIST_ERROR:
             return {
                 ...state,
                 loading: false,
                 list: null,
+                error: payload,
+            }
+        
+        case PROFILE_USER_ID_ERROR:
+            return {
+                ...state,
+                loading: false,
+                single: null,
                 error: payload,
             }
 

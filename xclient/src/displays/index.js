@@ -2,7 +2,7 @@ import LandingDisplay from "./publicDisplays/LandingDisplay";
 import RegisterDisplay from "./publicDisplays/RegisterDisplay";
 import LoginDisplay from "./publicDisplays/LoginDisplay";
 import ProfilesDisplay from "./publicDisplays/ProfilesDisplay";
-// import SingleProfileDisplay from "./publicDisplays/SingleProfileDisplay";
+import SingleProfileDisplay from "./publicDisplays/SingleProfileDisplay";
 
 import PrivateRoute from "./privateDisplays/PrivateRoute";
 import DashboardDisplay from "./privateDisplays/DashboardDisplay";
@@ -24,6 +24,6 @@ export {
     AddEducationDisplay,
     AddExperienceDisplay,
     ProfilesDisplay,
-    // SingleProfileDisplay,
+    SingleProfileDisplay,
     // PostsDisplay,
 };

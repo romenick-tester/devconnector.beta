@@ -1,32 +1,32 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-//import { useDispatch, useSelector } from "react-redux";
-import { About, Edu, Exp, Repos, Header } from "../components";
+import { useDispatch, useSelector } from "react-redux";
+import { About, Edu, Exp, Repos, Header, Loader } from "../../components";
+import { setAlert, getProfileById } from '../../manager';
 
 function SingleProfileDisplay({ match }) {
-    const loading = false;
-    const error = false;
-    const profile = {};
-
     const userId = match.params.id;
 
     const dispatch = useDispatch();
+    const profiles = useSelector(state => state.profiles);
+    const { loading, error, single: profile } = profiles;
 
     useEffect(() => {
-        //dispatch(getUserProfileById(userId))
+        dispatch(getProfileById(userId))
     }, [userId, dispatch]);
 
     if (loading) {
-        return <h4>Loading...</h4>
+        return <Loader />
     }
 
     if (error) {
-        return <h4>Error...</h4>
+        dispatch(setAlert("danger", error));
+        return <h4>{error}</h4>
     }
 
     const {
         bio = "", company = "", education = [], experience = [], githubusername = "",
-        location = "", skills = [], social = {}, website = "", status = "", user = {} } = profile;
+        location = "", skills = [], social = {}, website = "", status = "", user = {} } = profile ? profile : {};
     
     const header = { status, company, location };
 

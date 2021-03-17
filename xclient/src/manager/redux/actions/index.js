@@ -11,6 +11,7 @@ import {
     addEducation,
     addExperience,
     getAllProfiles,
+    getProfileById,
 } from "./profileActions";
 
 export {
@@ -24,4 +25,5 @@ export {
     addEducation,
     addExperience,
     getAllProfiles,
+    getProfileById,
 };

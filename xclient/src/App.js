@@ -13,7 +13,7 @@ import {
     AddExperienceDisplay,
     EditProfileDisplay,
     ProfilesDisplay,
-    // SingleProfileDisplay,
+    SingleProfileDisplay,
     // PostsDisplay,
 } from "./displays";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,7 +44,7 @@ function App() {
                     <PrivateRoute path="/add-experience" component={AddExperienceDisplay} />
                     <PrivateRoute path="/create-profile" component={CreateProfileDisplay} />
                     <PrivateRoute path="/dashboard" component={DashboardDisplay} />
-                    {/* <Route path="/profile/:id" component={SingleProfileDisplay} /> */}
+                    <Route path="/profile/:id" component={SingleProfileDisplay} />
                     <Route path="/profiles" component={ProfilesDisplay} />
                     <Route path="/register" component={RegisterDisplay} />
                     <Route path="/login" component={LoginDisplay} />

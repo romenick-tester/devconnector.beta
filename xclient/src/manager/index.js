@@ -11,6 +11,7 @@ import {
     addEducation,
     addExperience,
     getAllProfiles,
+    getProfileById,
 } from "./redux/actions";
 
 export {
@@ -26,4 +27,5 @@ export {
     addEducation,
     addExperience,
     getAllProfiles,
+    getProfileById,
 };

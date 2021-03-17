@@ -27,7 +27,7 @@ router
     .delete(auth, deleteUserProfile);
 
 router
-    .route("/user/:user_id")
+    .route("/user")
     .get(getUserProfileByID);
 
 router
