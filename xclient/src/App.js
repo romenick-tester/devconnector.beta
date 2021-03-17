@@ -11,7 +11,7 @@ import {
     CreateProfileDisplay,
     AddEducationDisplay,
     AddExperienceDisplay,
-    // EditProfileDisplay,
+    EditProfileDisplay,
     // SingleProfileDisplay,
     // ProfilesDisplay,
     // PostsDisplay,
@@ -39,7 +39,7 @@ function App() {
                 <Alert />
                 <Switch>
                     {/* <PrivateRoute path="/posts" component={PostsDisplay} /> */}
-                    {/* <PrivateRoute path="/edit-profile" component={EditProfileDisplay} /> */}
+                    <PrivateRoute path="/edit-profile" component={EditProfileDisplay} />
                     <PrivateRoute path="/add-education" component={AddEducationDisplay} />
                     <PrivateRoute path="/add-experience" component={AddExperienceDisplay} />
                     <PrivateRoute path="/create-profile" component={CreateProfileDisplay} />

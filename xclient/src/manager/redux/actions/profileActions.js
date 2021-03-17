@@ -28,7 +28,7 @@ export const getProfile = () => async (dispatch, getState) => {
         dispatch({ type: PROFILE_USER_SUCCESS, payload: data });
 
     } catch (error) {
-        const errors = error.response && error.response.data.errors ? error.response.data.errors : error.message;
+        const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
 
         dispatch({
             type: PROFILE_USER_ERROR,
@@ -41,7 +41,27 @@ export const createProfile = (form, history, edit = false) => async (dispatch, g
     dispatch({ type: PROFILE_CREATE_REQUEST });
 
     try {
-        const body = JSON.stringify(form);
+        let body;
+
+        if (edit) {
+            const formatForm = {
+                company: form._company,
+                website: form._website,
+                location: form._location,
+                status: form._status,
+                skills: form._skills,
+                bio: form._bio,
+                githubusername: form._githubusername,
+                youtube: form._youtube,
+                twitter: form._twitter,
+                facebook: form._facebook,
+                linkedin: form._linkedin,
+                instagram: form._instagram
+            }
+            body = JSON.stringify(formatForm);
+        } else {
+            body = JSON.stringify(form);
+        }
 
         const { auth: { token } } = getState();
 
@@ -56,12 +76,15 @@ export const createProfile = (form, history, edit = false) => async (dispatch, g
 
         dispatch({ type: PROFILE_CREATE_SUCCESS, payload: data });
 
+        dispatch(setAlert("success", "Updated profile!"))
+
         if (!edit) {
+            dispatch(setAlert("success", "Created profile!"))
             history.push("/dashboard");
         }
 
     } catch (error) {
-        const errors = error.response && error.response.data.errors ? error.response.data.errors : error.message;
+        const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
 
         if (errors) {
             errors.map((err) => dispatch(setAlert("danger", err.msg)));
