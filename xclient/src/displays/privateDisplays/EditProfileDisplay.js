@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaUser, FaTwitter, FaFacebook, FaLinkedin, FaYoutube, FaInstagram } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { createProfile } from "../../manager";
 import { Link } from "react-router-dom";
@@ -6,12 +7,12 @@ import { Link } from "react-router-dom";
 function EditProfileDisplay({ history }) {
     const [show, setShow] = useState(false);
 
-    const profile = useSelector(state => state.profile);
-    const { loading, privateProfile: profiling } = profile;
+    const profileDetails = useSelector(state => state.profile);
+    const { details } = profileDetails;
 
     const {
         company = "", website = "", location = "", status = "", skills = [],
-        bio = "", githubusername = "", social = {} } = profiling ? profiling : {};
+        bio = "", githubusername = "", social = {} } = details ? details : {};
 
     const { youtube = "", twitter = "", facebook = "", linkedin = "", instagram = "" } = social;
 
@@ -41,11 +42,10 @@ function EditProfileDisplay({ history }) {
         <>
             <h1 className="large text-primary">
                 Create Your Profile
-      </h1>
+            </h1>
             <p className="lead">
-                <i className="fas fa-user"></i> Let's get some information to make your
-        profile stand out
-      </p>
+                <FaUser /> Let's get some information to make your profile stand out
+            </p>
             <small>* = required field</small>
             <form className="form" onSubmit={(e) => onSubmitHandler(e)}>
                 <div className="form-group">
@@ -66,24 +66,20 @@ function EditProfileDisplay({ history }) {
                 </div>
                 <div className="form-group">
                     <input type="text" placeholder="Company" name="_company" value={_company} onChange={(e) => onChangeHandler(e)} />
-                    <small className="form-text">
-                        Could be your own company or one you work for</small>
+                    <small className="form-text">Could be your own company or one you work for</small>
                 </div>
                 <div className="form-group">
                     <input type="text" placeholder="Website" name="_website" value={_website} onChange={(e) => onChangeHandler(e)} />
-                    <small className="form-text">
-                        Could be your own or a company website</small>
+                    <small className="form-text">Could be your own or a company website</small>
                 </div>
                 <div className="form-group">
                     <input type="text" placeholder="Location" name="_location" value={_location} onChange={(e) => onChangeHandler(e)} />
-                    <small className="form-text">
-                        City & state suggested (eg. Boston, MA)</small>
+                    <small className="form-text">City & state suggested (eg. Boston, MA)</small>
 
                 </div>
                 <div className="form-group">
                     <input type="text" placeholder="* Skills" name="_skills" value={_skills} onChange={(e) => onChangeHandler(e)} />
-                    <small className="form-text">
-                        Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)</small>
+                    <small className="form-text">Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)</small>
                 </div>
                 <div className="form-group">
                     <input
@@ -91,8 +87,7 @@ function EditProfileDisplay({ history }) {
                         placeholder="Github Username"
                         name="_githubusername" value={_githubusername} onChange={(e) => onChangeHandler(e)}
                     />
-                    <small className="form-text">
-                        If you want your latest repos and a Github link, include your username</small>
+                    <small className="form-text">If you want your latest repos and a Github link, include your username</small>
                 </div>
                 <div className="form-group">
                     <textarea placeholder="A short bio of yourself" name="_bio" value={_bio} onChange={(e) => onChangeHandler(e)}></textarea>
@@ -108,27 +103,27 @@ function EditProfileDisplay({ history }) {
                 {show && (
                     <>
                         <div className="form-group social-input">
-                            <i className="fab fa-twitter fa-2x"></i>
+                            <FaTwitter />
                             <input type="text" placeholder="Twitter URL" name="_twitter" value={_twitter} onChange={(e) => onChangeHandler(e)} />
                         </div>
 
                         <div className="form-group social-input">
-                            <i className="fab fa-facebook fa-2x"></i>
+                            <FaFacebook />
                             <input type="text" placeholder="Facebook URL" name="_facebook" value={_facebook} onChange={(e) => onChangeHandler(e)} />
                         </div>
 
                         <div className="form-group social-input">
-                            <i className="fab fa-youtube fa-2x"></i>
+                            <FaYoutube />
                             <input type="text" placeholder="YouTube URL" name="_youtube" value={_youtube} onChange={(e) => onChangeHandler(e)} />
                         </div>
 
                         <div className="form-group social-input">
-                            <i className="fab fa-linkedin fa-2x"></i>
+                            <FaLinkedin />
                             <input type="text" placeholder="Linkedin URL" name="_linkedin" value={_linkedin} onChange={(e) => onChangeHandler(e)} />
                         </div>
 
                         <div className="form-group social-input">
-                            <i className="fab fa-instagram fa-2x"></i>
+                            <FaInstagram />
                             <input type="text" placeholder="Instagram URL" name="_instagram" value={_instagram} onChange={(e) => onChangeHandler(e)} />
                         </div>
                     </>

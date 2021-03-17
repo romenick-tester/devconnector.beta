@@ -10,6 +10,7 @@ import {
     createProfile, 
     addEducation,
     addExperience,
+    getAllProfiles,
 } from "./profileActions";
 
 export {
@@ -22,4 +23,5 @@ export {
     createProfile, 
     addEducation,
     addExperience,
+    getAllProfiles,
 };

@@ -1,7 +1,7 @@
 import LandingDisplay from "./publicDisplays/LandingDisplay";
 import RegisterDisplay from "./publicDisplays/RegisterDisplay";
 import LoginDisplay from "./publicDisplays/LoginDisplay";
-// import ProfilesDisplay from "./publicDisplays/ProfilesDisplay";
+import ProfilesDisplay from "./publicDisplays/ProfilesDisplay";
 // import SingleProfileDisplay from "./publicDisplays/SingleProfileDisplay";
 
 import PrivateRoute from "./privateDisplays/PrivateRoute";
@@ -23,7 +23,7 @@ export {
     EditProfileDisplay,
     AddEducationDisplay,
     AddExperienceDisplay,
-    // ProfilesDisplay,
+    ProfilesDisplay,
     // SingleProfileDisplay,
     // PostsDisplay,
 };

@@ -8,16 +8,18 @@ import {
     PROFILE_CREATE_ERROR,
     PROFILE_ADD_EDUCATION,
     PROFILE_ADD_EXPERIENCE,
+    PROFILE_LIST_REQUEST,
+    PROFILE_LIST_SUCCESS,
+    PROFILE_LIST_ERROR,
 } from "../constants/profileConstants";
 
-const initialState = {
+const profile_initial_state = {
     loading: false,
     error: null,
-    privateProfile: null,
-    publicProfile: null,
+    details: null,
 }
 
-const profileReducer = (state = initialState, action) => {
+const profileReducer = (state = profile_initial_state, action) => {
     const { type, payload } = action;
 
     switch (type) {
@@ -36,7 +38,7 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                privateProfile: payload.profile,
+                details: payload.profile,
                 error: null
             }
 
@@ -45,8 +47,7 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                privateProfile: null,
-                publicProfile: null,
+                details: null,
                 error: payload,
             }
 
@@ -54,8 +55,7 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                privateProfile: null,
-                publicProfile: null,
+                details: null,
                 error: null,
             }
 
@@ -64,4 +64,43 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 
-export default profileReducer;
+const profiles_initial_state = {
+    loading: false,
+    error: null,
+    list: null,
+    repos: null,
+}
+
+const profilesReducer = (state = profiles_initial_state, action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+
+        case PROFILE_LIST_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case PROFILE_LIST_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                list: payload.profiles,
+                error: null
+            }
+
+        case PROFILE_LIST_ERROR:
+            return {
+                ...state,
+                loading: false,
+                list: null,
+                error: payload,
+            }
+
+        default:
+            return state;
+    }
+};
+
+export { profileReducer, profilesReducer };

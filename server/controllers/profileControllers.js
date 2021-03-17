@@ -199,7 +199,7 @@ const getAllProfiles = async(req,res) => {
 //access:       private  
 const getUserProfileByID = async(req,res) => {
     try {
-        const profile = await Profile.findOne({ user: req.params.user_id }).populate("user", ["name", "avatar"]);
+        const profile = await Profile.findOne({ user: req.query.id }).populate("user", ["name", "avatar"]);
     
         if(!profile) {
             res.status(400).json({ errors: [{ msg: "No profile found!" }] });

@@ -8,8 +8,29 @@ import {
     PROFILE_CREATE_ERROR,
     PROFILE_ADD_EDUCATION,
     PROFILE_ADD_EXPERIENCE,
+    PROFILE_LIST_REQUEST,
+    PROFILE_LIST_SUCCESS,
+    PROFILE_LIST_ERROR,
 } from "../constants/profileConstants";
 import setAlert from "./alertActions";
+
+export const getAllProfiles = () => async (dispatch) => {
+    dispatch({ type: PROFILE_LIST_REQUEST });
+
+    try {
+        const { data } = await axios.get("/api/profile");
+
+        dispatch({ type: PROFILE_LIST_SUCCESS, payload: data });
+
+    } catch (error) {
+        const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
+
+        dispatch({
+            type: PROFILE_LIST_ERROR,
+            payload: errors ? errors.map((err) => err[0].msg) : error.message
+        })
+    }
+};
 
 export const getProfile = () => async (dispatch, getState) => {
     dispatch({ type: PROFILE_USER_REQUEST });
@@ -32,7 +53,7 @@ export const getProfile = () => async (dispatch, getState) => {
 
         dispatch({
             type: PROFILE_USER_ERROR,
-            payload: errors ? errors.map((err) => err.msg) : error.message
+            payload: errors ? errors.map((err) => err[0].msg) : error.message
         })
     }
 };
@@ -92,7 +113,7 @@ export const createProfile = (form, history, edit = false) => async (dispatch, g
         
         dispatch({
             type: PROFILE_CREATE_ERROR,
-            payload: errors ? errors.map((err) => err.msg) : error.message[0]
+            payload: errors ? errors.map((err) => err[0].msg) : error.message
         })
     }
 };
