@@ -35,7 +35,7 @@ export const getRepos = (username) => async (dispatch) => {
 
         dispatch({
             type: PROFILE_REPOS_ERROR,
-            payload: errors ? errors.map((err) => err.msg)[0] : error.message
+            payload: errors && errors.map((err) => err.msg)[0]
         })
     }
 };

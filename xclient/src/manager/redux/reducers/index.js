@@ -4,10 +4,12 @@ import {
     profileReducer,
     profilesReducer,
 } from "./profileReducers";
+import postsReducer from "./postReducers";
 
 export {
     alertReducer,
     authReducer,
     profileReducer,
     profilesReducer,
+    postsReducer,
 }

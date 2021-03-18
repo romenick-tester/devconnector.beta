@@ -14,15 +14,14 @@ import {
     EditProfileDisplay,
     ProfilesDisplay,
     SingleProfileDisplay,
-    // PostsDisplay,
+    PostsDisplay,
+    NotFoundDisplay,
 } from "./displays";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./manager";
-import {
-    PROFILE_USER_ID_CLEAR,
-} from "./manager/redux/constants/profileConstants";
+//import { PROFILE_USER_ID_CLEAR } from "./manager/redux/constants/profileConstants";
 
-function App({ location }) {
+function App() {
 
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
@@ -34,11 +33,11 @@ function App({ location }) {
         }
     }, [dispatch, loading, authenticated])
 
-    useEffect(() => {
-        if (!location.search && location.search !== "?clear") {
-            dispatch({ type: PROFILE_USER_ID_CLEAR });
-        } 
-    }, [location.search]);
+    // useEffect(() => {
+    //     if (!location.search && location.search !== "?clear") {
+    //         dispatch({ type: PROFILE_USER_ID_CLEAR });
+    //     } 
+    // }, [location.search]);
 
     return (
         <>
@@ -47,7 +46,7 @@ function App({ location }) {
             <Main className="container">
                 <Alert />
                 <Switch>
-                    {/* <PrivateRoute path="/posts" component={PostsDisplay} /> */}
+                    <PrivateRoute path="/posts" component={PostsDisplay} />
                     <PrivateRoute path="/edit-profile" component={EditProfileDisplay} />
                     <PrivateRoute path="/add-education" component={AddEducationDisplay} />
                     <PrivateRoute path="/add-experience" component={AddExperienceDisplay} />
@@ -57,6 +56,7 @@ function App({ location }) {
                     <Route path="/profiles" component={ProfilesDisplay} />
                     <Route path="/register" component={RegisterDisplay} />
                     <Route path="/login" component={LoginDisplay} />
+                    <Route path="*" component={NotFoundDisplay} />
                 </Switch>
             </Main>
         </>

@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import { alertReducer, authReducer, profileReducer, profilesReducer } from "./reducers";
+import { alertReducer, authReducer, profileReducer, profilesReducer, postsReducer } from "./reducers";
 
 const tokenFromStorage = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
 
@@ -10,6 +10,7 @@ const reducers = combineReducers({
     auth: authReducer,
     profile: profileReducer,
     profiles: profilesReducer,
+    posts: postsReducer,
 });
 
 const initialState = {

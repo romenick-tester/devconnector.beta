@@ -1,7 +1,7 @@
 import Navbar from "./Navbar";
 import Alert from "./Alert";
 import Loader from "./Loader";
-import { PostItem } from "./postsdisplay";
+import { Posts } from "./postsdisplay";
 import { About, Edu, Exp, Repos, Header } from "./singleprofiledisplay";
 import {
     DashboardEducation,
@@ -19,7 +19,7 @@ import {
 
 export {
     Navbar, Alert, Loader,
-    About, Edu, Exp, Repos, Header, PostItem,
+    About, Edu, Exp, Repos, Header, Posts,
     DashboardEducation,
     DashboardExperience,
     DashboardEduItem,

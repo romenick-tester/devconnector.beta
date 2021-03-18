@@ -1,13 +1,12 @@
 import React from 'react';
-import { FaThumbsUp, FaThumbsDown, FaTrash } from "react-icons/fa"
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { FaThumbsUp, FaThumbsDown, FaTrash } from "react-icons/fa"
 
-function PostItem({ post }) {
-    const { _id, text, name, avatar, user: postUser, likes, comments, date } = post;
+function PostsItem({ post, likeHandler }) {
+    const { _id, avatar, name, text, date, comments, likes, user } = post;
 
-    const user = useSelector(state => state.user);
-    const { info } = user;
+    const { user: subject = {} } = useSelector(state => state.auth);
 
     return (
         <div className="post bg-white p-1 my-1">
@@ -28,7 +27,7 @@ function PostItem({ post }) {
                 <p className="post-date">
                     Posted on {date.slice(0, 10)}
                 </p>
-                <button type="button" className="btn btn-light">
+                <button type="button" className="btn btn-light" onClick={() => likeHandler(_id)}>
                     <FaThumbsUp />{" "}
                     {likes.length > 0 && (
                         <span>{likes.length}</span>
@@ -37,13 +36,13 @@ function PostItem({ post }) {
                 <button type="button" className="btn btn-light">
                     <FaThumbsDown />{" "}
                 </button>
-                <Link to={`/post?id=${_id}`} className="btn btn-primary">
+                <Link to={`/post/${_id}`} className="btn btn-primary">
                     Discussion {" "}
                     {comments.length > 0 && (
                         <span className='comment-count'>{comments.length}</span>
                     )}
                 </Link>
-                {postUser === info._id && (
+                {user === subject._id && (
                     <button type="button" className="btn btn-danger">
                         <FaTrash />
                     </button>
@@ -53,4 +52,4 @@ function PostItem({ post }) {
     )
 }
 
-export default PostItem;
+export default PostsItem;

@@ -3,6 +3,7 @@ import LoginDisplay from "./LoginDisplay"
 import ProfileDisplay from "./ProfilesDisplay"
 import RegisterDisplay from "./RegisterDisplay"
 import SingleProfileDisplay from "./SingleProfileDisplay"
+import NotFoundDisplay from "./NotFoundDisplay"
 
 export {
     LandingDisplay,
@@ -10,4 +11,5 @@ export {
     ProfileDisplay,
     RegisterDisplay,
     SingleProfileDisplay,
+    NotFoundDisplay,
 }

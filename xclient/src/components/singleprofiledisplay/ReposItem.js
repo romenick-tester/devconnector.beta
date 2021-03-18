@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BiGitRepoForked } from "react-icons/bi";
 import { FaEye, FaStar } from "react-icons/fa";
 
 const ReposItem = ({ project, index }) => {
-    const [show, setShow] = React.useState(false);
+    const [show, setShow] = useState(false);
+
     const { html_url: url, name, forks_count, watchers_count, stargazers_count, description } = project;
 
     return (

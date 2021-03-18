@@ -16,6 +16,8 @@ import {
     getAllProfiles,
     getProfileById,
     getRepos,
+    getPosts,
+    likePost
 } from "./redux/actions";
 
 export {
@@ -36,4 +38,6 @@ export {
     getAllProfiles,
     getProfileById,
     getRepos,
+    getPosts,
+    likePost
 };

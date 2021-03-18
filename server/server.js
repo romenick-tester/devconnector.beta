@@ -7,7 +7,7 @@ const app = express();
 connectDB();
 dotenv.config();
 
-app.use(express.json({ extended: false }));
+app.use(express.json({ extended: true }));
 
 app.get("/", (req,res) => res.send("root route"));
 app.use("/api/users", usersRoutes);

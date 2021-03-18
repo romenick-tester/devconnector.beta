@@ -38,10 +38,13 @@ const getAllPosts = async(req,res) => {
     try {
         const posts = await Post.find({}).sort({ date: -1 }).limit(5);
 
-        res.json(posts);
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).send("server error");
+        if (!posts) {
+            return res.status(404).json({ errors: [{ msg: "There are no posts!" }] });
+        }
+
+        res.status(200).json({ posts });
+    } catch (err) {
+        res.status(500).json({ errors: [{ msg: err.message }] });
     }
 };
 
@@ -104,7 +107,7 @@ const likePost = async(req,res) => {
         const likes = post.likes.filter((like) => String(like.user) === req.user.id);
 
         if(likes.length > 0) {
-            return res.status(400).json({ msg: "You already liked this post." })
+            return res.status(400).json({ errors: [{ msg: "You already liked this post." }] })
         }
 
         post.likes.unshift({ user: req.user.id });

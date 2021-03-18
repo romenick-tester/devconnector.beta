@@ -15,6 +15,7 @@ import {
 } from "../constants/profileConstants";
 import setAlert from "./alertActions";
 
+
 export const loadUser = () => async (dispatch, getState) => {
     try {
         const { auth: { token } } = getState();
@@ -29,15 +30,18 @@ export const loadUser = () => async (dispatch, getState) => {
 
         dispatch({ type: AUTH_LOAD_USER, payload: data });
 
-    } catch (error) {
-        const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
+    } catch (err) {
+        const errors = err.response && err.response.data.errors ? err.response.data.errors : [{ msg: err.message }];
+
+        errors.map((error) => dispatch(setAlert("danger", error.msg)));
 
         dispatch({
             type: AUTH_LOAD_ERROR,
-            payload: errors ? errors.map((err) => err.msg)[0] : error.message
+            payload: errors && errors.map((error) => error.msg)[0]
         })
     }
 }
+
 
 export const register = (form) => async (dispatch) => {
     dispatch({ type: AUTH_REGISTER_REQUEST });
@@ -60,13 +64,15 @@ export const register = (form) => async (dispatch) => {
     } catch (err) {
         const errors = err.response && err.response.data.errors ? err.response.data.errors : [{ msg: err.message }];
 
-        if (errors) {
-            errors.map((error) => dispatch(setAlert("danger", error.msg)));
-        }
+        errors.map((error) => dispatch(setAlert("danger", error.msg)));
 
-        dispatch({ type: AUTH_REGISTER_ERROR, payload: err.message });
+        dispatch({
+            type: AUTH_REGISTER_ERROR,
+            payload: errors && errors.map((error) => error.msg)[0]
+        });
     }
 };
+
 
 export const login = (form) => async (dispatch) => {
     dispatch({ type: AUTH_LOGIN_REQUEST });
@@ -87,13 +93,15 @@ export const login = (form) => async (dispatch) => {
     } catch (err) {
         const errors = err.response && err.response.data.errors ? err.response.data.errors : [{ msg: err.message }];
 
-        if (errors) {
-            errors.map((error) => dispatch(setAlert("danger", error.msg)));
-        }
+        errors.map((error) => dispatch(setAlert("danger", error.msg)));
 
-        dispatch({ type: AUTH_LOGIN_ERROR, payload: err.message });
+        dispatch({
+            type: AUTH_LOGIN_ERROR,
+            payload: errors && errors.map((error) => error.msg)[0]
+        });
     }
 };
+
 
 export const logout = () => (dispatch) => {
     dispatch({ type: PROFILE_CLEAR_USER });
