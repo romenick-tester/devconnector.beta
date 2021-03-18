@@ -3,6 +3,9 @@ import {
     GET_POSTS_REQUEST,
     GET_POSTS_SUCCESS,
     GET_POSTS_ERROR,
+    GET_POST_REQUEST,
+    GET_POST_SUCCESS,
+    GET_POST_ERROR,
     LIKE_POST,
     UNLIKE_POST,
 } from "../constants/postConstants";
@@ -88,6 +91,32 @@ export const getPosts = () => async (dispatch) => {
 
         dispatch({
             type: GET_POSTS_ERROR,
+            payload: errors && errors.map((err) => err.msg)[0]
+        })
+    }
+}
+
+export const getPostById = (id) => async (dispatch, getState) => {
+    dispatch({ type: GET_POST_REQUEST });
+
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const { data } = await axios.get(`/api/posts/${id}`, config);
+
+        dispatch({ type: GET_POST_SUCCESS, payload: data });
+
+    } catch (error) {
+        const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
+
+        dispatch({
+            type: GET_POST_ERROR,
             payload: errors && errors.map((err) => err.msg)[0]
         })
     }

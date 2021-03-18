@@ -20,6 +20,7 @@ import {
     likePost,
     unlikePost, 
     deletePost,
+    getPostById,
 } from "./redux/actions";
 
 export {
@@ -44,4 +45,5 @@ export {
     likePost,
     unlikePost, 
     deletePost,
+    getPostById,
 };

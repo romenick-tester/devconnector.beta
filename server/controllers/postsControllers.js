@@ -56,16 +56,15 @@ const getSinglePost = async(req,res) => {
         const post = await Post.findOne({_id: req.params.post_id});
 
         if(!post) {
-            return res.status(404).json({ errors: [{ msg: "No post found!" }] });
+            return res.status(404).json({ errors: [{ msg: "Post not found!" }] });
         }
 
-        res.json(post);
+        res.json({ post });
     } catch (error) {
-        console.error(error.message);
         if(error.kind === "ObjectId") {
-            return res.status(404).json({ errors: [{ msg: "No post found!" }] });
+            return res.status(404).json({ errors: [{ msg: "Post not found!" }] });
         }
-        res.status(500).send("server error");
+        res.status(500).json({ errors: [{ msg: error.message }] })
     }
 };
 
@@ -77,7 +76,7 @@ const deletePost = async(req,res) => {
         const post = await Post.findById(req.params.post_id);
 
         if(!post) {
-            return res.status(404).json({ errors: [{ msg: "No post found!" }] });
+            return res.status(404).json({ errors: [{ msg: "Post not found!" }] });
         }
 
         //check user 
@@ -92,7 +91,7 @@ const deletePost = async(req,res) => {
         }
     } catch (err) {
         if (err.kind === "ObjectId") {
-            return res.status(404).json({ errors: [{ msg: "No post found!" }] });
+            return res.status(404).json({ errors: [{ msg: "Post not found!" }] });
         } else {
             return res.status(500).json({ errors: [{ msg: err.message }] });
         }

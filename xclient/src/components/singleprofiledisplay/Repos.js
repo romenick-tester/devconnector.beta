@@ -9,10 +9,12 @@ function GithubRepos({ githubusername }) {
 
     const dispatch = useDispatch();
     const profiles = useSelector(state => state.profiles);
-    const { loading, error, repos } = profiles;
+    const { loading, repos } = profiles;
 
     useEffect(() => {
-        dispatch(getRepos(githubusername));
+        if (githubusername) {
+            dispatch(getRepos(githubusername));
+        }
     }, [dispatch, githubusername])
 
     if (loading) {
@@ -21,12 +23,15 @@ function GithubRepos({ githubusername }) {
 
     return (
         <div className="profile-github">
+
             <h2 className="text-primary my-1">
+
                 <FaGithub />{" "}
-                {error ? error : "Github Repos"}
+
                 (<a href={`https://github.com/${githubusername}`} target="_blank" rel="noopener noreferrer">
                     {githubusername}
                 </a>)
+
             </h2>
             {repos && repos.sort((a, b) => b.size - a.size).slice(0, 3).map((item, index) => {
                 return <ReposItem key={index} project={item} index={index + 1} />
