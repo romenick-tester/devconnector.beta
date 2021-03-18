@@ -17,7 +17,8 @@ import {
     getProfileById,
     getRepos,
     getPosts,
-    likePost
+    likePost,
+    unlikePost,
 } from "./redux/actions";
 
 export {
@@ -39,5 +40,6 @@ export {
     getProfileById,
     getRepos,
     getPosts,
-    likePost
+    likePost,
+    unlikePost,
 };

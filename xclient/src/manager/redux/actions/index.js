@@ -17,7 +17,7 @@ import {
     getProfileById,
     getRepos,
 } from "./profileActions";
-import { getPosts, likePost } from "./postActions";
+import { getPosts, likePost, unlikePost } from "./postActions";
 
 export {
     setAlert,
@@ -36,5 +36,6 @@ export {
     getProfileById,
     getRepos,
     getPosts,
-    likePost
+    likePost,
+    unlikePost,
 };

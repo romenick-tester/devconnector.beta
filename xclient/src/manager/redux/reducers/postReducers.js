@@ -4,6 +4,7 @@ import {
     GET_POSTS_ERROR,
     CLEAR_ALL_POSTS,
     LIKE_POST,
+    UNLIKE_POST,
 } from "../constants/postConstants";
 
 const initialState = {
@@ -33,6 +34,14 @@ const postsReducer = (state = initialState, action) => {
             }
 
         case LIKE_POST:
+            return {
+                ...state,
+                loading: false,
+                postsList: state.postsList.map((post) => post._id === payload.id ? { ...post, likes: payload.likes } : post),
+                error: null,
+            }
+
+        case UNLIKE_POST:
             return {
                 ...state,
                 loading: false,
