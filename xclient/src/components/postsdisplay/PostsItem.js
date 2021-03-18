@@ -36,7 +36,7 @@ function PostsItem({ post, likeHandler, unlikeHandler, deleteHandler }) {
                 <button type="button" className="btn btn-light" onClick={() => unlikeHandler(_id)}>
                     <FaThumbsDown />{" "}
                 </button>
-                <Link to={`/post/${_id}`} className="btn btn-primary">
+                <Link to={`/post?id=${_id}`} className="btn btn-primary">
                     Discussion {" "}
                     {comments.length > 0 && (
                         <span className='comment-count'>{comments.length}</span>

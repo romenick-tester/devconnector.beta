@@ -12,6 +12,7 @@ import EditProfileDisplay from "./privateDisplays/EditProfileDisplay";
 import AddEducationDisplay from "./privateDisplays/AddEducationDisplay";
 import AddExperienceDisplay from "./privateDisplays/AddExperienceDisplay";
 import PostsDisplay from "./privateDisplays/PostsDisplay";
+import SinglePostDisplay from "./privateDisplays/SinglePostDisplay";
 
 
 export {
@@ -28,4 +29,5 @@ export {
     SingleProfileDisplay,
     PostsDisplay,
     NotFoundDisplay,
+    SinglePostDisplay,
 };

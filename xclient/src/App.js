@@ -15,6 +15,7 @@ import {
     ProfilesDisplay,
     SingleProfileDisplay,
     PostsDisplay,
+    SinglePostDisplay,
     NotFoundDisplay,
 } from "./displays";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,6 +47,7 @@ function App() {
             <Main className="container">
                 <Alert />
                 <Switch>
+                    <PrivateRoute path="/post" component={SinglePostDisplay} />
                     <PrivateRoute path="/posts" component={PostsDisplay} />
                     <PrivateRoute path="/edit-profile" component={EditProfileDisplay} />
                     <PrivateRoute path="/add-education" component={AddEducationDisplay} />
