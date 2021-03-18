@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import Social from "./SocialLinks";
+import Social from "./sub-components/SocialLinks";
 
 function Header({ user, social, website, company, status, location }) {
 

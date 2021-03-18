@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import EduItem from "./EducationItem";
+import EduItem from "./sub-components/EducationItem";
 
 function Education({ education }) {
     return (

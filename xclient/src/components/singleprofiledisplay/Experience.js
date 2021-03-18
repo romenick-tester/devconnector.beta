@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import ExpItem from "./ExperienceItem";
+import ExpItem from "./sub-components/ExperienceItem";
 
 function Experience({ experience }) {
 

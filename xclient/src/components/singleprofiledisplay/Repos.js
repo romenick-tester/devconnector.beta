@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getRepos } from "../../manager";
 import { FaGithub } from "react-icons/fa";
-import ReposItem from "./ReposItem";
+import ReposItem from "./sub-components/ReposItem";
 import Loader from "../Loader";
 
 function GithubRepos({ githubusername }) {
