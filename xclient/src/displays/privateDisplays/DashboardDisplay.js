@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { FaUser, FaUserEdit, FaUserCircle, FaUserGraduate, FaBlackTie, FaUserMinus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfile, setAlert } from "../../manager";
+import { getProfile, deleteProfile } from "../../manager";
 import { DashboardEducation, DashboardExperience, Loader } from "../../components";
 
 function DashboardDisplay() {
@@ -43,21 +43,20 @@ function DashboardDisplay() {
 
     const { education = [], experience = [], user = {} } = details ? details : {};
 
-    // function deleteAccount() {
-    //     const isConfirmed = window.confirm("Are you sure you want to delete your account?");
+    function deleteAccount() {
+        const isConfirmed = window.confirm("Are you sure you want to delete your account?");
 
-    //     if (isConfirmed) {
-    //         setTimeout(async () => {
-    //             const isForSure = window.confirm("Final check ?");
+        if (isConfirmed) {
+            setTimeout(async () => {
+                const isForSure = window.confirm("Final check ?");
 
-    //             if (isForSure) {
-    //                 console.log("deleted!");
-    //                 //dispatch(deleteProfile());
-    //             }
-    //         }, 1500);
+                if (isForSure) {
+                    dispatch(deleteProfile());
+                }
+            }, 1500);
 
-    //     }
-    // }
+        }
+    }
 
     return (
         <>
@@ -92,7 +91,7 @@ function DashboardDisplay() {
                     <DashboardExperience experience={experience} />
 
                     <div className="my-2">
-                        <button className="btn btn-danger" /* onClick={() => deleteAccount()} */>
+                        <button className="btn btn-danger" onClick={() => deleteAccount()}>
                             <FaUserMinus /> Delete My Account
                         </button>
                     </div>

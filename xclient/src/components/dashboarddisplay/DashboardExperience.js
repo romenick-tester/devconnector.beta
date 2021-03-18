@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import { deleteExperience } from "../../manager";
 import DashboardExpItem from "./DashboardExperienceItem";
 
 function ProfileExperience({ experience: exp }) {
@@ -29,14 +30,13 @@ function ProfileExperience({ experience: exp }) {
         return <h3>Error...</h3>
     }
 
-    // function removeExp(id) {
-    //     const isConfirmed = window.confirm("You want to delete ?");
+    function removeExp(id) {
+        const isConfirmed = window.confirm("You want to delete ?");
 
-    //     if (isConfirmed) {
-    //         console.log("experience deleted!");
-    //         //dispatch(deleteProfileExperience(id));
-    //     }
-    // }
+        if (isConfirmed) {
+            dispatch(deleteExperience(id))
+        }
+    }
 
     return (
         <>
@@ -57,7 +57,7 @@ function ProfileExperience({ experience: exp }) {
                             return sortByFromDate;
                         })
                         .map((item = { _id: "" }) => {
-                            return <DashboardExpItem key={item._id} {...item} /* removeExp={removeExp} */ />
+                            return <DashboardExpItem key={item._id} {...item} removeExp={removeExp} />
                         })
                     }
                     {experience.length === 0 && (

@@ -1,6 +1,7 @@
 import React from 'react';
 
 function SingleExperience({ title, company, location, from, current, to, _id, removeExp }) {
+
     return (
         <tr>
             <td>{company}</td>

@@ -8,6 +8,8 @@ import {
     PROFILE_CREATE_ERROR,
     PROFILE_ADD_EDUCATION,
     PROFILE_ADD_EXPERIENCE,
+    PROFILE_DELETE_EDUCATION,
+    PROFILE_DELETE_EXPERIENCE,
     PROFILE_LIST_REQUEST,
     PROFILE_LIST_SUCCESS,
     PROFILE_LIST_ERROR,
@@ -15,7 +17,6 @@ import {
     PROFILE_USER_ID_SUCCESS,
     PROFILE_USER_ID_ERROR,
     PROFILE_USER_ID_CLEAR,
-    PROFILE_REPOS_REQUEST,
     PROFILE_REPOS_SUCCESS,
     PROFILE_REPOS_ERROR,
 } from "../constants/profileConstants";
@@ -38,6 +39,8 @@ const profileReducer = (state = profile_initial_state, action) => {
                 loading: true,
             }
 
+        case PROFILE_DELETE_EDUCATION:
+        case PROFILE_DELETE_EXPERIENCE:
         case PROFILE_ADD_EDUCATION:
         case PROFILE_ADD_EXPERIENCE:
         case PROFILE_CREATE_SUCCESS:
@@ -83,7 +86,6 @@ const profilesReducer = (state = profiles_initial_state, action) => {
     const { type, payload } = action;
 
     switch (type) {
-
         case PROFILE_USER_ID_REQUEST:
         case PROFILE_LIST_REQUEST:
             return {

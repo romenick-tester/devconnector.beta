@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
-//import { useDispatch } from "react-redux";
-//import { deleteProfileEducation } from "../manager";
+import { useDispatch } from "react-redux";
+import { deleteEducation } from "../../manager";
 import DashboardEduItem from "./DashboardEducationItem";
 
 function ProfileEducation({ education: edu }) {
@@ -9,7 +9,7 @@ function ProfileEducation({ education: edu }) {
     const [error, setError] = useState(false);
     const [education, setEducation] = useState([]);
 
-    //const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setLoading(true);
@@ -30,14 +30,13 @@ function ProfileEducation({ education: edu }) {
         return <h3>Error...</h3>
     }
 
-    // function removeEdu(id) {
-    //     const isConfirmed = window.confirm("You want to delete?");
+    function removeEdu(id) {
+        const isConfirmed = window.confirm("You want to delete?");
 
-    //     if (isConfirmed) {
-    //         console.log("education deleted!");
-    //         //dispatch(deleteProfileEducation(id));
-    //     }
-    // }
+        if (isConfirmed) {
+            dispatch(deleteEducation(id))
+        }
+    }
 
     return (
         <>
@@ -58,7 +57,7 @@ function ProfileEducation({ education: edu }) {
                             return sortByFromDate;
                         })
                         .map((item = { _id: "" }) => {
-                            return <DashboardEduItem key={item._id} {...item} /* removeEdu={removeEdu} */ />
+                            return <DashboardEduItem key={item._id} {...item} removeEdu={removeEdu} />
                         })
                     }
                     {education.length === 0 && (

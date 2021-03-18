@@ -8,22 +8,23 @@ import {
     PROFILE_CREATE_ERROR,
     PROFILE_ADD_EDUCATION,
     PROFILE_ADD_EXPERIENCE,
+    PROFILE_DELETE_EDUCATION,
+    PROFILE_DELETE_EXPERIENCE,
+    PROFILE_DELETE,
     PROFILE_LIST_REQUEST,
     PROFILE_LIST_SUCCESS,
     PROFILE_LIST_ERROR,
     PROFILE_USER_ID_REQUEST,
     PROFILE_USER_ID_SUCCESS,
     PROFILE_USER_ID_ERROR,
-    PROFILE_REPOS_REQUEST,
     PROFILE_REPOS_SUCCESS,
     PROFILE_REPOS_ERROR,
 
 } from "../constants/profileConstants";
 import setAlert from "./alertActions";
+import { logout } from "./authActions";
 
 export const getRepos = (username) => async (dispatch) => {
-    dispatch({ type: PROFILE_REPOS_REQUEST });
-
     try {
         const { data } = await axios.get(`/api/profile/github?username=${username}`);
 
@@ -98,6 +99,29 @@ export const getProfile = () => async (dispatch, getState) => {
             type: PROFILE_USER_ERROR,
             payload: errors ? errors.map((err) => err.msg)[0] : error.message
         })
+    }
+};
+
+export const deleteProfile = () => async (dispatch, getState) => {
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const { data } = await axios.delete("/api/profile", config);
+
+        dispatch(setAlert("success", data.profile));
+
+        dispatch(logout());
+
+    } catch (error) {
+        const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
+
+        errors.map((err) => dispatch(setAlert("danger", err.msg)));
     }
 };
 
@@ -192,6 +216,34 @@ export const addEducation = (form, history) => async (dispatch, getState) => {
     }
 };
 
+export const deleteEducation = (id) => async (dispatch, getState) => {
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const { data } = await axios.delete(`/api/profile/education/${id}`, config);
+
+        dispatch({ type: PROFILE_DELETE_EDUCATION, payload: data });
+
+        dispatch(setAlert("success", "Education deleted!"))
+
+    } catch (error) {
+        const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
+
+        if (errors) {
+            errors.map((err) => dispatch(setAlert("danger", err.msg)));
+        }
+
+        console.error(error.message);
+    }
+};
+
 export const addExperience = (form, history) => async (dispatch, getState) => {
     try {
         const body = JSON.stringify(form);
@@ -212,6 +264,34 @@ export const addExperience = (form, history) => async (dispatch, getState) => {
         dispatch(setAlert("success", "Experience added!"))
 
         history.push("/dashboard");
+
+    } catch (error) {
+        const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
+
+        if (errors) {
+            errors.map((err) => dispatch(setAlert("danger", err.msg)));
+        }
+
+        console.error(error.message);
+    }
+};
+
+export const deleteExperience = (id) => async (dispatch, getState) => {
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const { data } = await axios.delete(`/api/profile/experience/${id}`, config);
+
+        dispatch({ type: PROFILE_DELETE_EXPERIENCE, payload: data });
+
+        dispatch(setAlert("success", "Experience deleted!"))
 
     } catch (error) {
         const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];

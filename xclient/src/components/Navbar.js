@@ -47,7 +47,7 @@ const PrivateLinks = ({ user }) => {
             </h1>
             <ul>
                 <li><Link to="/profiles"><RiProfileFill /> Developers</Link></li>
-                {/* <li><Link to="/posts"><RiMessageFill /> Posts</Link></li> */}
+                <li><Link to="/posts"><RiMessageFill /> Posts</Link></li>
                 <li><Link to="/dashboard"><RiUserFill /> {user && user.name} </Link></li>
                 <li><Link to="" onClick={() => dispatch(logout())}><RiLogoutBoxRFill /> Logout</Link></li>
             </ul>
