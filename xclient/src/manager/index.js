@@ -18,7 +18,8 @@ import {
     getRepos,
     getPosts,
     likePost,
-    unlikePost,
+    unlikePost, 
+    deletePost,
 } from "./redux/actions";
 
 export {
@@ -41,5 +42,6 @@ export {
     getRepos,
     getPosts,
     likePost,
-    unlikePost,
+    unlikePost, 
+    deletePost,
 };

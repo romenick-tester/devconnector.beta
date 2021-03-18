@@ -85,9 +85,11 @@ const deletePost = async(req,res) => {
             return res.status(401).json({ errors: [{ msg: "not authorised to delete!" }] })
         }
 
-        await post.remove();
+        const deleted = await post.remove();
 
-        res.json({ msg: "Post deleted!" });
+        if (deleted) {
+            res.status(200).json({ msg: "Post deleted!" });
+        }
     } catch (err) {
         if (err.kind === "ObjectId") {
             return res.status(404).json({ errors: [{ msg: "No post found!" }] });

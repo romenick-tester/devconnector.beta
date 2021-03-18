@@ -49,6 +49,6 @@ router
     .delete("/education/:edu_id", auth, deleteProfileEducation);
 
 router
-    .get("/github", getGithubRepo);
+    .get("/github/:username", getGithubRepo);
 
 module.exports = router;

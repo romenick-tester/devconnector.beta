@@ -17,6 +17,7 @@ import {
     PROFILE_USER_ID_SUCCESS,
     PROFILE_USER_ID_ERROR,
     PROFILE_USER_ID_CLEAR,
+    PROFILE_REPOS_REQUEST,
     PROFILE_REPOS_SUCCESS,
     PROFILE_REPOS_ERROR,
 } from "../constants/profileConstants";
@@ -86,6 +87,7 @@ const profilesReducer = (state = profiles_initial_state, action) => {
     const { type, payload } = action;
 
     switch (type) {
+        case PROFILE_REPOS_REQUEST:
         case PROFILE_USER_ID_REQUEST:
         case PROFILE_LIST_REQUEST:
             return {

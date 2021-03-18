@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaThumbsUp, FaThumbsDown, FaTrash } from "react-icons/fa"
 
-function PostsItem({ post, likeHandler, unlikeHandler }) {
+function PostsItem({ post, likeHandler, unlikeHandler, deleteHandler }) {
     const { _id, avatar, name, text, date, comments, likes, user } = post;
 
     const { user: subject = {} } = useSelector(state => state.auth);
@@ -43,7 +43,7 @@ function PostsItem({ post, likeHandler, unlikeHandler }) {
                     )}
                 </Link>
                 {user === subject._id && (
-                    <button type="button" className="btn btn-danger">
+                    <button type="button" className="btn btn-danger" onClick={() => deleteHandler(_id)} >
                         <FaTrash />
                     </button>
                 )}

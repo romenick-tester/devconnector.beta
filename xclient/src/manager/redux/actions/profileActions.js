@@ -10,13 +10,13 @@ import {
     PROFILE_ADD_EXPERIENCE,
     PROFILE_DELETE_EDUCATION,
     PROFILE_DELETE_EXPERIENCE,
-    PROFILE_DELETE,
     PROFILE_LIST_REQUEST,
     PROFILE_LIST_SUCCESS,
     PROFILE_LIST_ERROR,
     PROFILE_USER_ID_REQUEST,
     PROFILE_USER_ID_SUCCESS,
     PROFILE_USER_ID_ERROR,
+    PROFILE_REPOS_REQUEST,
     PROFILE_REPOS_SUCCESS,
     PROFILE_REPOS_ERROR,
 
@@ -25,8 +25,9 @@ import setAlert from "./alertActions";
 import { logout } from "./authActions";
 
 export const getRepos = (username) => async (dispatch) => {
+    dispatch({ type: PROFILE_REPOS_REQUEST });
     try {
-        const { data } = await axios.get(`/api/profile/github?username=${username}`);
+        const { data } = await axios.get(`/api/profile/github/${username}`);
 
         dispatch({ type: PROFILE_REPOS_SUCCESS, payload: data });
 

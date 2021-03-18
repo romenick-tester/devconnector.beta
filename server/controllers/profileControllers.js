@@ -244,7 +244,7 @@ const getGithubRepo = async(req,res) => {
     const mainUrl = "https://api.github.com/users/";
 
     try {
-        const uri = encodeURI(`${mainUrl}${req.query.username}/repos?per_page=5&sort=created:asc`);
+        const uri = encodeURI(`${mainUrl}${req.params.username}/repos?per_page=5&sort=created:asc`);
             
         const headers = {
             "user-agent": "node.js",
@@ -255,7 +255,7 @@ const getGithubRepo = async(req,res) => {
 
         res.json({ repos: data });
     } catch (error) {
-        return res.status(500).json({ errors: [{ msg: err.message }] });
+        res.status(500).json({ errors: [{ msg: error.message }] });
     }
 }
 

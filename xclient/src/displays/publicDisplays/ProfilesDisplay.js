@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { FaConnectdevelop } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProfiles, setAlert } from "../../manager";
+import { getAllProfiles } from "../../manager";
 import { ProfilesItem, Loader } from "../../components";
 
 function ProfilesDisplay() {
@@ -19,7 +19,6 @@ function ProfilesDisplay() {
     }
 
     if (error) {
-        dispatch(setAlert("danger", error));
         return <h4>{error}</h4>
     }
 
