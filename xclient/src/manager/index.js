@@ -21,6 +21,7 @@ import {
     unlikePost, 
     deletePost,
     getPostById,
+    createPost,
 } from "./redux/actions";
 
 export {
@@ -46,4 +47,5 @@ export {
     unlikePost, 
     deletePost,
     getPostById,
+    createPost,
 };

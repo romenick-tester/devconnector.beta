@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import Comment from "./CommentsItem";
 
 function PostComments({ comments }) {

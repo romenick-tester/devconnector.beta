@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../manager";
 import { FaUser } from "react-icons/fa";
-import { Posts, Loader } from "../../components";
+import { Posts, Loader, PostForm } from "../../components";
 
-function PostsDisplay() {
+function PostsDisplay({ history }) {
 
     const dispatch = useDispatch();
     const list = useSelector(state => state.posts);
@@ -26,7 +26,7 @@ function PostsDisplay() {
                 <FaUser /> {error ? error : "Welcome to the community"}
             </p>
 
-            {/* PostForm */}
+            <PostForm history={history} />
 
             {posts && posts.length > 0 && (
                 <Posts posts={posts} />

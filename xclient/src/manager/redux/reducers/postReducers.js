@@ -5,6 +5,9 @@ import {
     GET_POST_REQUEST,
     GET_POST_SUCCESS,
     GET_POST_ERROR,
+    CREATE_POST_REQUEST,
+    CREATE_POST_SUCCESS,
+    CREATE_POST_ERROR,
     LIKE_POST,
     UNLIKE_POST,
 } from "../constants/postConstants";
@@ -21,6 +24,7 @@ const postsReducer = (state = initialState, action) => {
 
     switch (type) {
 
+        case CREATE_POST_REQUEST:
         case GET_POST_REQUEST:
         case GET_POSTS_REQUEST:
             return {
@@ -44,6 +48,14 @@ const postsReducer = (state = initialState, action) => {
                 error: null
             }
 
+        case CREATE_POST_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                postsList: state.postsList.unshift(payload.post),
+                error: null
+            }
+
         case LIKE_POST:
             return {
                 ...state,
@@ -60,6 +72,7 @@ const postsReducer = (state = initialState, action) => {
                 error: null,
             }
         
+        case CREATE_POST_ERROR:
         case GET_POST_ERROR:
         case GET_POSTS_ERROR:
             return {

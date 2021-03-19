@@ -23,6 +23,7 @@ import {
     unlikePost,
     deletePost,
     getPostById,
+    createPost,
 } from "./postActions";
 
 
@@ -47,4 +48,5 @@ export {
     unlikePost,
     deletePost,
     getPostById,
+    createPost,
 };

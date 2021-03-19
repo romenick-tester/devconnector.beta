@@ -20,9 +20,9 @@ import {
 } from "./displays";
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "./manager";
-//import { PROFILE_USER_ID_CLEAR } from "./manager/redux/constants/profileConstants";
+import { PROFILE_USER_ID_CLEAR } from "./manager/redux/constants/profileConstants";
 
-function App() {
+function App({ location }) {
 
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
@@ -34,11 +34,11 @@ function App() {
         }
     }, [dispatch, loading, authenticated])
 
-    // useEffect(() => {
-    //     if (!location.search && location.search !== "?clear") {
-    //         dispatch({ type: PROFILE_USER_ID_CLEAR });
-    //     } 
-    // }, [location.search]);
+    useEffect(() => {
+        if (!location.search && location.search !== "?clear") {
+            dispatch({ type: PROFILE_USER_ID_CLEAR });
+        }
+    }, [location.search]);
 
     return (
         <>

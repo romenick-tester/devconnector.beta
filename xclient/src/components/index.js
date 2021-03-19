@@ -5,7 +5,8 @@ import ProfilesItem from "./ProfilesItem";
 import { Posts } from "./postsdisplay";
 import { About, Edu, Exp, Repos, Header } from "./singleprofiledisplay";
 import { DashboardEducation, DashboardExperience } from "./dashboarddisplay";
-import { Post, PostForm, PostComments } from "./singlepostdisplay";
+import { Post, CommentForm, PostComments, } from "./singlepostdisplay";
+import { PostForm } from "./postsdisplay";
 
 export {
     Navbar, Alert, Loader,
@@ -14,6 +15,7 @@ export {
     DashboardExperience,
     ProfilesItem,
     Post,
-    PostForm,
+    CommentForm,
     PostComments,
+    PostForm,
 }

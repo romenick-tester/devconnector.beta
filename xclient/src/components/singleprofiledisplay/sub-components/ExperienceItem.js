@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import styled from "styled-components";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 
 function ExperienceItem({ exp }) {
@@ -11,9 +11,9 @@ function ExperienceItem({ exp }) {
         <div>
             <h3 className="text-dark">
                 {company} in {location}
-                <Link to="#!" onClick={() => setShow(!show)}>
+                <Button type="button" className="text-primary" onClick={() => setShow(!show)}>
                     {show ? <BiChevronUp /> : <BiChevronDown />}
-                </Link>
+                </Button>
             </h3>
 
             {show && (
@@ -26,5 +26,12 @@ function ExperienceItem({ exp }) {
         </div>
     )
 }
+
+const Button = styled.button`
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+`
 
 export default ExperienceItem;
