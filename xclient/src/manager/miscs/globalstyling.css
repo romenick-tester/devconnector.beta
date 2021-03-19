@@ -466,6 +466,13 @@ button {
   align-items: center;
 }
 
+.post.comment {
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  grid-gap: 2rem;
+  align-items: center;
+}
+
 .post > div:first-child {
   text-align: center;
 }

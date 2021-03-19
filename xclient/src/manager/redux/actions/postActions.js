@@ -8,13 +8,18 @@ import {
     GET_POST_ERROR,
     CREATE_POST_REQUEST,
     CREATE_POST_SUCCESS,
-    CREATE_POST_ERROR,
-    LIKE_POST,
-    UNLIKE_POST,
+    DELETE_POST_REQUEST,
+    DELETE_POST_SUCCESS,
+    ADD_COMMENT_REQUEST,
+    ADD_COMMENT_SUCCESS,
+    LIKE_POST_REQUEST,
+    LIKE_POST_SUCCESS,
+    UNLIKE_POST_REQUEST,
+    UNLIKE_POST_SUCCESS,
 } from "../constants/postConstants";
 import setAlert from "./alertActions";
 
-export const createPost = (form, history) => async (dispatch, getState) => {
+export const createPost = (form) => async (dispatch, getState) => {
     dispatch({ type: CREATE_POST_REQUEST });
 
     try {
@@ -31,24 +36,56 @@ export const createPost = (form, history) => async (dispatch, getState) => {
 
         const { data } = await axios.post(`/api/posts`, body, config);
 
-        dispatch({ type: CREATE_POST_SUCCESS, payload: data })
-
-        if (data && data.post) {
-            history.push(`/post?id=${data.post._id}`)
+        if (data) {
+            dispatch(getPosts());
         }
+        
+        dispatch({ type: CREATE_POST_SUCCESS });
+
+        dispatch(setAlert("success", data.msg));
+
     } catch (error) {
         const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
 
         errors.map((err) => dispatch(setAlert("danger", err.msg)));
+    }
+}
 
-        dispatch({
-            type: CREATE_POST_ERROR,
-            payload: errors.map((err) => err.msg)[0]
-        })
+export const addComment = (id, form) => async (dispatch, getState) => {
+    dispatch({ type: ADD_COMMENT_REQUEST });
+
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const body = JSON.stringify(form);
+
+        const { data } = await axios.post(`/api/posts/comment/${id}`, body, config);
+
+        if (data) {
+            dispatch(getPosts());
+        }
+
+        dispatch({ type: ADD_COMMENT_SUCCESS });
+
+        dispatch(setAlert("success", data.msg));
+
+    } catch (error) {
+        const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
+
+        errors.map((err) => dispatch(setAlert("danger", err.msg)));
     }
 }
 
 export const likePost = (id) => async (dispatch, getState) => {
+    dispatch({ type: LIKE_POST_REQUEST });
+
     try {
         const { auth: { token } } = getState();
 
@@ -61,7 +98,14 @@ export const likePost = (id) => async (dispatch, getState) => {
 
         const { data } = await axios.put(`/api/posts/like/${id}`, {}, config);
 
-        dispatch({ type: LIKE_POST, payload: { id, likes: data.likes } })
+        if (data) {
+            dispatch(getPosts());
+        }
+
+        dispatch({ type: LIKE_POST_SUCCESS });
+
+        dispatch(setAlert("success", data.msg));
+
     } catch (error) {
         const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
 
@@ -70,6 +114,8 @@ export const likePost = (id) => async (dispatch, getState) => {
 }
 
 export const deletePost = (id) => async (dispatch, getState) => {
+    dispatch({ type: DELETE_POST_REQUEST });
+
     try {
         const { auth: { token } } = getState();
 
@@ -82,9 +128,13 @@ export const deletePost = (id) => async (dispatch, getState) => {
 
         const { data } = await axios.delete(`/api/posts/${id}`, config);
 
-        dispatch(setAlert("success", data.msg));
+        if (data) {
+            dispatch(getPosts());
+        }
 
-        dispatch(getPosts());
+        dispatch({ type: DELETE_POST_SUCCESS });
+
+        dispatch(setAlert("success", data.msg));
 
     } catch (error) {
         const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
@@ -94,6 +144,8 @@ export const deletePost = (id) => async (dispatch, getState) => {
 }
 
 export const unlikePost = (id) => async (dispatch, getState) => {
+    dispatch({ type: UNLIKE_POST_REQUEST });
+
     try {
         const { auth: { token } } = getState();
 
@@ -106,7 +158,14 @@ export const unlikePost = (id) => async (dispatch, getState) => {
 
         const { data } = await axios.put(`/api/posts/unlike/${id}`, {}, config);
 
-        dispatch({ type: UNLIKE_POST, payload: { id, likes: data.likes } })
+        if (data) {
+            dispatch(getPosts());
+        }
+
+        dispatch({ type: UNLIKE_POST_SUCCESS });
+
+        dispatch(setAlert("success", data.msg));
+
     } catch (error) {
         const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
 

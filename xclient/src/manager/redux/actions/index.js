@@ -24,6 +24,7 @@ import {
     deletePost,
     getPostById,
     createPost,
+    addComment,
 } from "./postActions";
 
 
@@ -49,4 +50,5 @@ export {
     deletePost,
     getPostById,
     createPost,
+    addComment,
 };

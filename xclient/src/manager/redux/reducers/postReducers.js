@@ -7,9 +7,14 @@ import {
     GET_POST_ERROR,
     CREATE_POST_REQUEST,
     CREATE_POST_SUCCESS,
-    CREATE_POST_ERROR,
-    LIKE_POST,
-    UNLIKE_POST,
+    DELETE_POST_REQUEST,
+    DELETE_POST_SUCCESS,
+    ADD_COMMENT_REQUEST,
+    ADD_COMMENT_SUCCESS,
+    LIKE_POST_REQUEST,
+    LIKE_POST_SUCCESS,
+    UNLIKE_POST_REQUEST,
+    UNLIKE_POST_SUCCESS,
 } from "../constants/postConstants";
 
 const initialState = {
@@ -23,7 +28,10 @@ const postsReducer = (state = initialState, action) => {
     const { type, payload } = action;
 
     switch (type) {
-
+        case DELETE_POST_REQUEST:
+        case LIKE_POST_REQUEST:
+        case UNLIKE_POST_REQUEST:
+        case ADD_COMMENT_REQUEST:
         case CREATE_POST_REQUEST:
         case GET_POST_REQUEST:
         case GET_POSTS_REQUEST:
@@ -39,40 +47,26 @@ const postsReducer = (state = initialState, action) => {
                 postsList: payload.posts,
                 error: null,
             }
-        
+
         case GET_POST_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 singlePost: payload.post,
-                error: null
+                error: null,
             }
 
+        case DELETE_POST_SUCCESS:
+        case LIKE_POST_SUCCESS:
+        case UNLIKE_POST_SUCCESS:
+        case ADD_COMMENT_SUCCESS:
         case CREATE_POST_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                postsList: state.postsList.unshift(payload.post),
-                error: null
-            }
-
-        case LIKE_POST:
-            return {
-                ...state,
-                loading: false,
-                postsList: state.postsList.map((post) => post._id === payload.id ? { ...post, likes: payload.likes } : post),
                 error: null,
             }
 
-        case UNLIKE_POST:
-            return {
-                ...state,
-                loading: false,
-                postsList: state.postsList.map((post) => post._id === payload.id ? { ...post, likes: payload.likes } : post),
-                error: null,
-            }
-        
-        case CREATE_POST_ERROR:
         case GET_POST_ERROR:
         case GET_POSTS_ERROR:
             return {

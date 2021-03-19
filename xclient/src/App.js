@@ -38,7 +38,7 @@ function App({ location }) {
         if (!location.search && location.search !== "?clear") {
             dispatch({ type: PROFILE_USER_ID_CLEAR });
         }
-    }, [location.search]);
+    }, [dispatch, location.search]);
 
     return (
         <>

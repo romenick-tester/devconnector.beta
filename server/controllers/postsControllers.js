@@ -21,9 +21,9 @@ const createPost = async(req,res) => {
             user: req.user.id,
         })
 
-        const post = await newPost.save();
+        await newPost.save();
 
-        res.status(201).json({ post });
+        res.status(201).json({ msg: "Post created!" });
     } catch (error) {
         res.status(500).json({ errors: [{ msg: error.message }] });
     }
@@ -113,7 +113,7 @@ const likePost = async(req,res) => {
         
         await post.save();
 
-        res.status(200).json({ likes: post.likes });
+        res.status(200).json({ msg: "Post liked!" });
     } catch (err) {
         return res.status(500).json({ errors: [{ msg: err.message }] });
     }
@@ -138,7 +138,7 @@ const unlikePost = async(req,res) => {
         
         await post.save();
 
-        res.status(200).json({ likes: post.likes });
+        res.status(200).json({ msg: "Post unliked!" });
     } catch (err) {
         return res.status(500).json({ errors: [{ msg: err.message }] });
     }
@@ -180,7 +180,7 @@ const createPostComment = async(req,res) => {
         const newComment = {
             user: req.user.id,
             name: user.name,
-            email: user.email,
+            avatar: user.avatar,
             text: req.body.text,
         }
 
@@ -188,8 +188,7 @@ const createPostComment = async(req,res) => {
 
         await post.save();
 
-        console.log("comment added!");
-        res.status(201).json({ comments: post.comments });
+        res.status(201).json({ msg: "Comment added!" });
     } catch (err) {
         return res.status(500).json({ errors: [{ msg: err.message }] });
     }
