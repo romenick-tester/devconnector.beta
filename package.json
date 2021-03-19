@@ -4,13 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "cd server && node server",
-    "server": "cd server && nodemon server",
+    "start": "cd server && node server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix xclient && npm run build --prefix xclient",
+    "server": "cd server && nodemon server.js",
     "client": "cd xclient && npm start",
-    "client-intall": "cd xclient && npm install",
-    "client-build": "cd xclient && npm run build",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run client-install && npm run client-build"
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "Romenick Tester",
