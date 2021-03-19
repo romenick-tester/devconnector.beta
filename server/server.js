@@ -8,7 +8,7 @@ const app = express();
 connectDB();
 dotenv.config();
 
-app.use(express.json({ extended: true }));
+app.use(express.json({ extended: false }));
 
 app.use("/api/users", usersRoutes);
 app.use("/api/profile", profileRoutes);
@@ -16,11 +16,11 @@ app.use("/api/auth", authRoutes);
 app.use("/api/posts", postsRoutes);
 
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static("xclient/build"));
+    app.use(express.static(path.join(__dirname, "../xclient/build")));
 
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "xclient", "build", "index.html"));
-    });
+    app.get("*", (req, res) => res.sendFile(path.resolve(__dirname, "../xclient", "build", "index.html")));
+} else {
+    app.get("/", (req, res) => res.send("Server is up and running..."));
 }
 
 const PORT = process.env.PORT || 5000;
