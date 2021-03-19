@@ -28,7 +28,7 @@ function SinglePostDisplay({ location }) {
             <Form postId={rest._id} />
 
             {comments && comments.length > 0 && (
-                <Comments comments={comments} />
+                <Comments comments={comments} postId={rest._id} />
             )}
         </div>
     )

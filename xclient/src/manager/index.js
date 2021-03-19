@@ -22,7 +22,8 @@ import {
     deletePost,
     getPostById,
     createPost, 
-    addComment,
+    addComment, 
+    deleteComment,
 } from "./redux/actions";
 
 export {
@@ -49,5 +50,6 @@ export {
     deletePost,
     getPostById,
     createPost, 
-    addComment,
+    addComment, 
+    deleteComment,
 };

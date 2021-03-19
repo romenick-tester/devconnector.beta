@@ -223,7 +223,7 @@ const deletePostComment = async(req,res) => {
         
         await post.save();
 
-        res.status(200).json({ comments: post.comments });
+        res.status(200).json({ msg: "Post comment deleted!" });
     } catch (error) {
         return res.status(500).json({ errors: [{ msg: err.message }] });
     }
