@@ -15,10 +15,6 @@ app.use("/api/profile", profileRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postsRoutes);
 
-app.all("*", (req, res) => {
-    res.status(404).send(`<strong>${req.originalUrl}</strong> page does not exist!`);
-});
-
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 
