@@ -54,7 +54,7 @@ export const getProfileById = (id) => async (dispatch) => {
 
         dispatch({
             type: PROFILE_USER_ID_ERROR,
-            payload: errors ? errors.map((err) => err.msg)[0] : error.message
+            payload: errors.map((err) => err.msg)[0]
         })
     }
 };
@@ -72,7 +72,7 @@ export const getAllProfiles = () => async (dispatch) => {
 
         dispatch({
             type: PROFILE_LIST_ERROR,
-            payload: errors ? errors.map((err) => err.msg)[0] : error.message
+            payload: errors.map((err) => err.msg)[0]
         })
     }
 };
@@ -98,7 +98,7 @@ export const getProfile = () => async (dispatch, getState) => {
 
         dispatch({
             type: PROFILE_USER_ERROR,
-            payload: errors ? errors.map((err) => err.msg)[0] : error.message
+            payload: errors.map((err) => err.msg)[0]
         })
     }
 };
@@ -130,28 +130,6 @@ export const createProfile = (form, history, edit = false) => async (dispatch, g
     dispatch({ type: PROFILE_CREATE_REQUEST });
 
     try {
-        let body;
-
-        if (edit) {
-            const formatForm = {
-                company: form._company,
-                website: form._website,
-                location: form._location,
-                status: form._status,
-                skills: form._skills,
-                bio: form._bio,
-                githubusername: form._githubusername,
-                youtube: form._youtube,
-                twitter: form._twitter,
-                facebook: form._facebook,
-                linkedin: form._linkedin,
-                instagram: form._instagram
-            }
-            body = JSON.stringify(formatForm);
-        } else {
-            body = JSON.stringify(form);
-        }
-
         const { auth: { token } } = getState();
 
         const config = {
@@ -160,6 +138,8 @@ export const createProfile = (form, history, edit = false) => async (dispatch, g
                 "Auth-Token": `${token}`
             }
         }
+
+        const body = JSON.stringify(form);
 
         const { data } = await axios.post("/api/profile", body, config);
 
@@ -180,7 +160,7 @@ export const createProfile = (form, history, edit = false) => async (dispatch, g
         
         dispatch({
             type: PROFILE_CREATE_ERROR,
-            payload: errors ? errors.map((err) => err.msg)[0] : error.message
+            payload: errors.map((err) => err.msg)[0]
         })
     }
 };
@@ -212,8 +192,6 @@ export const addEducation = (form, history) => async (dispatch, getState) => {
         if (errors) {
             errors.map((err) => dispatch(setAlert("danger", err.msg)));
         }
-
-        console.error(error.message);
     }
 };
 
@@ -240,8 +218,6 @@ export const deleteEducation = (id) => async (dispatch, getState) => {
         if (errors) {
             errors.map((err) => dispatch(setAlert("danger", err.msg)));
         }
-
-        console.error(error.message);
     }
 };
 
@@ -272,8 +248,6 @@ export const addExperience = (form, history) => async (dispatch, getState) => {
         if (errors) {
             errors.map((err) => dispatch(setAlert("danger", err.msg)));
         }
-
-        console.error(error.message);
     }
 };
 
@@ -300,7 +274,5 @@ export const deleteExperience = (id) => async (dispatch, getState) => {
         if (errors) {
             errors.map((err) => dispatch(setAlert("danger", err.msg)));
         }
-
-        console.error(error.message);
     }
 };

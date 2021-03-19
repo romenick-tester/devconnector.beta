@@ -36,7 +36,7 @@ function CommentsItem({ comment, postId }) {
                     {text}
                 </p>
                 <p className="post-date">
-                    Posted on {date}
+                    Posted on {date.slice(0, 10)}
                 </p>
             </div>
             <div>

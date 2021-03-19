@@ -7,7 +7,10 @@
     "start": "cd server && node server",
     "server": "cd server && nodemon server",
     "client": "cd xclient && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "client-intall": "cd xclient && npm install",
+    "client-build": "cd xclient && npm run build",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run client-install && npm run client-build"
   },
   "keywords": [],
   "author": "Romenick Tester",
