@@ -23,6 +23,3 @@
 Credits:
 bradtraversy - mernstack course
 
-## TASKS TO COMPLETE:
-
-1. single post display component -> form functionality
