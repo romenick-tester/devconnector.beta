@@ -43,24 +43,26 @@ function App({ location }) {
     return (
         <>
             <Navbar />
-            <Route path="/" exact component={LandingDisplay} />
-            <Main className="container">
-                <Alert />
-                <Switch>
-                    <PrivateRoute path="/post" component={SinglePostDisplay} />
-                    <PrivateRoute path="/posts" component={PostsDisplay} />
-                    <PrivateRoute path="/edit-profile" component={EditProfileDisplay} />
-                    <PrivateRoute path="/add-education" component={AddEducationDisplay} />
-                    <PrivateRoute path="/add-experience" component={AddExperienceDisplay} />
-                    <PrivateRoute path="/create-profile" component={CreateProfileDisplay} />
-                    <PrivateRoute path="/dashboard" component={DashboardDisplay} />
-                    <Route path="/profile/:id" component={SingleProfileDisplay} />
-                    <Route path="/profiles" component={ProfilesDisplay} />
-                    <Route path="/register" component={RegisterDisplay} />
-                    <Route path="/login" component={LoginDisplay} />
-                    <Route path="*" component={NotFoundDisplay} />
-                </Switch>
-            </Main>
+            <Switch>
+                <Route path="/" exact component={LandingDisplay} />
+                <Main className="container">
+                    <Alert />
+                    <Switch>
+                        <PrivateRoute path="/post" component={SinglePostDisplay} />
+                        <PrivateRoute path="/posts" component={PostsDisplay} />
+                        <PrivateRoute path="/edit-profile" component={EditProfileDisplay} />
+                        <PrivateRoute path="/add-education" component={AddEducationDisplay} />
+                        <PrivateRoute path="/add-experience" component={AddExperienceDisplay} />
+                        <PrivateRoute path="/create-profile" component={CreateProfileDisplay} />
+                        <PrivateRoute path="/dashboard" component={DashboardDisplay} />
+                        <Route path="/profile/:id" component={SingleProfileDisplay} />
+                        <Route path="/profiles" component={ProfilesDisplay} />
+                        <Route path="/register" component={RegisterDisplay} />
+                        <Route path="/login" component={LoginDisplay} />
+                        <Route path="*" component={NotFoundDisplay} />
+                    </Switch>
+                </Main>
+            </Switch>
         </>
     )
 }

@@ -9,7 +9,8 @@ function CommentForm({ postId }) {
 
     function submitHandler(e) {
         e.preventDefault();
-        dispatch(addComment(postId, { text }))
+        dispatch(addComment(postId, { text }));
+        setText("");
     }
 
     return (

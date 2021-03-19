@@ -14,7 +14,8 @@ function PostForm({ history }) {
             text,
         }
 
-        dispatch(createPost(newForm, history))
+        dispatch(createPost(newForm, history));
+        setText("");
     }
 
     return (

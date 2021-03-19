@@ -6,25 +6,10 @@ import {
     GET_POST_REQUEST,
     GET_POST_SUCCESS,
     GET_POST_ERROR,
-    CREATE_POST_REQUEST,
-    CREATE_POST_SUCCESS,
-    DELETE_POST_REQUEST,
-    DELETE_POST_SUCCESS,
-    // ADD_COMMENT_REQUEST,
-    ADD_COMMENT_SUCCESS,
-    // DELETE_COMMENT_REQUEST,
-    DELETE_COMMENT_SUCCESS,
-    LIKE_POST_REQUEST,
-    LIKE_POST_SUCCESS,
-    UNLIKE_POST_REQUEST,
-    UNLIKE_POST_SUCCESS,
-    REQUEST_ERROR,
 } from "../constants/postConstants";
 import setAlert from "./alertActions";
 
 export const createPost = (form) => async (dispatch, getState) => {
-    dispatch({ type: CREATE_POST_REQUEST });
-
     try {
         const { auth: { token } } = getState();
 
@@ -42,25 +27,15 @@ export const createPost = (form) => async (dispatch, getState) => {
         if (data) {
             dispatch(getPosts());
         }
-        
-        dispatch({ type: CREATE_POST_SUCCESS });
-
-        // dispatch(setAlert("success", data.msg));
-
-        console.log(data.msg);
 
     } catch (error) {
         const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
 
         errors.map((err) => dispatch(setAlert("danger", err.msg)));
-
-        dispatch({ type: REQUEST_ERROR });
     }
 }
 
 export const addComment = (id, form) => async (dispatch, getState) => {
-    // dispatch({ type: ADD_COMMENT_REQUEST });
-
     try {
         const { auth: { token } } = getState();
 
@@ -79,24 +54,14 @@ export const addComment = (id, form) => async (dispatch, getState) => {
             dispatch(getPostById(id));
         }
 
-        dispatch({ type: ADD_COMMENT_SUCCESS });
-
-        // dispatch(setAlert("success", data.msg));
-
-        console.log(data.msg);
-
     } catch (error) {
         const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
 
         errors.map((err) => dispatch(setAlert("danger", err.msg)));
-
-        dispatch({ type: REQUEST_ERROR });
     }
 }
 
 export const likePost = (id) => async (dispatch, getState) => {
-    dispatch({ type: LIKE_POST_REQUEST });
-
     try {
         const { auth: { token } } = getState();
 
@@ -113,24 +78,14 @@ export const likePost = (id) => async (dispatch, getState) => {
             dispatch(getPosts());
         }
 
-        dispatch({ type: LIKE_POST_SUCCESS });
-
-        // dispatch(setAlert("success", data.msg));
-
-        console.log(data.msg);
-
     } catch (error) {
         const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
 
         errors.map((err) => dispatch(setAlert("info", err.msg)));
-
-        dispatch({ type: REQUEST_ERROR });
     }
 }
 
 export const deletePost = (id) => async (dispatch, getState) => {
-    dispatch({ type: DELETE_POST_REQUEST });
-
     try {
         const { auth: { token } } = getState();
 
@@ -147,24 +102,14 @@ export const deletePost = (id) => async (dispatch, getState) => {
             dispatch(getPosts());
         }
 
-        dispatch({ type: DELETE_POST_SUCCESS });
-
-        // dispatch(setAlert("success", data.msg));
-
-        console.log(data.msg);
-
     } catch (error) {
         const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
 
         errors.map((err) => dispatch(setAlert("info", err.msg)));
-
-        dispatch({ type: REQUEST_ERROR });
     }
 }
 
 export const deleteComment = (postId, commentId) => async (dispatch, getState) => {
-    // dispatch({ type: DELETE_COMMENT_REQUEST });
-
     try {
         const { auth: { token } } = getState();
 
@@ -181,24 +126,14 @@ export const deleteComment = (postId, commentId) => async (dispatch, getState) =
             dispatch(getPostById(postId));
         }
 
-        dispatch({ type: DELETE_COMMENT_SUCCESS });
-
-        // dispatch(setAlert("success", data.msg));
-
-        console.log(data.msg);
-
     } catch (error) {
         const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
 
         errors.map((err) => dispatch(setAlert("info", err.msg)));
-
-        dispatch({ type: REQUEST_ERROR });
     }
 }
 
 export const unlikePost = (id) => async (dispatch, getState) => {
-    dispatch({ type: UNLIKE_POST_REQUEST });
-
     try {
         const { auth: { token } } = getState();
 
@@ -215,18 +150,10 @@ export const unlikePost = (id) => async (dispatch, getState) => {
             dispatch(getPosts());
         }
 
-        dispatch({ type: UNLIKE_POST_SUCCESS });
-
-        // dispatch(setAlert("success", data.msg));
-
-        console.log(data.msg);
-
     } catch (error) {
         const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
 
         errors.map((err) => dispatch(setAlert("info", err.msg)));
-
-        dispatch({ type: REQUEST_ERROR });
     }
 }
 
@@ -237,7 +164,7 @@ export const getPosts = () => async (dispatch) => {
 
         const { data } = await axios.get("/api/posts");
 
-        dispatch({ type: GET_POSTS_SUCCESS, payload: data });
+        dispatch({ type: GET_POSTS_SUCCESS, payload: { postsList: data.posts } });
 
     } catch (error) {
         const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
@@ -263,7 +190,7 @@ export const getPostById = (id) => async (dispatch, getState) => {
 
         const { data } = await axios.get(`/api/posts/${id}`, config);
 
-        dispatch({ type: GET_POST_SUCCESS, payload: data });
+        dispatch({ type: GET_POST_SUCCESS, payload: { singlePost: data.post } });
 
     } catch (error) {
         const errors = error.response && error.response.data.errors ? error.response.data.errors : [{ msg: error.message }];
