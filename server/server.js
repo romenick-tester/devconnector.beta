@@ -16,10 +16,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/posts", postsRoutes);
 
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
+    app.use(express.static("xclient/build"));
 
     app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+        res.sendFile(path.resolve(__dirname, "xclient", "build", "index.html"));
     });
 }
 
