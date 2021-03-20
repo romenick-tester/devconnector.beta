@@ -6,6 +6,7 @@
   "scripts": {
     "start": "cd server && node server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix xclient && npm run build --prefix xclient",
+    "client-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix xclient && npm run build --prefix xclient",
     "server": "cd server && nodemon server.js",
     "client": "cd xclient && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
