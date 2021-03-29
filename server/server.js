@@ -10,10 +10,10 @@ dotenv.config();
 
 app.use(express.json({ extended: false }));
 
-app.use("https://ukdevconnector.herokuapp.com/api/users", usersRoutes);
-app.use("https://ukdevconnector.herokuapp.com/api/profile", profileRoutes);
-app.use("https://ukdevconnector.herokuapp.com/api/auth", authRoutes);
-app.use("https://ukdevconnector.herokuapp.com/api/posts", postsRoutes);
+app.use("/api/users", usersRoutes);
+app.use("/api/profile", profileRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/posts", postsRoutes);
 
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../xclient/build")));
