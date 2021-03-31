@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import logo from "../../manager/miscs/images/devconnector.png";
+
 function LandingDisplay({ history }) {
     const auth = useSelector(state => state.auth);
     const { loading, authenticated } = auth;
@@ -17,7 +19,7 @@ function LandingDisplay({ history }) {
         <Wrapper className="landing">
             <div className="dark-overlay">
                 <div className="landing-inner">
-                    <h1 className="x-large">Developer Connector</h1>
+                    <h1 className="x-large"><img src={logo} alt="main-logo" /></h1>
                     <p className="lead">
                       Create a developer profile/portfolio, share posts and get help from
                       other developers
@@ -34,7 +36,7 @@ function LandingDisplay({ history }) {
 
 const Wrapper = styled.section`
     h1 {
-        color: yellow;
+        color: #038FE7;
     }
 `
 

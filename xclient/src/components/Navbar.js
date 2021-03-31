@@ -12,6 +12,8 @@ import {
     RiMessageFill
 } from "react-icons/ri";
 
+import logo from "../manager/miscs/images/devconnector2.png";
+
 function Navbar() {
     const auth = useSelector(state => state.auth);
     const { loading, authenticated, user } = auth;
@@ -27,7 +29,7 @@ const PublicLinks = () => {
     return (
         <>
             <h1>
-                <Link to="/"><RiBaseStationFill /> DevConnector</Link>
+                <Link to="/"><img src={logo} alt="devconnector" id="main-logo" /></Link>
             </h1>
             <ul>
                 <li><Link to="/profiles"><RiProfileFill /> Developers</Link></li>
@@ -43,7 +45,7 @@ const PrivateLinks = ({ user }) => {
     return (
         <>
             <h1>
-                <Link to="#!"><RiBaseStationFill /> DevConnector</Link>
+                <Link to="#!"><img src={logo} alt="devconnector" id="main-logo" /></Link>
             </h1>
             <ul>
                 <li><Link to="/profiles"><RiProfileFill /> Developers</Link></li>
@@ -56,8 +58,18 @@ const PrivateLinks = ({ user }) => {
 }
 
 const Nav = styled.nav`
+    position: relative;
+
     a {
-        color: yellow;
+        color: white;
+    }
+
+    #main-logo {
+        position: absolute;
+        top: 10;
+        left: 10;
+        width: 150px;
+        object-fit: fill;
     }
 `
 
