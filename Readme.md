@@ -1,5 +1,5 @@
 # DevConnector
-![dev-connector](https://i.ibb.co/FWyMvkg/devconnector.png)
+![dev-connector](https://i.ibb.co/4VJnbmq/devconn-cert.png)
 
 > social app
 

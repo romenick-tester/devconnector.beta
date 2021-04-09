@@ -6,13 +6,10 @@ import styled from "styled-components";
 import {
     RiUserFill,
     RiProfileFill,
-    RiBaseStationFill,
     RiLoginBoxFill,
     RiLogoutBoxRFill,
     RiMessageFill
 } from "react-icons/ri";
-
-import logo from "../manager/miscs/images/devconnector2.png";
 
 function Navbar() {
     const auth = useSelector(state => state.auth);
@@ -29,7 +26,7 @@ const PublicLinks = () => {
     return (
         <>
             <h1>
-                <Link to="/"><img src={logo} alt="devconnector" id="main-logo" /></Link>
+                <Link to="/">DevConnector</Link>
             </h1>
             <ul>
                 <li><Link to="/profiles"><RiProfileFill /> Developers</Link></li>
@@ -45,7 +42,7 @@ const PrivateLinks = ({ user }) => {
     return (
         <>
             <h1>
-                <Link to="#!"><img src={logo} alt="devconnector" id="main-logo" /></Link>
+                <Link to="#!">DevConnector</Link>
             </h1>
             <ul>
                 <li><Link to="/profiles"><RiProfileFill /> Developers</Link></li>
@@ -58,19 +55,7 @@ const PrivateLinks = ({ user }) => {
 }
 
 const Nav = styled.nav`
-    position: relative;
 
-    a {
-        color: white;
-    }
-
-    #main-logo {
-        position: absolute;
-        top: 10;
-        left: 10;
-        width: 150px;
-        object-fit: fill;
-    }
 `
 
 export default Navbar;
